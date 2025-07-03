@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Navigation from "@/components/Navigation";
+import VisitorCounter from "@/components/VisitorCounter";
 import {
   Search,
   GraduationCap,
@@ -145,6 +146,13 @@ export default function Index() {
     <div className="min-h-screen bg-background">
       <Navigation />
 
+      {/* Visitor Counter */}
+      <div className="py-4 px-4 bg-white border-b">
+        <div className="max-w-4xl mx-auto">
+          <VisitorCounter />
+        </div>
+      </div>
+
       {/* Personal Introduction Section */}
       <section
         className="relative py-20 px-4 overflow-hidden"
@@ -186,7 +194,7 @@ export default function Index() {
                 </p>
 
                 <p className="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
-                  لو وصلت هنا، فأنت ما وحدك… ✊
+                  لو وصلت هنا، فأن�� ما وحدك… ✊
                 </p>
               </div>
 
@@ -262,7 +270,7 @@ export default function Index() {
                   <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-yellow-200 transition-colors">
                     <Trophy className="w-8 h-8 text-yellow-600" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2">قصص النجاح</h3>
+                  <h3 className="font-bold text-lg mb-2">قص�� النجاح</h3>
                   <p className="text-sm text-muted-foreground">
                     اقرأ قصص ملهمة
                   </p>

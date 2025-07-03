@@ -10,3 +10,11 @@
 export interface DemoResponse {
   message: string;
 }
+
+/**
+ * Response type for visitor count endpoint
+ */
+export interface VisitorCountResponse {
+  totalVisitors: number;
+  todayVisitors: number;
+}

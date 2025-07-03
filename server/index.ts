@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
+import { handleVisitorCount, handleGetVisitorCount } from "./routes/visitors";
 
 export function createServer() {
   const app = express();
@@ -16,6 +17,10 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+
+  // Visitor tracking routes
+  app.post("/api/visitor", handleVisitorCount);
+  app.get("/api/visitors", handleGetVisitorCount);
 
   return app;
 }
