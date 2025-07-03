@@ -1,19 +1,25 @@
 {
-  "name": "منصة المنح الدراسية",
-  "short_name": "المنح",
+  "name": "حلم زول بسيط",
+  "short_name": "حلم زول بسيط",
+  "description": "منصة مجانية للمنح الدراسية للطلاب السودانيين والعرب",
   "icons": [
     {
-      "src": "/favicon-32x32.png",
-      "sizes": "32x32",
-      "type": "image/png"
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     },
     {
-      "src": "/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png"
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
     }
   ],
-  "theme_color": "#007BFF",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#2563eb",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "lang": "ar",
+  "dir": "rtl",
+  "scope": "/"
 }

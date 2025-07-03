@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cap-blue { fill: #2563eb; }
+      .cap-gold { fill: #f59e0b; }
+      .cap-light { fill: #60a5fa; }
+      @media (prefers-color-scheme: dark) {
+        .cap-blue { fill: #3b82f6; }
+        .cap-gold { fill: #fbbf24; }
+        .cap-light { fill: #93c5fd; }
+      }
+    </style>
+  </defs>
+  
+  <!-- Main graduation cap -->
+  <polygon class="cap-blue" points="16,6 4,12 16,18 28,12"/>
+  
+  <!-- Cap side -->
+  <path class="cap-blue" d="M24,13 L24,20 C24,22 20,24 16,24 C12,24 8,22 8,20 L8,13"/>
+  
+  <!-- Highlight -->
+  <polygon class="cap-light" points="16,8 6,13 16,16 26,13"/>
+  
+  <!-- Tassel -->
+  <circle class="cap-gold" cx="24" cy="10" r="1"/>
+  <rect class="cap-gold" x="23.5" y="11" width="1" height="4"/>
+  <circle class="cap-gold" cx="24" cy="15.5" r="1"/>
+</svg>
