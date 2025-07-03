@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        .cap-fill { fill: #3b82f6; }
+        .cap-stroke { stroke: #60a5fa; }
+        .tassel-fill { fill: #fbbf24; }
+      }
+      @media (prefers-color-scheme: light) {
+        .cap-fill { fill: #1e40af; }
+        .cap-stroke { stroke: #3b82f6; }
+        .tassel-fill { fill: #f59e0b; }
+      }
+    </style>
+  </defs>
+  
+  <!-- Graduation cap base -->
+  <path class="cap-fill" d="M4 14l12-4 12 4-4 2v6c0 2-4 4-8 4s-8-2-8-4v-6l-4-2z"/>
+  
+  <!-- Cap highlight -->
+  <path class="cap-stroke" stroke-width="1" fill="none" d="M6 15l10-3 10 3"/>
+  
+  <!-- Tassel -->
+  <circle class="tassel-fill" cx="24" cy="12" r="1.5"/>
+  <path class="tassel-fill" d="M24 13.5v4l-1 2h2l-1-2v-4"/>
+  
+  <!-- Graduation cap shadow -->
+  <ellipse fill="rgba(0,0,0,0.1)" cx="16" cy="28" rx="8" ry="1"/>
+</svg>
