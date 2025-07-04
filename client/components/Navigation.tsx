@@ -17,32 +17,59 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import AIAssistant from "./AIAssistant";
 import NotificationBanner from "./NotificationBanner";
+import { useTranslation } from "@/hooks/useTranslation";
+import LanguageToggle from "./LanguageToggle";
 
 const Navigation = () => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   const navItems = [
-    { href: "/", label: "الرئيسية", icon: null },
-    { href: "/search", label: "بحث", icon: Search },
+    { href: "/", label: t("nav.home"), icon: null },
+    { href: "/search", label: t("nav.search"), icon: Search },
     {
       href: "/scholarships/fully-funded",
-      label: "منح ممولة بالكامل",
+      label: t("categories.fully_funded"),
       icon: GraduationCap,
     },
-    { href: "/scholarships/airfare", label: "منح جوية", icon: Plane },
-    { href: "/scholarships/arab", label: "منح عربية", icon: MapPin },
-    { href: "/scholarships/foreign", label: "منح أجنبية", icon: Globe },
-    { href: "/services", label: "خدمات", icon: Settings },
-    { href: "/contact", label: "تواصل معنا", icon: MessageCircle },
+    {
+      href: "/scholarships/airfare",
+      label: t("categories.airfare"),
+      icon: Plane,
+    },
+    { href: "/scholarships/arab", label: t("categories.arab"), icon: MapPin },
+    {
+      href: "/scholarships/foreign",
+      label: t("categories.foreign"),
+      icon: Globe,
+    },
+    { href: "/services", label: t("nav.services"), icon: Settings },
+    { href: "/contact", label: t("nav.contact"), icon: MessageCircle },
   ];
 
   const moreItems = [
-    { href: "/explore", label: "🌍 استكشاف المنح", icon: "🗺️" },
-    { href: "/recommendations", label: "🤖 توصيات ذكية", icon: "🧠" },
-    { href: "/tracker", label: "📊 متابع الطلبات", icon: "📈" },
-    { href: "/success-stories", label: "🏆 قصص النجاح", icon: "✨" },
-    { href: "/blog", label: "📚 مدونة المنح", icon: "💡" },
+    {
+      href: "/explore",
+      label:
+        "🌍 " +
+        (t("nav.search") === "Search"
+          ? "Explore Scholarships"
+          : "استكشاف المنح"),
+      icon: "🗺️",
+    },
+    {
+      href: "/recommendations",
+      label: "🤖 " + t("nav.recommendations"),
+      icon: "🧠",
+    },
+    { href: "/tracker", label: "📊 " + t("nav.tracker"), icon: "📈" },
+    {
+      href: "/success-stories",
+      label: "🏆 " + t("nav.success_stories"),
+      icon: "✨",
+    },
+    { href: "/blog", label: "📚 " + t("nav.blog"), icon: "💡" },
   ];
 
   const whatsappNumber = "+62 859-3241-6084";
@@ -61,7 +88,7 @@ const Navigation = () => {
                   <GraduationCap className="w-6 h-6 text-white" />
                 </div>
                 <span className="text-xl font-bold text-primary mr-2">
-                  حلم زول بسيط
+                  {t("home.title")}
                 </span>
               </Link>
             </div>
@@ -92,7 +119,7 @@ const Navigation = () => {
                 <div className="relative group">
                   <button className="nav-link px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2">
                     <Sparkles className="w-4 h-4" />
-                    المزيد
+                    {t("nav.search") === "Search" ? "More" : "المزيد"}
                     <ChevronDown className="w-4 h-4" />
                   </button>
 
@@ -114,8 +141,9 @@ const Navigation = () => {
               </div>
             </div>
 
-            {/* WhatsApp Button */}
-            <div className="hidden md:block">
+            {/* Language Toggle & WhatsApp Button */}
+            <div className="hidden md:flex items-center gap-3">
+              <LanguageToggle />
               <a
                 href={whatsappLink}
                 target="_blank"
@@ -123,7 +151,7 @@ const Navigation = () => {
                 className="whatsapp-button"
               >
                 <MessageCircle className="w-4 h-4" />
-                واتساب
+                {t("nav.search") === "Search" ? "WhatsApp" : "واتساب"}
               </a>
             </div>
 
@@ -170,7 +198,9 @@ const Navigation = () => {
                 {/* Mobile More Items */}
                 <div className="border-t border-border pt-4 mt-4">
                   <div className="text-xs font-semibold text-muted-foreground px-3 mb-2">
-                    مميزات إضافية
+                    {t("nav.search") === "Search"
+                      ? "Additional Features"
+                      : "مميزات إضافية"}
                   </div>
                   {moreItems.map((item) => (
                     <Link
@@ -185,6 +215,11 @@ const Navigation = () => {
                   ))}
                 </div>
 
+                {/* Mobile Language Toggle */}
+                <div className="flex justify-center pt-4 border-t border-border mt-4">
+                  <LanguageToggle />
+                </div>
+
                 {/* Mobile WhatsApp Button */}
                 <a
                   href={whatsappLink}
@@ -193,7 +228,7 @@ const Navigation = () => {
                   className="whatsapp-button w-full justify-center mt-4"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  تواصل معنا على واتساب
+                  {t("common.whatsapp_contact")}
                 </a>
               </div>
             </div>
