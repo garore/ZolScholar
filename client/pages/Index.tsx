@@ -209,13 +209,8 @@ export default function Index() {
       </div>
 
       {/* Personal Introduction Section */}
-      <section
-        className="relative py-20 px-4 overflow-hidden"
-        style={{
-          background:
-            "linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(16, 185, 129, 0.1) 50%, rgba(245, 158, 11, 0.1) 100%)",
-        }}
-      >
+      <section className="relative py-20 px-4 overflow-hidden gradient-bg-hero opacity-95">
+        <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
         {/* Subtle Sudan flag pattern background */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-0 left-0 w-full h-1/3 bg-red-500"></div>
@@ -315,9 +310,9 @@ export default function Index() {
             </Link>
 
             <Link to="/recommendations" className="group">
-              <Card className="scholarship-card text-center hover:scale-105 transition-all duration-300 border-2 hover:border-purple-300">
+              <Card className="feature-card border-2 hover:border-accent/30">
                 <CardContent className="p-6">
-                  <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200 transition-colors">
+                  <div className="icon-wrapper bg-gradient-to-br from-accent to-accent/80">
                     <span className="text-2xl">🤖</span>
                   </div>
                   <h3 className="font-bold text-lg mb-2">
@@ -331,10 +326,10 @@ export default function Index() {
             </Link>
 
             <Link to="/success-stories" className="group">
-              <Card className="scholarship-card text-center hover:scale-105 transition-all duration-300 border-2 hover:border-yellow-300">
+              <Card className="feature-card border-2 hover:border-warning/30">
                 <CardContent className="p-6">
-                  <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-yellow-200 transition-colors">
-                    <Trophy className="w-8 h-8 text-yellow-600" />
+                  <div className="icon-wrapper bg-gradient-to-br from-warning to-warning/80">
+                    <Trophy className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="font-bold text-lg mb-2">
                     {t("home.quick.success")}
@@ -462,7 +457,7 @@ export default function Index() {
               منح مميزة هذا الشهر
             </h2>
             <p className="text-xl text-muted-foreground">
-              أفضل الفرص المتاحة حالياً مع مواعيد التقديم القريبة
+              أفضل الفرص المتاحة حالياً مع مواعيد التقدي�� القريبة
             </p>
           </div>
 
