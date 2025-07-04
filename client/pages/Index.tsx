@@ -663,7 +663,7 @@ export default function Index() {
             ابدأ رحلتك نحو حلمك الدراسي اليوم
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            معانا حتلقى منح عربية وأجنبية، وأدوات تسا��دك تخلي طريقك للتقديم
+            معانا حتلقى منح عربية وأجنبية، وأدوات ت��ا��دك تخلي طريقك للتقديم
             أسهل�� ونتابعك خطوة بخطوة لحدي ما تنجح إن شاء الله
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -768,8 +768,26 @@ export default function Index() {
             </div>
           </div>
 
-          <div className="border-t border-muted/20 mt-8 pt-8 text-center text-muted">
-            <p>© 2024 حلم زول بسيط. جميع الحقوق محفوظة.</p>
+          <div className="border-t border-muted/20 mt-8 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-muted">
+                © 2024 حلم زول بسيط. جميع الحقوق محفوظة.
+              </p>
+              <div className="flex gap-4 text-sm">
+                <Link
+                  to="/privacy-policy"
+                  className="text-muted hover:text-white transition-colors"
+                >
+                  سياسة الخصوصية
+                </Link>
+                <Link
+                  to="/terms-of-service"
+                  className="text-muted hover:text-white transition-colors"
+                >
+                  شروط الاستخدام
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
