@@ -137,7 +137,7 @@ export default function Index() {
     {
       title: "إنشاء حسابات في منصات التقديم",
       icon: UserCheck,
-      description: "مساعدة في إنشاء وتفعيل حساباتك في المنصات المختلفة",
+      description: "مساعدة في إنشاء وتفعيل حساباتك في ا��منصات المختلفة",
     },
     {
       title: "ترجمة المستندات",
@@ -173,7 +173,7 @@ export default function Index() {
       benefits: ["راتب شهري", "سكن مجاني", "تأمين صحي", "تذاكر طيران"],
     },
     {
-      title: "منح�� DAAD الألمانية",
+      title: "منحة DAAD الألمانية",
       country: "ألمانيا",
       deadline: "15 ف��راير 2024",
       funding: "ممولة بالكامل",
@@ -195,7 +195,7 @@ export default function Index() {
       <SEOHead
         title="حلم زول بسيط - منح دراسية مجانية للطلاب السودانيين والعرب"
         description="منصة مجانية لمساعدة الطلاب السودانيين والع��ب في العثور على منح دراسية ممولة بالكامل في جميع أنحاء العالم. أكثر من 350 منحة متاحة من أفضل الجامعات العالمية."
-        keywords="منح دراسية مجانية, منح للسودانيين, حلم زول بسيط, منح ممولة بالكامل, منح عربية, منح ��جنبية, دراسة مجانية, منح تركيا, منح ألمانيا, scholarship"
+        keywords="منح دراسية مجانية, منح للسودانيين, حلم زول بسيط, منح ممولة بالكامل, منح عربية, منح أجنبية, دراسة مجانية, منح تركيا, منح ألمانيا, scholarship"
         canonicalUrl="https://zolscholar.com/"
         jsonLd={homepageJsonLd}
       />
@@ -254,33 +254,41 @@ export default function Index() {
               </div>
 
               {/* CTA Button */}
-              <div className="mt-8 md:mt-10">
-                <Link to="/search">
-                  <button className="cta-primary text-xl md:text-2xl px-8 md:px-12 py-4 md:py-5 inline-flex items-center gap-3 w-full sm:w-auto justify-center">
+              <div className="mt-10 md:mt-12">
+                <Link to="/search" className="block">
+                  <button className="mobile-btn-xl cta-primary text-2xl md:text-3xl px-12 md:px-16 py-6 md:py-7 inline-flex items-center gap-4 w-full sm:w-auto justify-center shadow-2xl transform hover:scale-105 transition-all duration-300">
                     {language === "ar" && (
-                      <GraduationCap className="w-6 h-6 md:w-7 md:h-7" />
+                      <GraduationCap className="w-8 h-8 md:w-9 md:h-9" />
                     )}
-                    <span className="font-bold">{t("home.hero.cta")}</span>
+                    <span className="font-extrabold mobile-arabic-text">
+                      {t("home.hero.cta")}
+                    </span>
                     {language === "en" && (
-                      <GraduationCap className="w-6 h-6 md:w-7 md:h-7" />
+                      <GraduationCap className="w-8 h-8 md:w-9 md:h-9" />
                     )}
                   </button>
                 </Link>
               </div>
 
-              {/* Social proof - Mobile Enhanced */}
-              <div className="mt-8 md:mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 md:flex md:items-center md:justify-center md:gap-6 text-sm md:text-base text-gray-600">
-                <div className="flex items-center justify-center gap-2 p-3 md:p-0 bg-blue-50 md:bg-transparent rounded-lg md:rounded-none">
-                  <Users className="w-5 h-5 md:w-4 md:h-4 text-blue-600" />
-                  <span className="font-medium">10,000+ طالب مستفيد</span>
+              {/* Social proof - Much more comfortable for mobile */}
+              <div className="mt-10 md:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 md:flex md:items-center md:justify-center md:gap-8">
+                <div className="mobile-card-comfortable flex items-center justify-center gap-3 py-6 md:py-4 bg-gradient-to-r from-blue-50 to-blue-100 md:bg-transparent rounded-2xl md:rounded-none border-2 border-blue-200 md:border-none">
+                  <Users className="w-7 h-7 md:w-5 md:h-5 text-blue-600" />
+                  <span className="font-bold text-xl md:text-lg mobile-arabic-text text-blue-800">
+                    10,000+ طالب مستفيد
+                  </span>
                 </div>
-                <div className="flex items-center justify-center gap-2 p-3 md:p-0 bg-yellow-50 md:bg-transparent rounded-lg md:rounded-none">
-                  <Trophy className="w-5 h-5 md:w-4 md:h-4 text-yellow-600" />
-                  <span className="font-medium">500+ قصة نجاح</span>
+                <div className="mobile-card-comfortable flex items-center justify-center gap-3 py-6 md:py-4 bg-gradient-to-r from-yellow-50 to-yellow-100 md:bg-transparent rounded-2xl md:rounded-none border-2 border-yellow-200 md:border-none">
+                  <Trophy className="w-7 h-7 md:w-5 md:h-5 text-yellow-600" />
+                  <span className="font-bold text-xl md:text-lg mobile-arabic-text text-yellow-800">
+                    500+ قصة نجاح
+                  </span>
                 </div>
-                <div className="flex items-center justify-center gap-2 p-3 md:p-0 bg-red-50 md:bg-transparent rounded-lg md:rounded-none">
-                  <Heart className="w-5 h-5 md:w-4 md:h-4 text-red-500" />
-                  <span className="font-medium">من القلب للقلب</span>
+                <div className="mobile-card-comfortable flex items-center justify-center gap-3 py-6 md:py-4 bg-gradient-to-r from-red-50 to-red-100 md:bg-transparent rounded-2xl md:rounded-none border-2 border-red-200 md:border-none">
+                  <Heart className="w-7 h-7 md:w-5 md:h-5 text-red-500" />
+                  <span className="font-bold text-xl md:text-lg mobile-arabic-text text-red-800">
+                    من القلب للقلب
+                  </span>
                 </div>
               </div>
             </div>
@@ -291,16 +299,16 @@ export default function Index() {
       {/* Quick Access to Main Features */}
       <section className="py-12 md:py-16 px-4 md:px-8 bg-white border-b">
         <div className="max-w-7xl mx-auto">
-          {/* Mobile Title */}
-          <div className="text-center mb-8 md:hidden">
-            <h2 className="text-2xl font-bold text-foreground mb-3">
+          {/* Mobile Title - Much larger and clearer */}
+          <div className="text-center mb-12 md:mb-8 px-4">
+            <h2 className="mobile-title-xl text-4xl md:text-3xl font-extrabold text-foreground mb-6 md:mb-3 mobile-arabic-title">
               الخدمات الرئيسية
             </h2>
-            <p className="text-muted-foreground text-lg">
+            <p className="mobile-text-lead text-2xl md:text-lg text-muted-foreground leading-relaxed mobile-arabic-text">
               اختر ما تحتاجه لبدء رحلتك
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-8 px-2 md:px-0">
             <Link to="/search" className="group">
               <Card className="scholarship-card text-center hover:scale-105 transition-all duration-300 border-2 hover:border-blue-300">
                 <CardContent className="p-6">
@@ -315,16 +323,16 @@ export default function Index() {
               </Card>
             </Link>
 
-            <Link to="/recommendations" className="group">
-              <Card className="feature-card border-2 hover:border-accent/30">
-                <CardContent className="p-6">
-                  <div className="icon-wrapper bg-gradient-to-br from-accent to-accent/80">
-                    <span className="text-2xl">🤖</span>
+            <Link to="/recommendations" className="group block">
+              <Card className="mobile-card-elevated feature-card border-2 hover:border-accent/30 group hover:shadow-2xl transition-all duration-300">
+                <CardContent className="p-8 md:p-6 text-center">
+                  <div className="mobile-icon-xl icon-wrapper bg-gradient-to-br from-accent to-accent/80 mx-auto mb-6 shadow-lg">
+                    <span className="text-4xl md:text-2xl">🤖</span>
                   </div>
-                  <h3 className="font-bold text-lg mb-2">
+                  <h3 className="mobile-subtitle-comfort font-extrabold text-2xl md:text-lg mb-4 md:mb-2 mobile-arabic-title">
                     {t("home.quick.recommendations")}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="mobile-text-body text-xl md:text-sm text-muted-foreground leading-relaxed mobile-arabic-text">
                     {t("home.quick.recommendations_desc")}
                   </p>
                 </CardContent>
@@ -654,7 +662,7 @@ export default function Index() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground text-center mb-6">
-                  اكتشف قصص ملهمة لطلاب حصلوا على منح في أفضل الجامعات
+                  اكتشف قصص ملهمة لطلاب حصلوا على م��ح في أفضل الجامعات
                 </p>
                 <Link to="/success-stories">
                   <Button className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600">
@@ -695,7 +703,7 @@ export default function Index() {
             ابدأ رحلتك نحو حلمك الدراسي اليوم
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            معانا حتلقى منح عربية وأجنبية، ��أدوات تسا��دك تخلي طريقك للتقديم
+            معانا حتلقى منح عربية وأجنبية، وأدوات تسا��دك تخلي طريقك للتقديم
             أسهل�� ونتابعك خطوة بخطوة لحدي ما تنجح إن شاء الله
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -735,7 +743,7 @@ export default function Index() {
                 <span className="text-2xl font-bold">حلم زول بسيط</span>
               </div>
               <p className="text-muted mb-4">
-                منصتك الأولى للمنح الدراسية الممولة بالكامل حول العالم
+                منصتك الأولى للمنح الدراسية الممولة بالكام�� حول العالم
               </p>
             </div>
 
@@ -803,7 +811,7 @@ export default function Index() {
           <div className="border-t border-muted/20 mt-8 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-muted">
-                © 2024 حلم زول بسيط. جميع الحقوق محفوظة.
+                © 2024 حلم زول بسيط. جميع الحق��ق محفوظة.
               </p>
               <div className="flex gap-4 text-sm">
                 <Link
