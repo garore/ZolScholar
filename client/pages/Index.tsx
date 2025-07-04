@@ -48,7 +48,7 @@ export default function Index() {
     url: "https://zolscholar.com",
     logo: "https://zolscholar.com/favicon.svg",
     description:
-      "منصة مجانية لمساعدة الطلاب السودانيين والعرب في العثور على منح دراسية ممولة بالكامل في جميع أنحاء العالم",
+      "منصة مجانية لمساعدة ا��طلاب السودانيين والعرب في العثور على منح دراسية ممولة بالكامل في جميع أنحاء العالم",
     areaServed: {
       "@type": "Country",
       name: "Sudan",
@@ -86,17 +86,17 @@ export default function Index() {
 
   const scholarshipCategories = [
     {
-      title: "منح دراسية ممولة بالكامل",
-      description: "منح تغطي جميع التكاليف: الدراسة + السكن + المعيشة + السفر",
+      title: t("categories.fully_funded"),
+      description: t("categories.fully_funded_desc"),
       icon: GraduationCap,
       href: "/scholarships/fully-funded",
       color: "bg-primary",
       count: "100+",
-      badge: "الأكثر طلباً",
+      badge: language === "ar" ? "الأكثر طلباً" : "Most Popular",
     },
     {
-      title: "منح جوية",
-      description: "منح تشمل تذاكر الطيران مجاناً",
+      title: t("categories.airfare"),
+      description: t("categories.airfare_desc"),
       icon: Plane,
       href: "/scholarships/airfare",
       color: "bg-blue-500",
@@ -104,22 +104,22 @@ export default function Index() {
       badge: "جدي��",
     },
     {
-      title: "منح عربية",
-      description: "من السعودية، الإمارات، مصر، قطر، السودان",
+      title: t("categories.arab"),
+      description: t("categories.arab_desc"),
       icon: MapPin,
       href: "/scholarships/arab",
       color: "bg-amber-500",
       count: "80+",
-      badge: "محدث",
+      badge: language === "ar" ? "محدث" : "Updated",
     },
     {
-      title: "منح أجنبية",
-      description: "من ألمانيا، تركيا، أمريكا، كندا، إندونيسيا، ماليزيا",
+      title: t("categories.foreign"),
+      description: t("categories.foreign_desc"),
       icon: Globe,
       href: "/scholarships/foreign",
       color: "bg-accent",
       count: "120+",
-      badge: "مميز",
+      badge: language === "ar" ? "مميز" : "Featured",
     },
   ];
 
@@ -194,7 +194,7 @@ export default function Index() {
     <div className="min-h-screen bg-background">
       <SEOHead
         title="حلم زول بسيط - منح دراسية مجانية للطلاب السودانيين والعرب"
-        description="منصة مجانية لمساعدة الطلاب السودانيين والعرب في العثور على منح دراسية ممولة بالكامل في جميع أنحاء العالم. أكثر من 350 منحة متاحة من أفضل الجامعات العالمية."
+        description="منصة مجانية لمساعدة الطلاب السودانيين والع��ب في العثور على منح دراسية ممولة بالكامل في جميع أنحاء العالم. أكثر من 350 منحة متاحة من أفضل الجامعات العالمية."
         keywords="منح دراسية مجانية, منح للسودانيين, حلم زول بسيط, منح ممولة بالكامل, منح عربية, منح أجنبية, دراسة مجانية, منح تركيا, منح ألمانيا, scholarship"
         canonicalUrl="https://zolscholar.com/"
         jsonLd={homepageJsonLd}
