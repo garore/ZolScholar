@@ -186,7 +186,7 @@ export default function Index() {
       deadline: "28 فبراير 2024",
       funding: "ممولة بالكامل",
       level: "جميع المستويات",
-      benefits: ["راتب شهري", "سكن وطعام", "تذاكر طيران س��وية"],
+      benefits: ["راتب شهري", "سكن وطعام", "تذاكر طيران سنوية"],
     },
   ];
 
@@ -292,6 +292,117 @@ export default function Index() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Scholarships This Month */}
+      <section className="py-16 md:py-20 px-4 md:px-8 bg-gradient-to-br from-gray-50 to-blue-50/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 mobile-arabic-title">
+              المنح المميزة هذا الشهر
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground mobile-arabic-text">
+              أفضل الفرص المتاحة حالياً مع مواعيد التقديم القريبة
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "منحة الحكومة التركية 2024",
+                country: "تركيا",
+                funding: "ممولة بالكامل",
+                level: "جميع المستويات",
+                deadline: "31 يناير 2024",
+                benefits: [
+                  "راتب شهري",
+                  "سكن مجاني",
+                  "تأمين صحي",
+                  "تذاكر طيران",
+                ],
+              },
+              {
+                title: "منحة DAAD الألمانية",
+                country: "ألمانيا",
+                funding: "ممولة بالكامل",
+                level: "ماجستير، دكتوراه",
+                deadline: "15 فبراير 2024",
+                benefits: ["راتب 850€", "تأمين صحي", "دورات لغة"],
+              },
+              {
+                title: "منحة جامعة الملك سعود",
+                country: "السعودية",
+                funding: "ممولة بالكامل",
+                level: "جميع المستويات",
+                deadline: "28 فبراير 2024",
+                benefits: ["راتب شهري", "سكن وطعام", "تذاكر طيران"],
+              },
+            ].map((scholarship, index) => (
+              <Card
+                key={index}
+                className="scholarship-card h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              >
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-3">
+                    <Badge className="bg-accent text-white">
+                      {scholarship.country}
+                    </Badge>
+                    <div className="flex items-center text-sm text-red-600 font-medium">
+                      <Clock className="w-4 h-4 ml-1" />
+                      {scholarship.deadline}
+                    </div>
+                  </div>
+                  <CardTitle className="text-xl font-bold mobile-arabic-title mb-2">
+                    {scholarship.title}
+                  </CardTitle>
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    <Badge
+                      variant="outline"
+                      className="text-xs bg-success/10 text-success border-success/30"
+                    >
+                      {scholarship.funding}
+                    </Badge>
+                    <Badge variant="outline" className="text-xs">
+                      {scholarship.level}
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="mb-4">
+                    <h4 className="font-semibold text-sm mb-2 mobile-arabic-text">
+                      المزايا:
+                    </h4>
+                    <div className="flex flex-wrap gap-1">
+                      {scholarship.benefits.map((benefit, i) => (
+                        <Badge
+                          key={i}
+                          variant="secondary"
+                          className="text-xs bg-primary/10 text-primary"
+                        >
+                          {benefit}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <button className="flex-1 bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary/90 transition-colors font-medium">
+                      التفاصيل
+                    </button>
+                    <a
+                      href={whatsappLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <button className="bg-success text-white p-2 rounded-lg hover:bg-success/90 transition-colors">
+                        <MessageCircle className="w-4 h-4" />
+                      </button>
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -411,15 +522,15 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Scholarship Categories */}
-      <section className="py-16 md:py-20 px-4 md:px-8">
+      {/* Main Scholarship Categories */}
+      <section className="py-16 md:py-20 px-4 md:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 md:mb-6">
-              {t("categories.title")}
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 mobile-arabic-title">
+              أقسام المنح الرئيسية
             </h2>
-            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed px-4">
-              {t("categories.description")}
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mobile-arabic-text">
+              اختر نوع المنحة المناسب لك من الأقسام الرئيسية
             </p>
           </div>
 
@@ -475,7 +586,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">
-              منح مميزة هذا الشهر
+              منح مميز�� هذا الشهر
             </h2>
             <p className="text-xl text-muted-foreground">
               أفضل الفرص المتاحة حالياً مع مواعيد التقدي�� القريبة
@@ -637,7 +748,7 @@ export default function Index() {
                   <span className="text-2xl">📊</span>
                 </div>
                 <CardTitle className="text-xl font-bold">
-                  متابع ��لطلبات
+                  متابع الطلبات
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -682,7 +793,7 @@ export default function Index() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground text-center mb-6">
-                  دليل شامل بأفضل النصائح والاستراتيجيات للحصول على المنح
+                  دليل شامل بأفضل النصائح والاستراتيجيات لل��صول على المنح
                 </p>
                 <Link to="/blog">
                   <Button className="w-full bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600">
