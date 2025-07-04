@@ -66,23 +66,33 @@ export default function VisitorCounter() {
           );
         }
 
-        // Fallback: Use localStorage to simulate visitor count
-        let storedTotal = parseInt(
-          localStorage.getItem("totalVisitors") || "1000",
-        );
-        let storedToday = parseInt(
-          localStorage.getItem("todayVisitors") || "50",
-        );
+        // Fallback: Use localStorage to simulate visitor count (if available)
+        let storedTotal = 1205; // Default fallback
+        let storedToday = 67; // Default fallback
 
-        // Increment for this session
-        const hasVisitedToday =
-          localStorage.getItem("visitedToday") === new Date().toDateString();
-        if (!hasVisitedToday) {
-          storedTotal += 1;
-          storedToday += 1;
-          localStorage.setItem("totalVisitors", storedTotal.toString());
-          localStorage.setItem("todayVisitors", storedToday.toString());
-          localStorage.setItem("visitedToday", new Date().toDateString());
+        try {
+          if (typeof localStorage !== "undefined") {
+            storedTotal = parseInt(
+              localStorage.getItem("totalVisitors") || "1205",
+            );
+            storedToday = parseInt(
+              localStorage.getItem("todayVisitors") || "67",
+            );
+
+            // Increment for this session
+            const hasVisitedToday =
+              localStorage.getItem("visitedToday") ===
+              new Date().toDateString();
+            if (!hasVisitedToday) {
+              storedTotal += 1;
+              storedToday += 1;
+              localStorage.setItem("totalVisitors", storedTotal.toString());
+              localStorage.setItem("todayVisitors", storedToday.toString());
+              localStorage.setItem("visitedToday", new Date().toDateString());
+            }
+          }
+        } catch (storageError) {
+          console.warn("localStorage not available, using default values");
         }
 
         setVisitorData({
