@@ -281,7 +281,7 @@ export default function Index() {
                 <div className="mobile-card-comfortable flex items-center justify-center gap-3 py-6 md:py-4 bg-gradient-to-r from-yellow-50 to-yellow-100 md:bg-transparent rounded-2xl md:rounded-none border-2 border-yellow-200 md:border-none">
                   <Trophy className="w-7 h-7 md:w-5 md:h-5 text-yellow-600" />
                   <span className="font-bold text-xl md:text-lg mobile-arabic-text text-yellow-800">
-                    500+ قصة نجاح
+                    500+ قصة ن��اح
                   </span>
                 </div>
                 <div className="mobile-card-comfortable flex items-center justify-center gap-3 py-6 md:py-4 bg-gradient-to-r from-red-50 to-red-100 md:bg-transparent rounded-2xl md:rounded-none border-2 border-red-200 md:border-none">
@@ -339,16 +339,16 @@ export default function Index() {
               </Card>
             </Link>
 
-            <Link to="/success-stories" className="group">
-              <Card className="feature-card border-2 hover:border-warning/30">
-                <CardContent className="p-6">
-                  <div className="icon-wrapper bg-gradient-to-br from-warning to-warning/80">
-                    <Trophy className="w-8 h-8 text-white" />
+            <Link to="/success-stories" className="group block">
+              <Card className="mobile-card-elevated feature-card border-2 hover:border-warning/30 group hover:shadow-2xl transition-all duration-300">
+                <CardContent className="p-8 md:p-6 text-center">
+                  <div className="mobile-icon-xl icon-wrapper bg-gradient-to-br from-warning to-warning/80 mx-auto mb-6 shadow-lg">
+                    <Trophy className="w-12 h-12 md:w-8 md:h-8 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2">
+                  <h3 className="mobile-subtitle-comfort font-extrabold text-2xl md:text-lg mb-4 md:mb-2 mobile-arabic-title">
                     {t("home.quick.success")}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="mobile-text-body text-xl md:text-sm text-muted-foreground leading-relaxed mobile-arabic-text">
                     {t("home.quick.success_desc")}
                   </p>
                 </CardContent>
