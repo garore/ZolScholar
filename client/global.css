@@ -265,7 +265,7 @@
 
   /* Enhanced category cards */
   .category-card {
-    @apply scholarship-card group cursor-pointer hover:border-primary/30 relative overflow-hidden;
+    @apply scholarship-card cursor-pointer hover:border-primary/30 relative overflow-hidden;
   }
 
   .category-card::before {
@@ -280,7 +280,7 @@
 
   /* Feature cards with icons */
   .feature-card {
-    @apply scholarship-card text-center group hover:border-accent/30;
+    @apply scholarship-card text-center hover:border-accent/30;
   }
 
   .feature-card .icon-wrapper {
