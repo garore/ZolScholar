@@ -3,8 +3,10 @@ import { Users, Eye } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { VisitorCountResponse } from "@shared/api";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function VisitorCounter() {
+  const { t, language } = useTranslation();
   const [visitorData, setVisitorData] = useState<VisitorCountResponse | null>(
     null,
   );
@@ -128,9 +130,13 @@ export default function VisitorCounter() {
             </div>
             <div className="text-center">
               <div className="font-bold text-blue-900">
-                {visitorData.totalVisitors.toLocaleString("ar-EG")}
+                {visitorData.totalVisitors.toLocaleString(
+                  language === "ar" ? "ar-EG" : "en-US",
+                )}
               </div>
-              <div className="text-blue-600 text-xs">إجمالي الزوار</div>
+              <div className="text-blue-600 text-xs">
+                {t("common.visitors_total")}
+              </div>
             </div>
           </div>
 
@@ -142,9 +148,13 @@ export default function VisitorCounter() {
             </div>
             <div className="text-center">
               <div className="font-bold text-green-900">
-                {visitorData.todayVisitors.toLocaleString("ar-EG")}
+                {visitorData.todayVisitors.toLocaleString(
+                  language === "ar" ? "ar-EG" : "en-US",
+                )}
               </div>
-              <div className="text-green-600 text-xs">زوار اليوم</div>
+              <div className="text-green-600 text-xs">
+                {t("common.visitors_today")}
+              </div>
             </div>
           </div>
         </div>
