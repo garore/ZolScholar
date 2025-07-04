@@ -121,38 +121,38 @@ export default function VisitorCounter() {
   }
 
   return (
-    <Card className="bg-gradient-to-r from-blue-50 to-green-50 border-blue-200">
+    <Card className="gradient-bg-primary border-primary/30 shadow-lg">
       <CardContent className="p-4">
         <div className="flex items-center justify-center gap-6 text-sm">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-              <Users className="w-4 h-4 text-blue-600" />
+            <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+              <Users className="w-4 h-4 text-white" />
             </div>
             <div className="text-center">
-              <div className="font-bold text-blue-900">
+              <div className="font-bold text-white text-lg">
                 {visitorData.totalVisitors.toLocaleString(
                   language === "ar" ? "ar-EG" : "en-US",
                 )}
               </div>
-              <div className="text-blue-600 text-xs">
+              <div className="text-white/90 text-xs">
                 {t("common.visitors_total")}
               </div>
             </div>
           </div>
 
-          <div className="h-8 w-px bg-blue-200"></div>
+          <div className="h-8 w-px bg-white/30"></div>
 
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-              <Eye className="w-4 h-4 text-green-600" />
+            <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+              <Eye className="w-4 h-4 text-white" />
             </div>
             <div className="text-center">
-              <div className="font-bold text-green-900">
+              <div className="font-bold text-white text-lg">
                 {visitorData.todayVisitors.toLocaleString(
                   language === "ar" ? "ar-EG" : "en-US",
                 )}
               </div>
-              <div className="text-green-600 text-xs">
+              <div className="text-white/90 text-xs">
                 {t("common.visitors_today")}
               </div>
             </div>
