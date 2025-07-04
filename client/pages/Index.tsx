@@ -209,66 +209,55 @@ export default function Index() {
       </div>
 
       {/* Personal Introduction Section */}
-      <section className="relative py-16 md:py-20 px-4 md:px-8 overflow-hidden gradient-bg-hero opacity-95">
-        <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
-        {/* Subtle Sudan flag pattern background */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 left-0 w-full h-1/3 bg-red-500"></div>
-          <div className="absolute top-1/3 left-0 w-full h-1/3 bg-white"></div>
-          <div className="absolute top-2/3 left-0 w-full h-1/3 bg-black"></div>
-        </div>
+      <section className="relative py-16 md:py-24 px-4 md:px-8 overflow-hidden bg-gradient-to-br from-primary/5 via-white to-accent/5">
 
-        <div className="max-w-4xl mx-auto text-center relative z-10">
+        <div className="max-w-7xl mx-auto text-center relative z-10">
           <div className="animate-fade-in">
-            {/* Logo/Title */}
-            <div className="mb-8">
-              <h1
-                className="text-5xl md:text-6xl font-bold mb-4"
-                style={{
-                  fontFamily:
-                    language === "ar" ? "Cairo, serif" : "Inter, serif",
-                }}
-              >
-                <span className="bg-gradient-to-r from-blue-600 via-green-500 to-yellow-500 bg-clip-text text-transparent">
-                  {t("home.hero.title")}
-                </span>
-              </h1>
+            {/* Logo/Brand - Prominent and Clear */}
+            <div className="mb-8 md:mb-12">
+              <div className="inline-flex items-center gap-4 mb-6">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center shadow-lg">
+                  <GraduationCap className="w-8 h-8 md:w-10 md:h-10 text-white" />
+                </div>
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary mobile-arabic-title">
+                  {t("home.title")}
+                </h1>
+              </div>
+
+              {/* Main Value Proposition */}
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 mobile-arabic-title leading-tight">
+                بوابتك للمنح الدراسية والفرص التعليمية
+              </h2>
+
+              {/* Simplified Description */}
+              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mobile-arabic-text">
+                منصة شاملة تساعدك في العثور على أفضل المنح الدراسية المجانية والممولة بالكامل في جميع أنحاء العالم
+              </p>
             </div>
 
-            {/* Personal Story - Simple & Short */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
-              <div
-                className="space-y-4 text-lg leading-relaxed text-center"
-                style={{
-                  fontFamily:
-                    language === "ar" ? "Cairo, serif" : "Inter, serif",
-                }}
-              >
-                <p className="text-blue-800 font-semibold text-xl">
-                  {t("home.hero.description")}
-                </p>
+            {/* Primary CTA */}
+            <div className="mb-12">
+              <Link to="/search" className="inline-block">
+                <button className="cta-primary text-xl md:text-2xl px-12 md:px-16 py-4 md:py-6 inline-flex items-center gap-4 shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 rounded-2xl">
+                  <Search className="w-6 h-6 md:w-7 md:h-7" />
+                  <span className="font-bold">ابدأ البحث عن منحتك</span>
+                </button>
+              </Link>
+            </div>
 
-                <p className="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
-                  {t("home.hero.message")}
-                </p>
+            {/* Search Bar */}
+            <div className="max-w-2xl mx-auto">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="ابحث عن منح حسب التخصص أو البلد..."
+                  className="w-full px-6 py-4 md:py-5 text-lg rounded-2xl border-2 border-gray-200 focus:border-primary focus:outline-none shadow-lg bg-white/95 backdrop-blur-sm mobile-arabic-text"
+                />
+                <button className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-primary text-white px-6 py-2 rounded-xl hover:bg-primary/90 transition-colors">
+                  <Search className="w-5 h-5" />
+                </button>
               </div>
-
-              {/* CTA Button */}
-              <div className="mt-10 md:mt-12">
-                <Link to="/search" className="block">
-                  <button className="mobile-btn-xl cta-primary text-2xl md:text-3xl px-12 md:px-16 py-6 md:py-7 inline-flex items-center gap-4 w-full sm:w-auto justify-center shadow-2xl transform hover:scale-105 transition-all duration-300">
-                    {language === "ar" && (
-                      <GraduationCap className="w-8 h-8 md:w-9 md:h-9" />
-                    )}
-                    <span className="font-extrabold mobile-arabic-text">
-                      {t("home.hero.cta")}
-                    </span>
-                    {language === "en" && (
-                      <GraduationCap className="w-8 h-8 md:w-9 md:h-9" />
-                    )}
-                  </button>
-                </Link>
-              </div>
+            </div>
 
               {/* Social proof - Much more comfortable for mobile */}
               <div className="mt-10 md:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 md:flex md:items-center md:justify-center md:gap-8">
