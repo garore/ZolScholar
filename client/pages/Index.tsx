@@ -137,7 +137,7 @@ export default function Index() {
     {
       title: "إنشاء حسابات في منصات التقديم",
       icon: UserCheck,
-      description: "مساعدة في إنشاء وتفعيل حساباتك في المنصات ا��مختلفة",
+      description: "مساعدة في إنشاء وتفعيل حساباتك في المنصات المختلفة",
     },
     {
       title: "ترجمة المستندات",
@@ -173,7 +173,7 @@ export default function Index() {
       benefits: ["راتب شهري", "سكن مجاني", "تأمين صحي", "تذاكر طيران"],
     },
     {
-      title: "منحة DAAD الألمانية",
+      title: "منح�� DAAD الألمانية",
       country: "ألمانيا",
       deadline: "15 ف��راير 2024",
       funding: "ممولة بالكامل",
@@ -195,7 +195,7 @@ export default function Index() {
       <SEOHead
         title="حلم زول بسيط - منح دراسية مجانية للطلاب السودانيين والعرب"
         description="منصة مجانية لمساعدة الطلاب السودانيين والع��ب في العثور على منح دراسية ممولة بالكامل في جميع أنحاء العالم. أكثر من 350 منحة متاحة من أفضل الجامعات العالمية."
-        keywords="منح دراسية مجانية, منح للسودانيين, حلم زول بسيط, منح ممولة بالكامل, منح عربية, منح أجنبية, دراسة مجانية, منح تركيا, منح ألمانيا, scholarship"
+        keywords="منح دراسية مجانية, منح للسودانيين, حلم زول بسيط, منح ممولة بالكامل, منح عربية, منح ��جنبية, دراسة مجانية, منح تركيا, منح ألمانيا, scholarship"
         canonicalUrl="https://zolscholar.com/"
         jsonLd={homepageJsonLd}
       />
@@ -209,7 +209,7 @@ export default function Index() {
       </div>
 
       {/* Personal Introduction Section */}
-      <section className="relative py-20 px-4 overflow-hidden gradient-bg-hero opacity-95">
+      <section className="relative py-16 md:py-20 px-4 md:px-8 overflow-hidden gradient-bg-hero opacity-95">
         <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
         {/* Subtle Sudan flag pattern background */}
         <div className="absolute inset-0 opacity-5">
@@ -254,29 +254,33 @@ export default function Index() {
               </div>
 
               {/* CTA Button */}
-              <div className="mt-8">
+              <div className="mt-8 md:mt-10">
                 <Link to="/search">
-                  <button className="cta-primary text-xl px-12 py-5 inline-flex items-center gap-3">
-                    {language === "ar" && <GraduationCap className="w-6 h-6" />}
-                    {t("home.hero.cta")}
-                    {language === "en" && <GraduationCap className="w-6 h-6" />}
+                  <button className="cta-primary text-xl md:text-2xl px-8 md:px-12 py-4 md:py-5 inline-flex items-center gap-3 w-full sm:w-auto justify-center">
+                    {language === "ar" && (
+                      <GraduationCap className="w-6 h-6 md:w-7 md:h-7" />
+                    )}
+                    <span className="font-bold">{t("home.hero.cta")}</span>
+                    {language === "en" && (
+                      <GraduationCap className="w-6 h-6 md:w-7 md:h-7" />
+                    )}
                   </button>
                 </Link>
               </div>
 
-              {/* Social proof */}
-              <div className="mt-6 flex items-center justify-center gap-6 text-sm text-gray-600">
-                <div className="flex items-center gap-2">
-                  <Users className="w-4 h-4" />
-                  <span>10,000+ طالب مستفيد</span>
+              {/* Social proof - Mobile Enhanced */}
+              <div className="mt-8 md:mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 md:flex md:items-center md:justify-center md:gap-6 text-sm md:text-base text-gray-600">
+                <div className="flex items-center justify-center gap-2 p-3 md:p-0 bg-blue-50 md:bg-transparent rounded-lg md:rounded-none">
+                  <Users className="w-5 h-5 md:w-4 md:h-4 text-blue-600" />
+                  <span className="font-medium">10,000+ طالب مستفيد</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Trophy className="w-4 h-4" />
-                  <span>500+ قصة نجاح</span>
+                <div className="flex items-center justify-center gap-2 p-3 md:p-0 bg-yellow-50 md:bg-transparent rounded-lg md:rounded-none">
+                  <Trophy className="w-5 h-5 md:w-4 md:h-4 text-yellow-600" />
+                  <span className="font-medium">500+ قصة نجاح</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Heart className="w-4 h-4 text-red-500" />
-                  <span>من القلب للقلب</span>
+                <div className="flex items-center justify-center gap-2 p-3 md:p-0 bg-red-50 md:bg-transparent rounded-lg md:rounded-none">
+                  <Heart className="w-5 h-5 md:w-4 md:h-4 text-red-500" />
+                  <span className="font-medium">من القلب للقلب</span>
                 </div>
               </div>
             </div>
@@ -285,9 +289,18 @@ export default function Index() {
       </section>
 
       {/* Quick Access to Main Features */}
-      <section className="py-12 px-4 bg-white border-b">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white border-b">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {/* Mobile Title */}
+          <div className="text-center mb-8 md:hidden">
+            <h2 className="text-2xl font-bold text-foreground mb-3">
+              الخدمات الرئيسية
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              اختر ما تحتاجه لبدء رحلتك
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             <Link to="/search" className="group">
               <Card className="scholarship-card text-center hover:scale-105 transition-all duration-300 border-2 hover:border-blue-300">
                 <CardContent className="p-6">
@@ -359,9 +372,16 @@ export default function Index() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white border-b">
+        <div className="max-w-7xl mx-auto">
+          {/* Mobile title */}
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
+              إنجازاتنا
+            </h2>
+            <p className="text-muted-foreground text-lg">أرقام نفتخر بها</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               return (
@@ -384,13 +404,13 @@ export default function Index() {
       </section>
 
       {/* Scholarship Categories */}
-      <section className="py-20 px-4">
+      <section className="py-16 md:py-20 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 md:mb-6">
               {t("categories.title")}
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed px-4">
               {t("categories.description")}
             </p>
           </div>
@@ -494,7 +514,7 @@ export default function Index() {
                   </div>
                   <div className="flex gap-2">
                     <Button className="flex-1">
-                      الت��اصيل
+                      التفاصيل
                       <ExternalLink className="w-4 h-4 mr-2" />
                     </Button>
                     <a
@@ -675,7 +695,7 @@ export default function Index() {
             ابدأ رحلتك نحو حلمك الدراسي اليوم
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            معانا حتلقى منح عربية وأجنبية، وأدوات تسا��دك تخلي طريق�� للتقديم
+            معانا حتلقى منح عربية وأجنبية، ��أدوات تسا��دك تخلي طريقك للتقديم
             أسهل�� ونتابعك خطوة بخطوة لحدي ما تنجح إن شاء الله
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
