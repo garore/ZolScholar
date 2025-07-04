@@ -15,6 +15,9 @@ import ScholarshipsArab from "./pages/ScholarshipsArab";
 import ScholarshipsForeign from "./pages/ScholarshipsForeign";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
+import About from "./pages/About";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 import Recommendations from "./pages/Recommendations";
 import ApplicationTracker from "./pages/ApplicationTracker";
 import SuccessStories from "./pages/SuccessStories";
@@ -48,6 +51,9 @@ const App = () => (
           />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/recommendations" element={<Recommendations />} />
           <Route path="/tracker" element={<ApplicationTracker />} />
           <Route path="/success-stories" element={<SuccessStories />} />

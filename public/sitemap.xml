@@ -116,4 +116,31 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://zolscholar.com/contact" />
   </url>
 
+  <!-- About Page -->
+  <url>
+    <loc>https://zolscholar.com/about</loc>
+    <lastmod>2024-01-15T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://zolscholar.com/about" />
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://zolscholar.com/privacy-policy</loc>
+    <lastmod>2024-01-15T00:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://zolscholar.com/privacy-policy" />
+  </url>
+
+  <!-- Terms of Service -->
+  <url>
+    <loc>https://zolscholar.com/terms-of-service</loc>
+    <lastmod>2024-01-15T00:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://zolscholar.com/terms-of-service" />
+  </url>
+
 </urlset>
