@@ -186,7 +186,7 @@ export default function Index() {
       deadline: "28 فبراير 2024",
       funding: "ممولة بالكامل",
       level: "جميع المستويات",
-      benefits: ["راتب شهري", "سكن وطعام", "تذاكر طيران سنوية"],
+      benefits: ["راتب شهري", "سكن وطعام", "تذاكر طيران س��وية"],
     },
   ];
 
@@ -361,15 +361,15 @@ export default function Index() {
               rel="noopener noreferrer"
               className="group"
             >
-              <Card className="scholarship-card text-center hover:scale-105 transition-all duration-300 border-2 hover:border-green-300">
-                <CardContent className="p-6">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
-                    <MessageCircle className="w-8 h-8 text-green-600" />
+              <Card className="mobile-card-elevated feature-card border-2 hover:border-success/30 group hover:shadow-2xl transition-all duration-300">
+                <CardContent className="p-8 md:p-6 text-center">
+                  <div className="mobile-icon-xl icon-wrapper bg-gradient-to-br from-success to-success/80 mx-auto mb-6 shadow-lg">
+                    <MessageCircle className="w-12 h-12 md:w-8 md:h-8 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2">
+                  <h3 className="mobile-subtitle-comfort font-extrabold text-2xl md:text-lg mb-4 md:mb-2 mobile-arabic-title">
                     {t("home.quick.contact")}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="mobile-text-body text-xl md:text-sm text-muted-foreground leading-relaxed mobile-arabic-text">
                     {t("home.quick.contact_desc")}
                   </p>
                 </CardContent>
@@ -637,7 +637,7 @@ export default function Index() {
                   <span className="text-2xl">📊</span>
                 </div>
                 <CardTitle className="text-xl font-bold">
-                  متابع الطلبات
+                  متابع ��لطلبات
                 </CardTitle>
               </CardHeader>
               <CardContent>
