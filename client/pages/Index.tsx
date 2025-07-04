@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -177,7 +178,7 @@ export default function Index() {
       country: "ألمانيا",
       deadline: "15 ف��راير 2024",
       funding: "ممولة بالكامل",
-      level: "ماجستير، دكتوراه",
+      level: "ماجستي��، دكتوراه",
       benefits: ["راتب 850€", "تأمين صحي", "دورات لغة"],
     },
     {
