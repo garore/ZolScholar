@@ -137,7 +137,7 @@ export default function Index() {
     {
       title: "إنشاء حسابات في منصات التقديم",
       icon: UserCheck,
-      description: "مساعدة في إنشاء وتفعيل حساباتك في المنصات المختلفة",
+      description: "مساعدة في إنشاء وتفعيل حساباتك في المنصات ا��مختلفة",
     },
     {
       title: "ترجمة المستندات",
@@ -256,18 +256,11 @@ export default function Index() {
               {/* CTA Button */}
               <div className="mt-8">
                 <Link to="/search">
-                  <Button
-                    size="lg"
-                    className="text-xl px-10 py-4 bg-gradient-to-r from-blue-600 via-green-500 to-yellow-500 hover:from-blue-700 hover:via-green-600 hover:to-yellow-600 text-white shadow-lg transform hover:scale-105 transition-all duration-300"
-                  >
-                    {language === "ar" && (
-                      <GraduationCap className="w-6 h-6 ml-3" />
-                    )}
+                  <button className="cta-primary text-xl px-12 py-5 inline-flex items-center gap-3">
+                    {language === "ar" && <GraduationCap className="w-6 h-6" />}
                     {t("home.hero.cta")}
-                    {language === "en" && (
-                      <GraduationCap className="w-6 h-6 mr-3" />
-                    )}
-                  </Button>
+                    {language === "en" && <GraduationCap className="w-6 h-6" />}
+                  </button>
                 </Link>
               </div>
 
@@ -501,7 +494,7 @@ export default function Index() {
                   </div>
                   <div className="flex gap-2">
                     <Button className="flex-1">
-                      التفاصيل
+                      الت��اصيل
                       <ExternalLink className="w-4 h-4 mr-2" />
                     </Button>
                     <a
@@ -682,7 +675,7 @@ export default function Index() {
             ابدأ رحلتك نحو حلمك الدراسي اليوم
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            معانا حتلقى منح عربية وأجنبية، وأدوات تسا��دك تخلي طريقك للتقديم
+            معانا حتلقى منح عربية وأجنبية، وأدوات تسا��دك تخلي طريق�� للتقديم
             أسهل�� ونتابعك خطوة بخطوة لحدي ما تنجح إن شاء الله
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
