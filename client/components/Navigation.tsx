@@ -81,8 +81,8 @@ const Navigation = () => {
       <nav className="bg-white/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo and Language Toggle */}
-            <div className="flex-shrink-0 flex items-center gap-3">
+            {/* Logo */}
+            <div className="flex-shrink-0">
               <Link to="/" className="flex items-center space-x-2">
                 <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center">
                   <GraduationCap className="w-6 h-6 text-white" />
@@ -91,10 +91,6 @@ const Navigation = () => {
                   {t("home.title")}
                 </span>
               </Link>
-              {/* Language Toggle - Always visible */}
-              <div className="md:hidden">
-                <LanguageToggle />
-              </div>
             </div>
 
             {/* Desktop Navigation */}
