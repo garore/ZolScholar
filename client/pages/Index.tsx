@@ -49,7 +49,7 @@ export default function Index() {
     url: "https://zolscholar.com",
     logo: "https://zolscholar.com/favicon.svg",
     description:
-      "منصة مجانية لمساعدة ا��طلاب السودانيين والعرب في العثور على منح دراسية ممولة بالكامل في جميع أنحاء العالم",
+      "منصة مجانية لمساعدة الطلاب السودانيين والعرب في العثور على منح دراسية ممولة بالكامل في جميع أنحاء العالم",
     areaServed: {
       "@type": "Country",
       name: "Sudan",
@@ -102,7 +102,7 @@ export default function Index() {
       href: "/scholarships/airfare",
       color: "bg-blue-500",
       count: "50+",
-      badge: "جدي��",
+      badge: "جديد",
     },
     {
       title: t("categories.arab"),
@@ -138,12 +138,12 @@ export default function Index() {
     {
       title: "إنشاء حسابات في منصات التقديم",
       icon: UserCheck,
-      description: "مساعدة في إنشاء وتفعيل حساباتك في ا��منصات المختلفة",
+      description: "مساعدة في إنشاء وتفعيل حساباتك في المنصات المختلفة",
     },
     {
       title: "ترجمة المستندات",
       icon: Languages,
-      description: "تر��مة دقيقة ومعتمدة لجميع المستندات المطلوبة",
+      description: "ترجمة دقيقة ومعتمدة لجميع المستندات المطلوبة",
     },
     {
       title: "تدريب على المقابلات",
@@ -166,7 +166,7 @@ export default function Index() {
 
   const featuredScholarships = [
     {
-      title: "منحة ���لحكومة التركية 2024",
+      title: "منحة الحكومة التركية 2024",
       country: "تركيا",
       deadline: "31 يناير 2024",
       funding: "ممولة بالكامل",
@@ -176,9 +176,9 @@ export default function Index() {
     {
       title: "منحة DAAD الألمانية",
       country: "ألمانيا",
-      deadline: "15 ف��راير 2024",
+      deadline: "15 فبراير 2024",
       funding: "ممولة بالكامل",
-      level: "ماجستي��، دكتوراه",
+      level: "ماجستير، دكتوراه",
       benefits: ["راتب 850€", "تأمين صحي", "دورات لغة"],
     },
     {
@@ -195,7 +195,7 @@ export default function Index() {
     <div className="min-h-screen bg-background">
       <SEOHead
         title="حلم زول بسيط - منح دراسية مجانية للطلاب السودانيين والعرب"
-        description="منصة مجانية لمساعدة الطلاب السودانيين والع��ب في العثور على منح دراسية ممولة بالكامل في جميع أنحاء العالم. أكثر من 350 منحة متاحة من أفضل الجامعات العالمية."
+        description="منصة مجانية لمساعدة الطلاب السودانيين والعرب في العثور على منح دراسية ممولة بالكامل في جميع أنحاء العالم. أكثر من 350 منحة متاحة من أفضل الجامعات العالمية."
         keywords="منح دراسية مجانية, منح للسودانيين, حلم زول بسيط, منح ممولة بالكامل, منح عربية, منح أجنبية, دراسة مجانية, منح تركيا, منح ألمانيا, scholarship"
         canonicalUrl="https://zolscholar.com/"
         jsonLd={homepageJsonLd}
@@ -211,7 +211,6 @@ export default function Index() {
 
       {/* Personal Introduction Section */}
       <section className="relative py-16 md:py-24 px-4 md:px-8 overflow-hidden bg-gradient-to-br from-primary/5 via-white to-accent/5">
-
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <div className="animate-fade-in">
             {/* Logo/Brand - Prominent and Clear */}
@@ -232,7 +231,8 @@ export default function Index() {
 
               {/* Simplified Description */}
               <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mobile-arabic-text">
-                منصة شاملة تساعدك في العثور على أفضل المنح الدراسية المجانية والممولة بالكامل في جميع أنحاء العالم
+                منصة شاملة تساعدك في العثور على أفضل المنح الدراسية المجانية
+                والممولة بالكامل في جميع أنحاء العالم
               </p>
             </div>
 
@@ -260,26 +260,25 @@ export default function Index() {
               </div>
             </div>
 
-              {/* Social proof - Much more comfortable for mobile */}
-              <div className="mt-10 md:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 md:flex md:items-center md:justify-center md:gap-8">
-                <div className="mobile-card-comfortable flex items-center justify-center gap-3 py-6 md:py-4 bg-gradient-to-r from-blue-50 to-blue-100 md:bg-transparent rounded-2xl md:rounded-none border-2 border-blue-200 md:border-none">
-                  <Users className="w-7 h-7 md:w-5 md:h-5 text-blue-600" />
-                  <span className="font-bold text-xl md:text-lg mobile-arabic-text text-blue-800">
-                    10,000+ طالب مستفيد
-                  </span>
-                </div>
-                <div className="mobile-card-comfortable flex items-center justify-center gap-3 py-6 md:py-4 bg-gradient-to-r from-yellow-50 to-yellow-100 md:bg-transparent rounded-2xl md:rounded-none border-2 border-yellow-200 md:border-none">
-                  <Trophy className="w-7 h-7 md:w-5 md:h-5 text-yellow-600" />
-                  <span className="font-bold text-xl md:text-lg mobile-arabic-text text-yellow-800">
-                    500+ قصة ن��اح
-                  </span>
-                </div>
-                <div className="mobile-card-comfortable flex items-center justify-center gap-3 py-6 md:py-4 bg-gradient-to-r from-red-50 to-red-100 md:bg-transparent rounded-2xl md:rounded-none border-2 border-red-200 md:border-none">
-                  <Heart className="w-7 h-7 md:w-5 md:h-5 text-red-500" />
-                  <span className="font-bold text-xl md:text-lg mobile-arabic-text text-red-800">
-                    من القلب للقلب
-                  </span>
-                </div>
+            {/* Social proof - Much more comfortable for mobile */}
+            <div className="mt-10 md:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 md:flex md:items-center md:justify-center md:gap-8">
+              <div className="mobile-card-comfortable flex items-center justify-center gap-3 py-6 md:py-4 bg-gradient-to-r from-blue-50 to-blue-100 md:bg-transparent rounded-2xl md:rounded-none border-2 border-blue-200 md:border-none">
+                <Users className="w-7 h-7 md:w-5 md:h-5 text-blue-600" />
+                <span className="font-bold text-xl md:text-lg mobile-arabic-text text-blue-800">
+                  10,000+ طالب مستفيد
+                </span>
+              </div>
+              <div className="mobile-card-comfortable flex items-center justify-center gap-3 py-6 md:py-4 bg-gradient-to-r from-yellow-50 to-yellow-100 md:bg-transparent rounded-2xl md:rounded-none border-2 border-yellow-200 md:border-none">
+                <Trophy className="w-7 h-7 md:w-5 md:h-5 text-yellow-600" />
+                <span className="font-bold text-xl md:text-lg mobile-arabic-text text-yellow-800">
+                  500+ قصة نجاح
+                </span>
+              </div>
+              <div className="mobile-card-comfortable flex items-center justify-center gap-3 py-6 md:py-4 bg-gradient-to-r from-red-50 to-red-100 md:bg-transparent rounded-2xl md:rounded-none border-2 border-red-200 md:border-none">
+                <Heart className="w-7 h-7 md:w-5 md:h-5 text-red-500" />
+                <span className="font-bold text-xl md:text-lg mobile-arabic-text text-red-800">
+                  من القلب للقلب
+                </span>
               </div>
             </div>
           </div>
@@ -418,7 +417,7 @@ export default function Index() {
                   </div>
                   <h3 className="font-bold text-lg mb-2">ابحث عن منح</h3>
                   <p className="text-sm text-muted-foreground">
-                    اك��شف مئات المنح المتاحة
+                    اكتشف مئات المنح المتاحة
                   </p>
                 </CardContent>
               </Card>
@@ -576,10 +575,10 @@ export default function Index() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">
-              منح مميز�� هذا الشهر
+              منح مميزة هذا الشهر
             </h2>
             <p className="text-xl text-muted-foreground">
-              أفضل الفرص المتاحة حالياً مع مواعيد التقدي�� القريبة
+              أفضل الفرص المتاحة حالياً مع مواعيد التقديم القريبة
             </p>
           </div>
 
@@ -649,7 +648,7 @@ export default function Index() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">خدماتنا</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              نقدم لك كل ما تحتاجه لضمان نجاح طلب المنحة ��لدراسية
+              نقدم لك كل ما تحتاجه لضمان نجاح طلب ��لمنحة الدراسية
             </p>
           </div>
 
@@ -763,7 +762,7 @@ export default function Index() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground text-center mb-6">
-                  اكتشف قصص ملهمة لطلاب حصلوا على م��ح في أفضل الجامعات
+                  اكتشف قصص ملهمة لطلاب حصلوا على منح في أفضل الجامعات
                 </p>
                 <Link to="/success-stories">
                   <Button className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600">
@@ -783,7 +782,7 @@ export default function Index() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground text-center mb-6">
-                  دليل شامل بأفضل النصائح والاستراتيجيات لل��صول على المنح
+                  دليل شامل بأفضل النصائح والاستراتيجيات للحصول على المنح
                 </p>
                 <Link to="/blog">
                   <Button className="w-full bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600">
@@ -804,8 +803,8 @@ export default function Index() {
             ابدأ رحلتك نحو حلمك الدراسي اليوم
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            معانا حتلقى منح عربية وأجنبية، وأدوات تسا��دك تخلي طريقك للتقديم
-            أسهل�� ونتابعك خطوة بخطوة لحدي ما تنجح إن شاء الله
+            معانا حتلقى منح عربية وأجنبية، وأدوات تساعدك تخلي طريقك للتقديم
+            أسهل، ونتابعك خطوة بخطوة لحدي ما تنجح إن شاء الله
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/recommendations">
@@ -844,7 +843,7 @@ export default function Index() {
                 <span className="text-2xl font-bold">حلم زول بسيط</span>
               </div>
               <p className="text-muted mb-4">
-                منصتك الأولى للمنح الدراسية الممولة بالكام�� حول العالم
+                منصتك الأولى للمنح الدراسية الممولة بالكامل حول العالم
               </p>
             </div>
 
@@ -912,7 +911,7 @@ export default function Index() {
           <div className="border-t border-muted/20 mt-8 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-muted">
-                © 2024 حلم زول بسيط. جميع الحق��ق محفوظة.
+                © 2024 حلم زول بسيط. جميع الحقوق محفوظة.
               </p>
               <div className="flex gap-4 text-sm">
                 <Link
