@@ -159,8 +159,9 @@ const Navigation = () => {
               </a>
             </div>
 
-            {/* Mobile menu button */}
-            <div className="md:hidden">
+            {/* Mobile menu button with language toggle */}
+            <div className="md:hidden flex items-center gap-2">
+              <LanguageToggle />
               <Button
                 variant="ghost"
                 size="icon"
