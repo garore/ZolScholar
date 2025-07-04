@@ -70,6 +70,13 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        scholarship: {
+          blue: "hsl(var(--scholarship-blue))",
+          teal: "hsl(var(--scholarship-teal))",
+          orange: "hsl(var(--scholarship-orange))",
+          green: "hsl(var(--scholarship-green))",
+          purple: "hsl(var(--scholarship-purple))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -107,6 +114,12 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         float: "float 3s ease-in-out infinite",
         "fade-in": "fade-in 0.6s ease-out",
+      },
+      backgroundImage: {
+        "gradient-primary": "var(--gradient-primary)",
+        "gradient-warm": "var(--gradient-warm)",
+        "gradient-success": "var(--gradient-success)",
+        "gradient-hero": "var(--gradient-hero)",
       },
     },
   },
