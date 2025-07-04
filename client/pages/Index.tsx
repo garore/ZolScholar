@@ -10,6 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import Navigation from "@/components/Navigation";
 import VisitorCounter from "@/components/VisitorCounter";
+import SEOHead from "@/components/SEOHead";
 import {
   Search,
   GraduationCap,
@@ -35,6 +36,51 @@ import {
 export default function Index() {
   const whatsappNumber = "+62 859-3241-6084";
   const whatsappLink = `https://wa.me/${whatsappNumber.replace(/\s+/g, "").replace("+", "")}`;
+
+  // Structured data for homepage
+  const homepageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    name: "حلم زول بسيط",
+    alternateName: "Simple Guy's Dream",
+    url: "https://zolscholar.com",
+    logo: "https://zolscholar.com/favicon.svg",
+    description:
+      "منصة مجانية لمساعدة الطلاب السودانيين والعرب في العثور على منح دراسية ممولة بالكامل في جميع أنحاء العالم",
+    areaServed: {
+      "@type": "Country",
+      name: "Sudan",
+    },
+    serviceType: "Educational Consulting",
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "منح دراسية",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "منح دراسية ممولة بالكامل",
+            description: "مساعدة في العثور على منح دراسية ممولة بالكامل",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "منح عربية وأجنبية",
+            description: "منح من الدول العربية والأجنبية",
+          },
+        },
+      ],
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+62-859-3241-6084",
+      contactType: "customer service",
+      availableLanguage: ["Arabic", "English"],
+    },
+  };
 
   const scholarshipCategories = [
     {
@@ -94,7 +140,7 @@ export default function Index() {
     {
       title: "ترجمة المستندات",
       icon: Languages,
-      description: "ترجمة دقيقة ومعتمدة لجميع المستندات المطلوبة",
+      description: "تر��مة دقيقة ومعتمدة لجميع المستندات المطلوبة",
     },
     {
       title: "تدريب على المقابلات",
@@ -127,7 +173,7 @@ export default function Index() {
     {
       title: "منحة DAAD الألمانية",
       country: "ألمانيا",
-      deadline: "15 فبراير 2024",
+      deadline: "15 ف��راير 2024",
       funding: "ممولة بالكامل",
       level: "ماجستير، دكتوراه",
       benefits: ["راتب 850€", "تأمين صحي", "دورات لغة"],
@@ -144,6 +190,13 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="حلم زول بسيط - منح دراسية مجانية للطلاب السودانيين والعرب"
+        description="منصة مجانية لمساعدة الطلاب السودانيين والعرب في العثور على منح دراسية ممولة بالكامل في جميع أنحاء العالم. أكثر من 350 منحة متاحة من أفضل الجامعات العالمية."
+        keywords="منح دراسية مجانية, منح للسودانيين, حلم زول بسيط, منح ممولة بالكامل, منح عربية, منح أجنبية, دراسة مجانية, منح تركيا, منح ألمانيا, scholarship"
+        canonicalUrl="https://zolscholar.com/"
+        jsonLd={homepageJsonLd}
+      />
       <Navigation />
 
       {/* Visitor Counter */}
@@ -194,7 +247,7 @@ export default function Index() {
                 </p>
 
                 <p className="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
-                  لو وصلت هنا، فأن�� ما وحدك… ✊
+                  لو وصلت هنا، فأنت ما وحدك… ✊
                 </p>
               </div>
 
@@ -270,7 +323,7 @@ export default function Index() {
                   <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-yellow-200 transition-colors">
                     <Trophy className="w-8 h-8 text-yellow-600" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2">قص�� النجاح</h3>
+                  <h3 className="font-bold text-lg mb-2">قصص النجاح</h3>
                   <p className="text-sm text-muted-foreground">
                     اقرأ قصص ملهمة
                   </p>
@@ -611,7 +664,7 @@ export default function Index() {
           </h2>
           <p className="text-xl mb-8 opacity-90">
             معانا حتلقى منح عربية وأجنبية، وأدوات تسا��دك تخلي طريقك للتقديم
-            أسهل، ونتابعك خطوة بخطوة لحدي ما تنجح إن شاء الله
+            أسهل�� ونتابعك خطوة بخطوة لحدي ما تنجح إن شاء الله
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/recommendations">
