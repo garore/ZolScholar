@@ -99,7 +99,7 @@ export default function Index() {
       href: "/scholarships/airfare",
       color: "bg-blue-500",
       count: "50+",
-      badge: "جديد",
+      badge: "جدي��",
     },
     {
       title: "منح عربية",
@@ -721,6 +721,12 @@ export default function Index() {
                   className="block text-muted hover:text-white transition-colors"
                 >
                   منح عربية
+                </Link>
+                <Link
+                  to="/about"
+                  className="block text-muted hover:text-white transition-colors"
+                >
+                  من نحن
                 </Link>
                 <Link
                   to="/services"
