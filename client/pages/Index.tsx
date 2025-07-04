@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import Navigation from "@/components/Navigation";
 import VisitorCounter from "@/components/VisitorCounter";
 import SEOHead from "@/components/SEOHead";
+import { useTranslation } from "@/hooks/useTranslation";
 import {
   Search,
   GraduationCap,
@@ -34,6 +35,7 @@ import {
 } from "lucide-react";
 
 export default function Index() {
+  const { t, language } = useTranslation();
   const whatsappNumber = "+62 859-3241-6084";
   const whatsappLink = `https://wa.me/${whatsappNumber.replace(/\s+/g, "").replace("+", "")}`;
 
@@ -227,10 +229,13 @@ export default function Index() {
             <div className="mb-8">
               <h1
                 className="text-5xl md:text-6xl font-bold mb-4"
-                style={{ fontFamily: "Cairo, serif" }}
+                style={{
+                  fontFamily:
+                    language === "ar" ? "Cairo, serif" : "Inter, serif",
+                }}
               >
                 <span className="bg-gradient-to-r from-blue-600 via-green-500 to-yellow-500 bg-clip-text text-transparent">
-                  ✨ حلم زول بسيط ✨
+                  {t("home.hero.title")}
                 </span>
               </h1>
             </div>
@@ -239,15 +244,17 @@ export default function Index() {
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
               <div
                 className="space-y-4 text-lg leading-relaxed text-center"
-                style={{ fontFamily: "Cairo, serif" }}
+                style={{
+                  fontFamily:
+                    language === "ar" ? "Cairo, serif" : "Inter, serif",
+                }}
               >
                 <p className="text-blue-800 font-semibold text-xl">
-                  "حلم زول بسيط" - منصة مجانية لمساعدة الطلاب السودانيين في
-                  الحصول على منح دراسية.
+                  {t("home.hero.description")}
                 </p>
 
                 <p className="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
-                  لو وصلت هنا، فأنت ما وحدك… ✊
+                  {t("home.hero.message")}
                 </p>
               </div>
 
@@ -258,9 +265,13 @@ export default function Index() {
                     size="lg"
                     className="text-xl px-10 py-4 bg-gradient-to-r from-blue-600 via-green-500 to-yellow-500 hover:from-blue-700 hover:via-green-600 hover:to-yellow-600 text-white shadow-lg transform hover:scale-105 transition-all duration-300"
                   >
-                    <GraduationCap className="w-6 h-6 ml-3" />
-                    ابدأ رحلة حلمك
-                    <ArrowLeft className="w-6 h-6 mr-3" />
+                    {language === "ar" && (
+                      <GraduationCap className="w-6 h-6 ml-3" />
+                    )}
+                    {t("home.hero.cta")}
+                    {language === "en" && (
+                      <GraduationCap className="w-6 h-6 mr-3" />
+                    )}
                   </Button>
                 </Link>
               </div>
@@ -309,9 +320,11 @@ export default function Index() {
                   <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200 transition-colors">
                     <span className="text-2xl">🤖</span>
                   </div>
-                  <h3 className="font-bold text-lg mb-2">توصيات ذكية</h3>
+                  <h3 className="font-bold text-lg mb-2">
+                    {t("home.quick.recommendations")}
+                  </h3>
                   <p className="text-sm text-muted-foreground">
-                    منح مخصصة لملفك
+                    {t("home.quick.recommendations_desc")}
                   </p>
                 </CardContent>
               </Card>
@@ -323,9 +336,11 @@ export default function Index() {
                   <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-yellow-200 transition-colors">
                     <Trophy className="w-8 h-8 text-yellow-600" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2">قصص النجاح</h3>
+                  <h3 className="font-bold text-lg mb-2">
+                    {t("home.quick.success")}
+                  </h3>
                   <p className="text-sm text-muted-foreground">
-                    اقرأ قصص ملهمة
+                    {t("home.quick.success_desc")}
                   </p>
                 </CardContent>
               </Card>
@@ -342,9 +357,11 @@ export default function Index() {
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
                     <MessageCircle className="w-8 h-8 text-green-600" />
                   </div>
-                  <h3 className="font-bold text-lg mb-2">تحدث معنا</h3>
+                  <h3 className="font-bold text-lg mb-2">
+                    {t("home.quick.contact")}
+                  </h3>
                   <p className="text-sm text-muted-foreground">
-                    احصل على مساعدة فورية
+                    {t("home.quick.contact_desc")}
                   </p>
                 </CardContent>
               </Card>
@@ -663,7 +680,7 @@ export default function Index() {
             ابدأ رحلتك نحو حلمك الدراسي اليوم
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            معانا حتلقى منح عربية وأجنبية، وأدوات ت��ا��دك تخلي طريقك للتقديم
+            معانا حتلقى منح عربية وأجنبية، وأدوات تسا��دك تخلي طريقك للتقديم
             أسهل�� ونتابعك خطوة بخطوة لحدي ما تنجح إن شاء الله
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
