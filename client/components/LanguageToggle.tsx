@@ -10,11 +10,12 @@ export default function LanguageToggle() {
       variant="outline"
       size="sm"
       onClick={toggleLanguage}
-      className="flex items-center gap-2 bg-white/10 border-white/20 text-white hover:bg-white/20 transition-all duration-200"
+      className="flex items-center gap-2 bg-gradient-to-r from-blue-500/20 to-green-500/20 border-blue-300/30 text-blue-800 hover:from-blue-500/30 hover:to-green-500/30 transition-all duration-200 shadow-sm"
+      title={language === "ar" ? "Switch to English" : "التبديل للعربية"}
     >
-      <Languages className="w-4 h-4" />
+      <Globe className="w-4 h-4" />
       <span className="text-sm font-medium">
-        {language === "ar" ? "English" : "العربية"}
+        {language === "ar" ? "EN" : "ع"}
       </span>
     </Button>
   );
