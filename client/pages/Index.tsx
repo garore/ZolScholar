@@ -157,10 +157,10 @@ export default function Index() {
   ];
 
   const stats = [
-    { number: "10,000+", label: "طالب مستفيد", icon: Users },
-    { number: "350+", label: "منحة متاحة", icon: GraduationCap },
-    { number: "95%", label: "معدل النجاح", icon: Trophy },
-    { number: "50+", label: "دولة", icon: Globe },
+    { number: "10,000+", label: "students", icon: Users },
+    { number: "350+", label: "scholarships", icon: GraduationCap },
+    { number: "95%", label: "success_rate", icon: Trophy },
+    { number: "50+", label: "countries", icon: Globe },
   ];
 
   const featuredScholarships = [
@@ -384,7 +384,10 @@ export default function Index() {
                   <div className="text-3xl font-bold text-foreground mb-2">
                     {stat.number}
                   </div>
-                  <div className="text-muted-foreground">{stat.label}</div>
+                  <div className="text-muted-foreground">
+                    {t(`stats.${stat.label.toLowerCase().replace(" ", "_")}`) ||
+                      stat.label}
+                  </div>
                 </div>
               );
             })}
@@ -397,11 +400,10 @@ export default function Index() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">
-              أقسام المنح الدراسية
+              {t("categories.title")}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              اختر النوع المناسب لك من منحنا المتنوعة والمصممة لتلبية احتياجاتك
-              التعليمية
+              {t("categories.description")}
             </p>
           </div>
 
@@ -435,8 +437,13 @@ export default function Index() {
                     </CardDescription>
                     <Link to={category.href}>
                       <Button className="w-full group-hover:bg-primary/90">
-                        استكشف الآن
-                        <ArrowLeft className="w-4 h-4 mr-2" />
+                        {language === "ar" && (
+                          <ArrowLeft className="w-4 h-4 ml-2" />
+                        )}
+                        {t("categories.explore_now")}
+                        {language === "en" && (
+                          <ArrowLeft className="w-4 h-4 mr-2" />
+                        )}
                       </Button>
                     </Link>
                   </CardContent>
