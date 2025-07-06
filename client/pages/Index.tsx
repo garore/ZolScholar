@@ -72,7 +72,7 @@ export default function Index() {
           itemOffered: {
             "@type": "Service",
             name: "منح عربية وأجنبية",
-            description: "منح من الدول العربية والأجنبية",
+            description: "منح من الدول الع��بية والأجنبية",
           },
         },
       ],
@@ -126,7 +126,7 @@ export default function Index() {
 
   const services = [
     {
-      title: "��صميم سيرة ذاتية احترافية",
+      title: "تصميم سيرة ذاتية احترافية",
       icon: FileText,
       description: "سيرة ذاتية مميزة تبرز مهاراتك وإنجازاتك",
     },
@@ -164,7 +164,7 @@ export default function Index() {
     { number: "50+", label: "countries", icon: Globe },
   ];
 
-  const featuredScholarships = [
+  const [featuredScholarships, setFeaturedScholarships] = useState([
     {
       title: "منحة الحكومة التركية 2024",
       country: "تركيا",
@@ -189,12 +189,40 @@ export default function Index() {
       level: "جميع المستويات",
       benefits: ["راتب شهري", "سكن وطعام", "تذاكر طيران سنوية"],
     },
-  ];
+  ]);
+
+  // Load featured scholarships from API
+  React.useEffect(() => {
+    const fetchFeaturedScholarships = async () => {
+      try {
+        const response = await fetch("/api/scholarships");
+        const data = await response.json();
+        if (data.success && data.scholarships.length > 0) {
+          // Use first 3 scholarships from API as featured
+          const apiScholarships = data.scholarships
+            .slice(0, 3)
+            .map((s: any) => ({
+              title: s.title,
+              country: s.country,
+              deadline: s.deadline,
+              funding: s.funding,
+              level: s.level,
+              benefits: s.benefits.slice(0, 4),
+            }));
+          setFeaturedScholarships(apiScholarships);
+        }
+      } catch (error) {
+        console.log("Using default scholarships:", error);
+      }
+    };
+
+    fetchFeaturedScholarships();
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="��لم زول بسيط - منح دراسية مجانية للطلاب السودانيين والعرب"
+        title="حلم زول بسيط - منح دراسية مجانية للطلاب السودانيين والعرب"
         description="منصة مجانية لمساعدة الطلاب السودانيين والعرب في العثور على منح دراسية ممولة بالكامل في جميع أنحاء العالم. أكثر من 350 منحة متاحة من أفضل الجامعات العالمية."
         keywords="منح دراسية مجانية, منح للسودانيين, حلم زول بسيط, منح ممولة بالكامل, منح عربية, منح أجنبية, دراسة مجانية, منح تركيا, منح ألمانيا, scholarship"
         canonicalUrl="https://zolscholar.com/"
@@ -332,7 +360,7 @@ export default function Index() {
                 funding: "ممولة بالكامل",
                 level: "جميع المستويات",
                 deadline: "28 فبراير 2024",
-                benefits: ["راتب شهري", "سكن وطعام", "تذاكر طيران"],
+                benefits: ["راتب شهري", "سكن وطعام", "تذاكر ط��ران"],
               },
             ].map((scholarship, index) => (
               <Card
@@ -581,7 +609,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">
-              منح مميزة هذا الشهر
+              م��ح مميزة هذا الشهر
             </h2>
             <p className="text-xl text-muted-foreground">
               أفضل الفرص المتاحة حالياً مع مواعيد التقديم القريبة
@@ -743,7 +771,7 @@ export default function Index() {
                   <span className="text-2xl">📊</span>
                 </div>
                 <CardTitle className="text-xl font-bold">
-                  متابع الطلبات
+                  متابع الطل��ات
                 </CardTitle>
               </CardHeader>
               <CardContent>
