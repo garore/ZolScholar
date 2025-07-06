@@ -50,6 +50,15 @@ const Navigation = () => {
 
   const moreItems = [
     {
+      href: "/scholarships",
+      label:
+        "⭐ " +
+        (t("nav.search") === "Search"
+          ? "Available Scholarships"
+          : "المنح المتاحة"),
+      icon: "🎓",
+    },
+    {
       href: "/explore",
       label:
         "🌍 " +
