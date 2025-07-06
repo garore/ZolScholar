@@ -43,10 +43,38 @@ export default function Search() {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("");
   const [selectedFunding, setSelectedFunding] = useState("");
+  const [scholarships, setScholarships] = useState<Scholarship[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>("");
+  const [selectedScholarship, setSelectedScholarship] =
+    useState<Scholarship | null>(null);
 
-  // استخدام قاعدة البيانات الشاملة
+  useEffect(() => {
+    fetchScholarships();
+  }, []);
+
+  const fetchScholarships = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch("/api/scholarships");
+      const data = await response.json();
+
+      if (data.success) {
+        setScholarships(data.scholarships);
+      } else {
+        setError("فشل في تحميل المنح");
+      }
+    } catch (err) {
+      setError("حدث خطأ في الاتصال");
+      console.error("Error fetching scholarships:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // استخدام المنح من API
   const getFilteredScholarships = () => {
-    let filtered = scholarshipsDatabase;
+    let filtered = scholarships;
 
     // فلترة بالبحث النصي
     if (searchTerm) {
@@ -59,9 +87,9 @@ export default function Search() {
           scholarship.university
             .toLowerCase()
             .includes(searchTerm.toLowerCase()) ||
-          scholarship.subjects.some((subject) =>
-            subject.toLowerCase().includes(searchTerm.toLowerCase()),
-          ),
+          scholarship.description
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()),
       );
     }
 
@@ -95,8 +123,44 @@ export default function Search() {
 
   // الحصول على قائمة الدول المتاحة
   const availableCountries = Array.from(
-    new Set(scholarshipsDatabase.map((s) => s.country)),
+    new Set(scholarships.map((s) => s.country)),
   ).sort();
+
+  const openScholarshipDetails = (scholarship: Scholarship) => {
+    setSelectedScholarship(scholarship);
+  };
+
+  const closeScholarshipDetails = () => {
+    setSelectedScholarship(null);
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-lg text-muted-foreground">جاري تحميل المنح...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <p className="text-lg text-red-500 mb-4">{error}</p>
+            <Button onClick={fetchScholarships}>إعادة المحاولة</Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -148,7 +212,7 @@ export default function Search() {
                 onChange={(e) => setSelectedLevel(e.target.value)}
               >
                 <option value="">جميع المستويات</option>
-                <option value="بكالوريوس">بكالوريو��</option>
+                <option value="بكالوريوس">بكالوريوس</option>
                 <option value="ماجستير">ماجستير</option>
                 <option value="دكتوراه">دكتوراه</option>
               </select>
@@ -158,7 +222,7 @@ export default function Search() {
                 onChange={(e) => setSelectedFunding(e.target.value)}
               >
                 <option value="">نوع التمويل</option>
-                <option value="ممولة بالكامل">ممول بالكامل</option>
+                <option value="ممولة بالكامل">��مول بالكامل</option>
                 <option value="منحة جزئية">ممول جزئياً</option>
               </select>
             </div>
