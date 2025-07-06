@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -49,7 +49,7 @@ export default function Index() {
     url: "https://zolscholar.com",
     logo: "https://zolscholar.com/favicon.svg",
     description:
-      "منصة مجانية لمساعدة الطلاب السودانيين والعرب في العثور على منح دراسية ممولة بالكامل في جميع أنحاء العالم",
+      "منصة مجانية لمساعدة الطلاب السودانيين والعرب في العثور على منح دراسية ممولة بالكامل في ج��يع أنحاء العالم",
     areaServed: {
       "@type": "Country",
       name: "Sudan",
@@ -72,7 +72,7 @@ export default function Index() {
           itemOffered: {
             "@type": "Service",
             name: "منح عربية وأجنبية",
-            description: "منح من الدول الع��بية والأجنبية",
+            description: "منح من الدول العربية والأجنبية",
           },
         },
       ],
@@ -133,7 +133,7 @@ export default function Index() {
     {
       title: "كتابة رسالة الدافع",
       icon: BookOpen,
-      description: "رسالة دافع مقنعة ومؤثرة لزيادة فرص القبول",
+      description: "رسالة دافع مقنعة ومؤثرة لزيادة فرص ��لقبول",
     },
     {
       title: "إنشاء حسابات في منصات التقديم",
@@ -360,7 +360,7 @@ export default function Index() {
                 funding: "ممولة بالكامل",
                 level: "جميع المستويات",
                 deadline: "28 فبراير 2024",
-                benefits: ["راتب شهري", "سكن وطعام", "تذاكر ط��ران"],
+                benefits: ["راتب شهري", "سكن وطعام", "تذاكر طيران"],
               },
             ].map((scholarship, index) => (
               <Card
@@ -609,7 +609,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">
-              م��ح مميزة هذا الشهر
+              منح مميزة هذا الشهر
             </h2>
             <p className="text-xl text-muted-foreground">
               أفضل الفرص المتاحة حالياً مع مواعيد التقديم القريبة
@@ -680,7 +680,9 @@ export default function Index() {
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">خدماتنا</h2>
+            <h2 className="text-4xl font-bold text-foreground mb-4">
+              خدمات��ا
+            </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               نقدم لك كل ما تحتاجه لضمان نجاح طلب المنحة الدراسية
             </p>
@@ -771,7 +773,7 @@ export default function Index() {
                   <span className="text-2xl">📊</span>
                 </div>
                 <CardTitle className="text-xl font-bold">
-                  متابع الطل��ات
+                  متابع الطلبات
                 </CardTitle>
               </CardHeader>
               <CardContent>
