@@ -25,6 +25,7 @@ import SuccessStories from "./pages/SuccessStories";
 import Blog from "./pages/Blog";
 import ScholarshipDetails from "./pages/ScholarshipDetails";
 import Explore from "./pages/Explore";
+import Scholarships from "./pages/Scholarships";
 
 const queryClient = new QueryClient();
 
