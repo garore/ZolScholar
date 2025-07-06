@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,8 +14,29 @@ import {
   ArrowRight,
   MessageCircle,
   Star,
+  ExternalLink,
+  CheckCircle,
 } from "lucide-react";
-import { scholarshipsDatabase, filterScholarships } from "@/data/scholarships";
+
+interface Scholarship {
+  id: string;
+  title: string;
+  country: string;
+  flag: string;
+  university: string;
+  description: string;
+  funding: string;
+  level: string;
+  deadline: string;
+  requirements: string[];
+  applicationSteps: string[];
+  documents: string[];
+  benefits: string[];
+  applicationLink: string;
+  additionalLinks?: { name: string; url: string }[];
+  isActive: boolean;
+  createdAt: string;
+}
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -127,7 +148,7 @@ export default function Search() {
                 onChange={(e) => setSelectedLevel(e.target.value)}
               >
                 <option value="">جميع المستويات</option>
-                <option value="بكالوريوس">بكالوريوس</option>
+                <option value="بكالوريوس">بكالوريو��</option>
                 <option value="ماجستير">ماجستير</option>
                 <option value="دكتوراه">دكتوراه</option>
               </select>
