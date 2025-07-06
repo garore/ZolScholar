@@ -37,6 +37,9 @@ export function createServer() {
   app.post("/api/visitor", handleVisitorCount);
   app.get("/api/visitors", handleGetVisitorCount);
 
+  // Scholarships routes
+  app.use("/api/scholarships", scholarshipsRouter);
+
   // Error handling middleware
   app.use(
     (
