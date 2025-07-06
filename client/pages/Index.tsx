@@ -126,7 +126,7 @@ export default function Index() {
 
   const services = [
     {
-      title: "تصميم سيرة ذاتية احترافية",
+      title: "��صميم سيرة ذاتية احترافية",
       icon: FileText,
       description: "سيرة ذاتية مميزة تبرز مهاراتك وإنجازاتك",
     },
@@ -194,7 +194,7 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="حلم زول بسيط - منح دراسية مجانية للطلاب السودانيين والعرب"
+        title="��لم زول بسيط - منح دراسية مجانية للطلاب السودانيين والعرب"
         description="منصة مجانية لمساعدة الطلاب السودانيين والعرب في العثور على منح دراسية ممولة بالكامل في جميع أنحاء العالم. أكثر من 350 منحة متاحة من أفضل الجامعات العالمية."
         keywords="منح دراسية مجانية, منح للسودانيين, حلم زول بسيط, منح ممولة بالكامل, منح عربية, منح أجنبية, دراسة مجانية, منح تركيا, منح ألمانيا, scholarship"
         canonicalUrl="https://zolscholar.com/"
@@ -237,11 +237,17 @@ export default function Index() {
             </div>
 
             {/* Primary CTA */}
-            <div className="mb-12">
-              <Link to="/search" className="inline-block">
+            <div className="mb-12 flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/scholarships" className="inline-block">
                 <button className="cta-primary text-xl md:text-2xl px-12 md:px-16 py-4 md:py-6 inline-flex items-center gap-4 shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 rounded-2xl">
+                  <span className="text-2xl">🎓</span>
+                  <span className="font-bold">المنح المتاحة الآن</span>
+                </button>
+              </Link>
+              <Link to="/search" className="inline-block">
+                <button className="bg-white text-primary border-2 border-primary text-xl md:text-2xl px-12 md:px-16 py-4 md:py-6 inline-flex items-center gap-4 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-2xl hover:bg-primary/5">
                   <Search className="w-6 h-6 md:w-7 md:h-7" />
-                  <span className="font-bold">ابدأ البحث عن منحتك</span>
+                  <span className="font-bold">ابحث عن منح أخرى</span>
                 </button>
               </Link>
             </div>
@@ -648,7 +654,7 @@ export default function Index() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">خدماتنا</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              نقدم لك كل ما تحتاجه لضمان نجاح طلب ��لمنحة الدراسية
+              نقدم لك كل ما تحتاجه لضمان نجاح طلب المنحة الدراسية
             </p>
           </div>
 
@@ -705,8 +711,8 @@ export default function Index() {
               🚀 أدوات ذكية لضمان نجاحك
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              اكتشف مجموعة من الأدوات المبتكرة المصممة خصيصاً لمساعدتك في الحصول
-              على المنحة المثالية
+              اكتشف مجموعة من الأدوات المبتكرة المصممة ��صيصاً لمساعدتك في
+              الحصول على المنحة المثالية
             </p>
           </div>
 
