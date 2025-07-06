@@ -223,7 +223,7 @@ export default function Search() {
               >
                 <option value="">نوع التمويل</option>
                 <option value="ممولة بالكامل">ممول بالكامل</option>
-                <option value="منحة جزئية">ممول جزئياً</option>
+                <option value="منحة جزئية">م��ول جزئياً</option>
               </select>
             </div>
             <div className="mt-4 flex items-center gap-4">
@@ -397,6 +397,173 @@ export default function Search() {
           </div>
         )}
       </div>
+
+      {/* Scholarship Details Modal */}
+      {selectedScholarship && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b px-6 py-4 flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-foreground mobile-arabic-title">
+                {selectedScholarship.title}
+              </h2>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={closeScholarshipDetails}
+              >
+                ✕
+              </Button>
+            </div>
+
+            <div className="p-6 space-y-6">
+              {/* University and Country */}
+              <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl">
+                <div className="text-3xl">{selectedScholarship.flag}</div>
+                <div>
+                  <h3 className="font-bold text-lg">
+                    {selectedScholarship.country}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {selectedScholarship.university}
+                  </p>
+                </div>
+              </div>
+
+              {/* Description */}
+              <div>
+                <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
+                  📝 وصف المنحة
+                </h3>
+                <p className="text-muted-foreground leading-relaxed mobile-arabic-text">
+                  {selectedScholarship.description}
+                </p>
+              </div>
+
+              {/* Requirements */}
+              <div>
+                <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
+                  ✅ الشروط المطلوبة
+                </h3>
+                <ul className="space-y-2">
+                  {selectedScholarship.requirements.map((req, index) => (
+                    <li key={index} className="flex items-start gap-2">
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-muted-foreground mobile-arabic-text">
+                        {req}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Application Steps */}
+              <div>
+                <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
+                  📋 خطوات التقديم
+                </h3>
+                <ol className="space-y-2">
+                  {selectedScholarship.applicationSteps.map((step, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <span className="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                        {index + 1}
+                      </span>
+                      <span className="text-muted-foreground mobile-arabic-text">
+                        {step}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              {/* Documents */}
+              <div>
+                <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
+                  📄 المستندات المطلوبة
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  {selectedScholarship.documents.map((doc, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-2 p-2 bg-blue-50 rounded-lg"
+                    >
+                      <SearchIcon className="w-4 h-4 text-blue-500" />
+                      <span className="text-sm text-blue-700">{doc}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Benefits */}
+              <div>
+                <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
+                  🎁 مزايا المنحة
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  {selectedScholarship.benefits.map((benefit, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-2 p-2 bg-green-50 rounded-lg"
+                    >
+                      <CheckCircle className="w-4 h-4 text-green-500" />
+                      <span className="text-sm text-green-700">{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Application Links */}
+              <div className="bg-gradient-to-r from-primary/10 to-accent/10 p-6 rounded-xl">
+                <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+                  🔗 روابط التقديم
+                </h3>
+                <div className="space-y-3">
+                  <a
+                    href={selectedScholarship.applicationLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <Button className="w-full bg-primary text-white hover:bg-primary/90 text-lg py-3">
+                      <ExternalLink className="w-5 h-5 ml-2" />
+                      التقديم الرسمي للمنحة
+                    </Button>
+                  </a>
+                  {selectedScholarship.additionalLinks?.map((link, index) => (
+                    <a
+                      key={index}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      <Button
+                        variant="outline"
+                        className="w-full border-primary text-primary hover:bg-primary/10"
+                      >
+                        <ExternalLink className="w-4 h-4 ml-2" />
+                        {link.name}
+                      </Button>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Deadline Warning */}
+              <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-xl">
+                <div className="flex items-center gap-2 mb-2">
+                  <Calendar className="w-5 h-5 text-yellow-600" />
+                  <span className="font-semibold text-yellow-800">
+                    موعد انتهاء التقديم:
+                  </span>
+                </div>
+                <p className="text-yellow-700 font-medium">
+                  {selectedScholarship.deadline}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
