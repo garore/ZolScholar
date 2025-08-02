@@ -27,6 +27,7 @@ import ScholarshipDetails from "./pages/ScholarshipDetails";
 import Explore from "./pages/Explore";
 import Scholarships from "./pages/Scholarships";
 import Admin from "./pages/Admin";
+import TestAPI from "./pages/TestAPI";
 
 const queryClient = new QueryClient();
 
