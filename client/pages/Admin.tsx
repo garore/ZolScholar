@@ -158,7 +158,9 @@ export default function Admin() {
           notes: "",
           expectedResponseDate: "",
         });
-        alert(`تم إنشاء الطلب بنجاح! رقم التتبع: ${trackingId}\n\nيمكن للعميل البحث بالبريد الإلكتروني أو رقم التتبع`);
+        alert(
+          `تم إنشاء الطلب بنجاح! رقم التتبع: ${trackingId}\n\nيمكن للعميل البحث بالبريد الإلكتروني أو رقم التتبع`,
+        );
       } else {
         alert(data.message || "فشل في حفظ الطلب");
       }
@@ -178,7 +180,10 @@ export default function Admin() {
         statusCode: newStatus,
         status: statusOptions[newStatus as keyof typeof statusOptions].label,
         progress: newProgress,
-        submissionDate: newStatus === "submitted" ? new Date().toISOString().split("T")[0] : null,
+        submissionDate:
+          newStatus === "submitted"
+            ? new Date().toISOString().split("T")[0]
+            : null,
       };
 
       const response = await fetch(`/api/tracking/update/${appId}`, {
@@ -199,9 +204,14 @@ export default function Admin() {
               ? {
                   ...app,
                   statusCode: newStatus,
-                  status: statusOptions[newStatus as keyof typeof statusOptions].label,
+                  status:
+                    statusOptions[newStatus as keyof typeof statusOptions]
+                      .label,
                   progress: newProgress,
-                  submissionDate: newStatus === "submitted" ? new Date().toISOString().split("T")[0] : app.submissionDate,
+                  submissionDate:
+                    newStatus === "submitted"
+                      ? new Date().toISOString().split("T")[0]
+                      : app.submissionDate,
                 }
               : app,
           ),

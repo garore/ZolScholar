@@ -6,7 +6,10 @@ export default function TestAPI() {
   const [loading, setLoading] = useState(false);
 
   const addTestResult = (message: string) => {
-    setTestResults(prev => [...prev, `${new Date().toLocaleTimeString()}: ${message}`]);
+    setTestResults((prev) => [
+      ...prev,
+      `${new Date().toLocaleTimeString()}: ${message}`,
+    ]);
   };
 
   const testTracking = async () => {
@@ -19,16 +22,20 @@ export default function TestAPI() {
       const searchResponse = await fetch("/api/tracking/search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: "TRK001" })
+        body: JSON.stringify({ query: "TRK001" }),
       });
       const searchData = await searchResponse.json();
-      addTestResult(`نتيجة البحث: ${searchData.success ? "✅ نجح" : "❌ فشل"} - ${searchData.message}`);
+      addTestResult(
+        `نتيجة البحث: ${searchData.success ? "✅ نجح" : "❌ فشل"} - ${searchData.message}`,
+      );
 
       // Test 2: Get all applications
       addTestResult("2️⃣ اختبار جلب جميع الطلبات...");
       const allResponse = await fetch("/api/tracking/all");
       const allData = await allResponse.json();
-      addTestResult(`جلب البيانات: ${allData.success ? "✅ نجح" : "❌ فشل"} - العدد: ${allData.count || 0}`);
+      addTestResult(
+        `جلب البيانات: ${allData.success ? "✅ نجح" : "❌ فشل"} - العدد: ${allData.count || 0}`,
+      );
 
       // Test 3: Add new application
       addTestResult("3️⃣ اختبار إضافة طلب جديد...");
@@ -49,25 +56,29 @@ export default function TestAPI() {
           motivationLetter: "غير مبدوء",
           transcripts: "غير مبدوء",
           passport: "غير مبدوء",
-          languageCert: "غير مبدوء"
+          languageCert: "غير مبدوء",
         },
-        timeline: [{
-          date: new Date().toISOString().split("T")[0],
-          status: "بدء العمل",
-          description: "تم إنشاء الطلب من اختبار API"
-        }],
+        timeline: [
+          {
+            date: new Date().toISOString().split("T")[0],
+            status: "بدء العمل",
+            description: "تم إنشاء الطلب من اختبار API",
+          },
+        ],
         nextSteps: ["البدء في إعداد المستندات"],
         expectedResponseDate: "2025-06-01",
-        notes: "طلب تجريبي من اختبار API"
+        notes: "طلب تجريبي من اختبار API",
       };
 
       const addResponse = await fetch("/api/tracking/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newApp)
+        body: JSON.stringify(newApp),
       });
       const addData = await addResponse.json();
-      addTestResult(`إضافة طلب: ${addData.success ? "✅ نجح" : "❌ فشل"} - ${addData.message}`);
+      addTestResult(
+        `إضافة طلب: ${addData.success ? "✅ نجح" : "❌ فشل"} - ${addData.message}`,
+      );
 
       if (addData.success) {
         // Test 4: Search for the newly added application
@@ -75,12 +86,13 @@ export default function TestAPI() {
         const newSearchResponse = await fetch("/api/tracking/search", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query: newApp.email })
+          body: JSON.stringify({ query: newApp.email }),
         });
         const newSearchData = await newSearchResponse.json();
-        addTestResult(`البحث عن الطلب الجديد: ${newSearchData.success ? "✅ نجح" : "❌ فشل"}`);
+        addTestResult(
+          `البحث عن الطلب الجديد: ${newSearchData.success ? "✅ نجح" : "❌ فشل"}`,
+        );
       }
-
     } catch (error) {
       addTestResult(`❌ خطأ في الاختبار: ${error}`);
     }
@@ -96,10 +108,10 @@ export default function TestAPI() {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       <div className="max-w-4xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-6">🧪 اختبار API التتبع</h1>
-        
+
         <div className="flex gap-4 mb-6">
           <button
             onClick={testTracking}
@@ -108,7 +120,7 @@ export default function TestAPI() {
           >
             {loading ? "جاري الاختبار..." : "🚀 تشغيل الاختبار"}
           </button>
-          
+
           <button
             onClick={clearResults}
             className="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600"
@@ -120,7 +132,9 @@ export default function TestAPI() {
         <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
           <div className="mb-2 text-white">📊 نتائج الاختبار:</div>
           {testResults.length === 0 ? (
-            <div className="text-gray-500">انقر على "تشغيل الاختبار" لبدء الفحص...</div>
+            <div className="text-gray-500">
+              انقر على "تشغيل الاختبار" لبدء الفحص...
+            </div>
           ) : (
             testResults.map((result, index) => (
               <div key={index} className="mb-1">
