@@ -65,6 +65,8 @@ import {
   Target,
   BookOpen,
   Star,
+  X,
+  RefreshCw,
 } from "lucide-react";
 
 export default function ApplicationTracker() {
@@ -211,7 +213,7 @@ export default function ApplicationTracker() {
             🔍 تتبع حالة طلبك
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 mobile-arabic-text">
-            أدخل بريدك الإلكتروني أو رقم التتبع لمعرفة آخر التحديثات على طلب
+            أدخل بريدك الإلكتروني أو رقم التتبع لمعرفة آخر التحديثات ع��ى طلب
             المنحة الدراسية الخاص بك
           </p>
 
@@ -454,54 +456,27 @@ export default function ApplicationTracker() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm">السيرة الذاتية</span>
-                        <div className="flex items-center gap-2">
-                          {getDocumentIcon(searchResult.documents.cv)}
-                          <span className="text-sm font-medium">
-                            {searchResult.documents.cv}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm">رسالة الدافع</span>
-                        <div className="flex items-center gap-2">
-                          {getDocumentIcon(
-                            searchResult.documents.motivationLetter,
-                          )}
-                          <span className="text-sm font-medium">
-                            {searchResult.documents.motivationLetter}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm">كشف الدرجات</span>
-                        <div className="flex items-center gap-2">
-                          {getDocumentIcon(searchResult.documents.transcripts)}
-                          <span className="text-sm font-medium">
-                            {searchResult.documents.transcripts}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm">جواز السفر</span>
-                        <div className="flex items-center gap-2">
-                          {getDocumentIcon(searchResult.documents.passport)}
-                          <span className="text-sm font-medium">
-                            {searchResult.documents.passport}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between md:col-span-2">
-                        <span className="text-sm">شهادة اللغة</span>
-                        <div className="flex items-center gap-2">
-                          {getDocumentIcon(searchResult.documents.languageCert)}
-                          <span className="text-sm font-medium">
-                            {searchResult.documents.languageCert}
-                          </span>
-                        </div>
-                      </div>
+                    <div className="grid grid-cols-1 gap-3">
+                      {[
+                        { key: 'cv', label: 'السيرة الذاتية' },
+                        { key: 'motivationLetter', label: 'رسالة الدافع' },
+                        { key: 'transcripts', label: 'كشف الدرجات' },
+                        { key: 'passport', label: 'جواز السفر' },
+                        { key: 'languageCert', label: 'شهادة اللغة' }
+                      ].map((doc) => {
+                        const status = searchResult.documents[doc.key as keyof typeof searchResult.documents];
+                        return (
+                          <div key={doc.key} className={`flex items-center justify-between p-3 rounded-lg border ${getDocumentColor(status)}`}>
+                            <span className="font-medium">{doc.label}</span>
+                            <div className="flex items-center gap-2">
+                              {getDocumentIcon(status)}
+                              <span className="text-sm font-semibold">
+                                {status}
+                              </span>
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </CardContent>
                 </Card>
