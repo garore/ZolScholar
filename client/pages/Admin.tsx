@@ -127,6 +127,17 @@ export default function Admin() {
         passport: "غير مبدوء",
         languageCert: "غير مبدوء",
       },
+      timeline: [
+        {
+          date: currentDate,
+          status: "بدء العمل",
+          description: "تم إنشاء الطلب من لوحة التحكم"
+        }
+      ],
+      nextSteps: [
+        "البدء في إعداد المستندات",
+        "التواصل مع العميل لجمع البيانات"
+      ],
       notes: newApp.notes,
       expectedResponseDate: newApp.expectedResponseDate || "2025-06-01",
     };
@@ -658,7 +669,7 @@ export default function Admin() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">
-                      المنحة الدراسية *
+                      المنحة الد��اسية *
                     </label>
                     <Input
                       value={newApp.scholarshipName}
@@ -749,7 +760,7 @@ export default function Admin() {
                 إسطنبول,عميل جديد
               </div>
               <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                <li>أترك رقم التتبع فارغا�� لتوليد رقم تلقائياً</li>
+                <li>أترك رقم التتبع فارغا�� لتوليد رقم تلقائ��اً</li>
                 <li>
                   الحقول المطلوبة: اسم الطالب، البريد الإلكتروني، اسم المنحة
                 </li>
