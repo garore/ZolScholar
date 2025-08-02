@@ -75,7 +75,7 @@ export default function ApplicationTracker() {
   const [error, setError] = useState("");
   const [searched, setSearched] = useState(false);
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (!searchQuery.trim()) {
       setError("يرجى إدخال البريد الإلكتروني أو رقم التتبع");
       return;
@@ -349,7 +349,7 @@ export default function ApplicationTracker() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <h4 className="font-semibold text-sm text-muted-foreground mb-1">
-                          اسم المنحة
+                          اسم ال��نحة
                         </h4>
                         <p className="mobile-arabic-text">
                           {searchResult.scholarshipName}
