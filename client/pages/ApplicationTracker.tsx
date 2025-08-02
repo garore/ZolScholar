@@ -206,9 +206,6 @@ export default function ApplicationTracker() {
     }
   };
 
-    }
-  };
-
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("ar", {
@@ -421,7 +418,7 @@ export default function ApplicationTracker() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-sm text-muted-foreground mb-1">
-                          تاريخ التقديم
+                          تاريخ التقد��م
                         </h4>
                         <p>
                           {searchResult.submissionDate
