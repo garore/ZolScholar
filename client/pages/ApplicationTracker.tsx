@@ -465,8 +465,8 @@ export default function ApplicationTracker() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                  <div className="space-y-4">
-                      {searchResult.timeline?.map((item, index) => (
+                    <div className="space-y-4">
+                      {searchResult.timeline && searchResult.timeline.length > 0 ? searchResult.timeline.map((item, index) => (
                         <div key={index} className="flex gap-4">
                           <div className="flex flex-col items-center">
                             <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
