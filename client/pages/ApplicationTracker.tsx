@@ -172,7 +172,7 @@ export default function ApplicationTracker() {
                 <div className="flex-1">
                   <Input
                     type="text"
-                    placeholder="أدخل بريدك الإلكتروني أو رقم التتبع (مثل: TRK001)"
+                    placeholder="أدخل بريدك الإلكتروني، رقم التتبع، أو رقم ال��اتف"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="text-lg py-3 px-4 mobile-arabic-text"
@@ -540,7 +540,7 @@ export default function ApplicationTracker() {
                 <Card className="bg-gradient-to-r from-purple-50 to-blue-50 border-purple-200">
                   <CardContent className="p-6 text-center">
                     <MessageCircle className="w-12 h-12 text-purple-500 mx-auto mb-4" />
-                    <h3 className="font-bold mb-2">تحتاج مساعدة؟</h3>
+                    <h3 className="font-bold mb-2">تحتاج مساعد��؟</h3>
                     <p className="text-sm text-muted-foreground mb-4">
                       فريقنا جاهز لمساعدتك
                     </p>
