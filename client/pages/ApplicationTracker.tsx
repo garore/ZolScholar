@@ -41,7 +41,7 @@ import {
 export default function ApplicationTracker() {
   const { t, language } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResult, setSearchResult] = useState<Application | null>(null);
+  const [searchResult, setSearchResult] = useState<ApplicationWithStatus | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [searched, setSearched] = useState(false);
@@ -81,7 +81,7 @@ export default function ApplicationTracker() {
         setSearchResult(resultWithStatus);
         setSearched(true);
       } else {
-        setError("لم يتم العثور على طلب بهذا البريد الإلكتروني، رقم التتبع، أو رقم الهاتف");
+        setError("لم يتم العثور على ط��ب بهذا البريد الإلكتروني، رقم التتبع، أو رقم الهاتف");
         setSearched(true);
       }
     } catch (err) {
@@ -337,7 +337,7 @@ export default function ApplicationTracker() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-sm text-muted-foreground mb-1">
-                          التاريخ المتوقع لل��د
+                          التاريخ المتوقع للرد
                         </h4>
                         <p>{formatDate(searchResult.expectedResponseDate)}</p>
                       </div>
