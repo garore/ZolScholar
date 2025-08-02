@@ -132,23 +132,39 @@ export default function Admin() {
     };
 
     try {
-      // هنا يمكن إضافة API call لحفظ البيانات
-      setApplications([...applications, application]);
-      setShowAddForm(false);
-      setNewApp({
-        email: "",
-        phone: "",
-        studentName: "",
-        scholarshipName: "",
-        university: "",
-        statusCode: "not_submitted",
-        currentStep: "بدء العمل",
-        notes: "",
-        expectedResponseDate: "",
+      // حفظ البيانات في API
+      const response = await fetch("/api/tracking/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(application),
       });
-      alert(`تم إنشاء الطلب بنجاح! رقم التتبع: ${trackingId}`);
+
+      const data = await response.json();
+
+      if (data.success) {
+        // إضافة الطلب للقائمة المحلية أيضاً
+        setApplications([...applications, application]);
+        setShowAddForm(false);
+        setNewApp({
+          email: "",
+          phone: "",
+          studentName: "",
+          scholarshipName: "",
+          university: "",
+          statusCode: "not_submitted",
+          currentStep: "بدء العمل",
+          notes: "",
+          expectedResponseDate: "",
+        });
+        alert(`تم إنشاء الطلب بنجاح! رقم التتبع: ${trackingId}\n\nيمكن للعميل البحث بالبريد الإلكتروني أو رقم التتبع`);
+      } else {
+        alert(data.message || "فشل في حفظ الطلب");
+      }
     } catch (error) {
-      alert("حدث خطأ في إضافة الطلب");
+      console.error("Error saving application:", error);
+      alert("حدث خطأ في إضافة الطلب. تأكد من الاتصال بالشبكة.");
     }
   };
 
@@ -261,7 +277,7 @@ export default function Admin() {
               cv: "غير مبدوء",
               motivationLetter: "غير مبدوء",
               transcripts: "غير مبدوء",
-              passport: "غير مبدوء",
+              passport: "غير مبدو��",
               languageCert: "غير مبدوء",
             },
             notes: values[6] || "",
@@ -437,7 +453,7 @@ export default function Admin() {
                 <thead>
                   <tr className="border-b">
                     <th className="text-right p-3">رقم التتبع</th>
-                    <th className="text-right p-3">اسم الطالب</th>
+                    <th className="text-right p-3">اسم ال��الب</th>
                     <th className="text-right p-3">البريد/الهاتف</th>
                     <th className="text-right p-3">المنحة</th>
                     <th className="text-right p-3">الحالة</th>
