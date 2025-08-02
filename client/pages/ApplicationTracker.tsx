@@ -466,29 +466,35 @@ export default function ApplicationTracker() {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
-                      {searchResult.timeline && searchResult.timeline.length > 0 ? searchResult.timeline.map((item, index) => (
-                        <div key={index} className="flex gap-4">
-                          <div className="flex flex-col items-center">
-                            <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                            {index < searchResult.timeline.length - 1 && (
-                              <div className="w-px h-8 bg-gray-200 mt-2"></div>
-                            )}
-                          </div>
-                          <div className="flex-1 pb-4">
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="font-semibold text-sm">
-                                {item.status}
-                              </span>
-                              <span className="text-xs text-muted-foreground">
-                                {formatDate(item.date)}
-                              </span>
+                      {searchResult.timeline && searchResult.timeline.length > 0 ? (
+                        searchResult.timeline.map((item, index) => (
+                          <div key={index} className="flex gap-4">
+                            <div className="flex flex-col items-center">
+                              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                              {index < searchResult.timeline.length - 1 && (
+                                <div className="w-px h-8 bg-gray-200 mt-2"></div>
+                              )}
                             </div>
-                            <p className="text-sm text-muted-foreground mobile-arabic-text">
-                              {item.description}
-                            </p>
+                            <div className="flex-1 pb-4">
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="font-semibold text-sm">
+                                  {item.status}
+                                </span>
+                                <span className="text-xs text-muted-foreground">
+                                  {formatDate(item.date)}
+                                </span>
+                              </div>
+                              <p className="text-sm text-muted-foreground mobile-arabic-text">
+                                {item.description}
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))
+                      ) : (
+                        <p className="text-muted-foreground text-center py-4">
+                          لا توجد مراحل محفوظة بعد
+                        </p>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
