@@ -118,6 +118,22 @@ export default function Admin() {
     }
 
     try {
+      // تحديد حالة المستندات ا��افتراضية حسب حالة الطلب
+      const getDefaultDocumentStatus = (statusCode: string) => {
+        switch (statusCode) {
+          case "ready":
+            return "جاهز";
+          case "submitted":
+            return "جاهز";
+          case "in_progress":
+            return "قيد التجهيز";
+          default:
+            return "غير مبدوء";
+        }
+      };
+
+      const defaultDocStatus = getDefaultDocumentStatus(newApp.statusCode);
+
       const applicationData = {
         email: newApp.email,
         phone: newApp.phone,
@@ -127,10 +143,17 @@ export default function Admin() {
         status:
           statusOptions[newApp.statusCode as keyof typeof statusOptions].label,
         statusCode: newApp.statusCode,
-        progress: newApp.statusCode === "ready" ? 100 : 20,
+        progress: newApp.statusCode === "ready" ? 100 : newApp.statusCode === "submitted" ? 100 : newApp.statusCode === "in_progress" ? 60 : 20,
         currentStep: newApp.currentStep,
         notes: newApp.notes,
         expectedResponseDate: newApp.expectedResponseDate || "2025-06-01",
+        documents: {
+          cv: defaultDocStatus,
+          motivationLetter: defaultDocStatus,
+          transcripts: defaultDocStatus,
+          passport: defaultDocStatus,
+          languageCert: defaultDocStatus,
+        }
       };
 
       const response = await fetch("/api/customers", {
@@ -171,7 +194,7 @@ export default function Admin() {
 🔗 رابط صفحة التتبع: ${window.location.origin}/tracker`,
         );
       } else if (response.status === 409) {
-        alert("❌ فشل في حفظ الطلب. يوجد طلب بهذا البريد الإلكتروني مسبقاً.");
+        alert("❌ فشل في حفظ الط��ب. يوجد طلب بهذا البريد الإلكتروني مسبقاً.");
       } else {
         throw new Error("Failed to save application");
       }
@@ -231,6 +254,37 @@ export default function Admin() {
     } catch (error) {
       console.error("Error updating application:", error);
       alert("فشل في تحديث الطلب");
+    }
+  };
+
+  const handleUpdateApplication = async (updatedApp: Application) => {
+    try {
+      const response = await fetch(`/api/customers/${updatedApp.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedApp),
+      });
+
+      if (response.ok) {
+        const updated = await response.json();
+
+        // تحديث القائمة المحلية
+        setApplications(
+          applications.map((app) =>
+            app.id === updatedApp.id ? updated : app
+          )
+        );
+
+        setEditingApp(null);
+        alert("✅ تم تحديث بيانات العميل بنجاح!");
+      } else {
+        throw new Error("Failed to update application");
+      }
+    } catch (error) {
+      console.error("Error updating application:", error);
+      alert("❌ فشل في تحديث البيانات. يرجى المحاولة مرة أخرى.");
     }
   };
 
@@ -587,6 +641,7 @@ export default function Admin() {
                             size="sm"
                             variant="outline"
                             onClick={() => setEditingApp(app)}
+                            title="تحرير بيانات العميل"
                           >
                             <Edit className="w-3 h-3" />
                           </Button>
@@ -595,6 +650,7 @@ export default function Admin() {
                             variant="outline"
                             onClick={() => handleDeleteApplication(app.id)}
                             className="text-red-500 hover:text-red-700"
+                            title="حذف العميل"
                           >
                             <Trash2 className="w-3 h-3" />
                           </Button>
@@ -730,6 +786,246 @@ export default function Admin() {
                   <Button
                     variant="outline"
                     onClick={() => setShowAddForm(false)}
+                  >
+                    إلغاء
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {/* Edit Application Modal */}
+        {editingApp && (
+          <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+            <Card className="w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  تحرير بيانات العميل - {editingApp.studentName}
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setEditingApp(null)}
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Basic Information */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      اسم الطالب *
+                    </label>
+                    <Input
+                      value={editingApp.studentName}
+                      onChange={(e) =>
+                        setEditingApp({ ...editingApp, studentName: e.target.value })
+                      }
+                      placeholder="أدخل اسم الطالب"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      البريد الإلكتروني *
+                    </label>
+                    <Input
+                      type="email"
+                      value={editingApp.email}
+                      onChange={(e) =>
+                        setEditingApp({ ...editingApp, email: e.target.value })
+                      }
+                      placeholder="example@email.com"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      رقم الهاتف
+                    </label>
+                    <Input
+                      value={editingApp.phone}
+                      onChange={(e) =>
+                        setEditingApp({ ...editingApp, phone: e.target.value })
+                      }
+                      placeholder="+249123456789"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      المنحة الدراسية *
+                    </label>
+                    <Input
+                      value={editingApp.scholarshipName}
+                      onChange={(e) =>
+                        setEditingApp({
+                          ...editingApp,
+                          scholarshipName: e.target.value,
+                        })
+                      }
+                      placeholder="اسم المنحة"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      الجامعة
+                    </label>
+                    <Input
+                      value={editingApp.university}
+                      onChange={(e) =>
+                        setEditingApp({ ...editingApp, university: e.target.value })
+                      }
+                      placeholder="اسم الجامعة"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      الحالة العامة
+                    </label>
+                    <select
+                      value={editingApp.statusCode}
+                      onChange={(e) => {
+                        const newStatus = e.target.value;
+                        const newProgress =
+                          newStatus === "ready" ? 100 :
+                          newStatus === "submitted" ? 100 :
+                          newStatus === "in_progress" ? 60 : 20;
+
+                        setEditingApp({
+                          ...editingApp,
+                          statusCode: newStatus,
+                          status: statusOptions[newStatus as keyof typeof statusOptions].label,
+                          progress: newProgress,
+                          submissionDate: newStatus === "submitted"
+                            ? new Date().toISOString().split("T")[0]
+                            : editingApp.submissionDate
+                        });
+                      }}
+                      className="w-full px-3 py-2 border border-input rounded-md bg-background"
+                    >
+                      {Object.entries(statusOptions).map(([key, option]) => (
+                        <option key={key} value={key}>
+                          {option.icon} {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Documents Status */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <FileText className="w-5 h-5 text-purple-500" />
+                    حالة المستندات
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {[
+                      { key: 'cv', label: 'السيرة الذاتية' },
+                      { key: 'motivationLetter', label: 'رسالة الدافع' },
+                      { key: 'transcripts', label: 'كشف الدرجات' },
+                      { key: 'passport', label: 'جواز السفر' },
+                      { key: 'languageCert', label: 'شهادة اللغة' }
+                    ].map((doc) => (
+                      <div key={doc.key} className="border rounded-lg p-3">
+                        <label className="block text-sm font-medium mb-2">
+                          {doc.label}
+                        </label>
+                        <select
+                          value={editingApp.documents[doc.key as keyof typeof editingApp.documents]}
+                          onChange={(e) =>
+                            setEditingApp({
+                              ...editingApp,
+                              documents: {
+                                ...editingApp.documents,
+                                [doc.key]: e.target.value
+                              }
+                            })
+                          }
+                          className="w-full px-2 py-1 border border-input rounded text-sm"
+                        >
+                          <option value="غير مبدوء">❌ غير مبدوء</option>
+                          <option value="قيد التجهيز">⏳ قيد التجهيز</option>
+                          <option value="قيد المراجعة">👁️ قيد المراجعة</option>
+                          <option value="جاهز">✅ جاهز</option>
+                          <option value="مرفوض">❌ مرفوض</option>
+                          <option value="يحتاج تعديل">🔄 يحتاج تعديل</option>
+                        </select>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Current Step and Notes */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      الخطوة الحالية
+                    </label>
+                    <Input
+                      value={editingApp.currentStep}
+                      onChange={(e) =>
+                        setEditingApp({ ...editingApp, currentStep: e.target.value })
+                      }
+                      placeholder="الخطوة الحالية في العملية"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      تاريخ الرد المتوقع
+                    </label>
+                    <Input
+                      type="date"
+                      value={editingApp.expectedResponseDate}
+                      onChange={(e) =>
+                        setEditingApp({ ...editingApp, expectedResponseDate: e.target.value })
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">
+                    ملاحظات
+                  </label>
+                  <Textarea
+                    value={editingApp.notes}
+                    onChange={(e) =>
+                      setEditingApp({ ...editingApp, notes: e.target.value })
+                    }
+                    placeholder="أي ملاحظات إضافية..."
+                    rows={3}
+                  />
+                </div>
+
+                {/* Next Steps */}
+                <div>
+                  <label className="block text-sm font-medium mb-1">
+                    الخطوات التالية (كل خطوة في سطر منفصل)
+                  </label>
+                  <Textarea
+                    value={editingApp.nextSteps.join('\n')}
+                    onChange={(e) =>
+                      setEditingApp({
+                        ...editingApp,
+                        nextSteps: e.target.value.split('\n').filter(step => step.trim())
+                      })
+                    }
+                    placeholder="الخطوة الأولى&#10;الخطوة الثانية&#10;الخطوة الثالثة"
+                    rows={4}
+                  />
+                </div>
+
+                <div className="flex gap-3 pt-4">
+                  <Button
+                    onClick={() => handleUpdateApplication(editingApp)}
+                    className="flex-1"
+                  >
+                    <Save className="w-4 h-4 ml-2" />
+                    حفظ التغييرات
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => setEditingApp(null)}
                   >
                     إلغاء
                   </Button>
