@@ -98,7 +98,7 @@
       "id": "TRK003",
       "email": "omar.salim@email.com",
       "phone": "+249111222333",
-      "studentName": "عمر سليم محمد",
+      "studentName": "عمر سليم محم��",
       "scholarshipName": "منحة الأمير سلطان - السعودية",
       "university": "جامعة الأمير سلطان",
       "submissionDate": null,
@@ -132,6 +132,7 @@
     {
       "id": "TRK004",
       "email": "sara.ibrahim@email.com",
+      "phone": "+249555666777",
       "studentName": "سارة إبراهيم عبدالله",
       "scholarshipName": "منحة DAAD الألمانية",
       "university": "جامعة ميونخ التقنية",
@@ -161,7 +162,7 @@
         {
           "date": "2024-12-05",
           "status": "مراجعة نهائية",
-          "description": "مراجعة شاملة لجميع المستندات"
+          "description": "مراجعة شاملة لجميع المستندا��"
         },
         {
           "date": "2024-12-10",
@@ -197,7 +198,7 @@
       "documents": {
         "cv": "جاهز",
         "motivationLetter": "قيد التجهيز",
-        "transcripts": "ق��د المراجعة",
+        "transcripts": "قيد المراجعة",
         "passport": "جاهز",
         "languageCert": "جاهز"
       },
