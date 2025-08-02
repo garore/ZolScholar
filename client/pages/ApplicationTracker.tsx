@@ -4,6 +4,15 @@ import SEOHead from "@/components/SEOHead";
 import { useTranslation } from "@/hooks/useTranslation";
 import { searchApplication, type Application } from "@/lib/localDB";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+interface ApplicationWithStatus extends Application {
+  statusInfo?: {
+    label: string;
+    icon: string;
+    color: string;
+    description: string;
+  };
+}
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -328,7 +337,7 @@ export default function ApplicationTracker() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-sm text-muted-foreground mb-1">
-                          التاريخ المتوقع للرد
+                          التاريخ المتوقع لل��د
                         </h4>
                         <p>{formatDate(searchResult.expectedResponseDate)}</p>
                       </div>
