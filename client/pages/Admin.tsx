@@ -7,6 +7,15 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import {
+  getApplications,
+  addApplication,
+  updateApplication,
+  deleteApplication,
+  generateTrackingId,
+  getStats,
+  type Application
+} from "@/lib/localDB";
+import {
   Plus,
   Upload,
   Edit,
@@ -143,7 +152,7 @@ export default function Admin() {
     };
 
     try {
-      // حفظ البيانات في API
+      // ح��ظ البيانات في API
       const response = await fetch("/api/tracking/add", {
         method: "POST",
         headers: {
@@ -489,7 +498,7 @@ export default function Admin() {
               >
                 <option value="all">جميع الحالات</option>
                 <option value="ready">جاهز</option>
-                <option value="in_progress">قيد التجهيز</option>
+                <option value="in_progress">قي�� التجهيز</option>
                 <option value="submitted">تم التقديم</option>
                 <option value="not_submitted">لم يتم التقديم</option>
               </select>
