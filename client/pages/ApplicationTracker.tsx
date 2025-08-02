@@ -172,6 +172,44 @@ export default function ApplicationTracker() {
     switch (status) {
       case "جاهز":
         return <CheckCircle className="w-4 h-4 text-green-500" />;
+      case "قيد التجهيز":
+        return <Clock className="w-4 h-4 text-blue-500" />;
+      case "قيد المراجعة":
+        return <Eye className="w-4 h-4 text-yellow-500" />;
+      case "مرفوض":
+        return <X className="w-4 h-4 text-red-500" />;
+      case "يحتاج تعديل":
+        return <RefreshCw className="w-4 h-4 text-orange-500" />;
+      case "غير مبدوء":
+        return <AlertCircle className="w-4 h-4 text-gray-400" />;
+      default:
+        return <AlertCircle className="w-4 h-4 text-gray-400" />;
+    }
+  };
+
+  const getDocumentColor = (status: string) => {
+    switch (status) {
+      case "جاهز":
+        return "text-green-600 bg-green-50 border-green-200";
+      case "قيد التجهيز":
+        return "text-blue-600 bg-blue-50 border-blue-200";
+      case "قيد المراجعة":
+        return "text-yellow-600 bg-yellow-50 border-yellow-200";
+      case "مرفوض":
+        return "text-red-600 bg-red-50 border-red-200";
+      case "يحتاج تعديل":
+        return "text-orange-600 bg-orange-50 border-orange-200";
+      case "غير مبدوء":
+        return "text-gray-500 bg-gray-50 border-gray-200";
+      default:
+        return "text-gray-500 bg-gray-50 border-gray-200";
+    }
+  };
+
+  const getDocumentIcon = (status: string) => {
+    switch (status) {
+      case "جاهز":
+        return <CheckCircle className="w-4 h-4 text-green-500" />;
       case "قيد التجه��ز":
         return <Clock className="w-4 h-4 text-blue-500" />;
       case "قيد المراجعة":
@@ -198,7 +236,7 @@ export default function ApplicationTracker() {
       <SEOHead
         title="تتبع طلبات المنح الدراسية - حلم زول بسيط"
         description="تتبع حالة طلبك للمنح الدراسية. أدخل بريدك الإلكتروني أو رقم التتبع لمعرفة آخر التحديثات على طلبك."
-        keywords="تتبع طلبات المنح, حالة التقديم, رقم التتبع, متابعة الطلب"
+        keywords="تتبع طلبا�� المنح, حالة التقديم, رقم التتبع, متابعة الطلب"
       />
       <Navigation />
 
