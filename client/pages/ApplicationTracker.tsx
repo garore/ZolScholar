@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navigation from "@/components/Navigation";
 import SEOHead from "@/components/SEOHead";
 import { useTranslation } from "@/hooks/useTranslation";
-// import { searchApplication, type Application } from "@/lib/localDB";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface Application {
   id: string;
@@ -32,7 +32,6 @@ interface Application {
   notes: string;
   expectedResponseDate: string;
 }
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface ApplicationWithStatus extends Application {
   statusInfo?: {
@@ -42,6 +41,7 @@ interface ApplicationWithStatus extends Application {
     description: string;
   };
 }
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -88,14 +88,13 @@ export default function ApplicationTracker() {
     try {
       // البحث باستخدام API
       console.log("Searching for:", searchQuery.trim());
-
+      
       const response = await fetch(`/api/customers/search?q=${encodeURIComponent(searchQuery.trim())}`);
-
+      
       if (response.ok) {
         const result = await response.json();
         console.log("Search result:", result);
 
-        if (result) {
         // إضافة معلومات الحالة
         const statusInfo = {
           ready: { label: "جاهز", icon: "✅", color: "green", description: "تم قبول الطلب أو العمل مكتمل" },
@@ -108,9 +107,9 @@ export default function ApplicationTracker() {
           ...result,
           statusInfo: statusInfo[result.statusCode as keyof typeof statusInfo] || {
             label: result.status,
-            icon: "��",
+            icon: "❓",
             color: "gray",
-            description: "حالة غير معرو��ة"
+            description: "حالة غير معروفة"
           }
         };
 
@@ -144,7 +143,7 @@ export default function ApplicationTracker() {
     switch (status) {
       case "جاهز":
         return <CheckCircle className="w-4 h-4 text-green-500" />;
-      case "قيد التجهيز":
+      case "قيد التجه��ز":
         return <Clock className="w-4 h-4 text-blue-500" />;
       case "قيد المراجعة":
         return <Eye className="w-4 h-4 text-yellow-500" />;
@@ -236,10 +235,10 @@ export default function ApplicationTracker() {
                     ahmed.mohamed@email.com
                   </button>
                   <button
-                    onClick={() => setSearchQuery("TRK004")}
+                    onClick={() => setSearchQuery("TRK002")}
                     className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full hover:bg-blue-100 transition-colors"
                   >
-                    TRK004
+                    TRK002
                   </button>
                   <button
                     onClick={() => setSearchQuery("+249123456789")}
@@ -349,7 +348,7 @@ export default function ApplicationTracker() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <h4 className="font-semibold text-sm text-muted-foreground mb-1">
-                          اسم ال��نحة
+                          اسم المنحة
                         </h4>
                         <p className="mobile-arabic-text">
                           {searchResult.scholarshipName}
@@ -468,7 +467,7 @@ export default function ApplicationTracker() {
                         </div>
                       </div>
                       <div className="flex items-center justify-between md:col-span-2">
-                        <span className="text-sm">��هادة اللغة</span>
+                        <span className="text-sm">شهادة اللغة</span>
                         <div className="flex items-center gap-2">
                           {getDocumentIcon(searchResult.documents.languageCert)}
                           <span className="text-sm font-medium">
@@ -517,7 +516,7 @@ export default function ApplicationTracker() {
                         ))
                       ) : (
                         <p className="text-muted-foreground text-center py-4">
-                          لا توج�� مراحل محفوظة بعد
+                          لا توجد مراحل محفوظة بعد
                         </p>
                       )}
                     </div>
@@ -631,9 +630,9 @@ export default function ApplicationTracker() {
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Mail className="w-8 h-8 text-blue-500" />
                   </div>
-                  <h3 className="font-bold mb-2">1. أدخل بيانا��ك</h3>
+                  <h3 className="font-bold mb-2">1. أدخل بياناتك</h3>
                   <p className="text-sm text-muted-foreground">
-                    أ��خل بريدك الإلكتروني أو رقم التتبع الذي تم إرساله لك
+                    أدخل بريدك الإلكتروني أو رقم التتبع الذي تم إرساله لك
                   </p>
                 </CardContent>
               </Card>
@@ -657,7 +656,7 @@ export default function ApplicationTracker() {
                   </div>
                   <h3 className="font-bold mb-2">3. تابع التقدم</h3>
                   <p className="text-sm text-muted-foreground">
-                    شاهد تفاصيل حالة طلبك و��لخطوات التالية المطلوبة
+                    شاهد تفاصيل حالة طلبك والخطوات التالية المطلوبة
                   </p>
                 </CardContent>
               </Card>
