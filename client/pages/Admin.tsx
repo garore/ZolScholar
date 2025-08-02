@@ -77,11 +77,7 @@ export default function Admin() {
     }
   };
 
-  const generateTrackingId = () => {
-    return "TRK" + String(Date.now()).slice(-6);
-  };
-
-  const handleAddApplication = async () => {
+  const handleAddApplication = () => {
     if (!newApp.email || !newApp.studentName || !newApp.scholarshipName) {
       alert("يرجى ملء الحقول المطلوبة");
       return;
@@ -125,42 +121,34 @@ export default function Admin() {
       expectedResponseDate: newApp.expectedResponseDate || "2025-06-01",
     };
 
-    try {
-      // حفظ البيانات في API
-      const response = await fetch("/api/tracking/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(application),
+    // حفظ في قاعدة البيانات المحلية
+    const success = addApplication(application);
+
+    if (success) {
+      // تحديث القائمة المحلية
+      setApplications([...applications, application]);
+      setShowAddForm(false);
+      setNewApp({
+        email: "",
+        phone: "",
+        studentName: "",
+        scholarshipName: "",
+        university: "",
+        statusCode: "not_submitted",
+        currentStep: "بدء العمل",
+        notes: "",
+        expectedResponseDate: "",
       });
+      alert(
+        `✅ تم إنشاء الطلب بنجاح!
 
-      const data = await response.json();
+📧 البريد: ${newApp.email}
+🆔 رقم التتبع: ${trackingId}
 
-      if (data.success) {
-        // إضافة الطلب للقائمة المحلية أيضاً
-        setApplications([...applications, application]);
-        setShowAddForm(false);
-        setNewApp({
-          email: "",
-          phone: "",
-          studentName: "",
-          scholarshipName: "",
-          university: "",
-          statusCode: "not_submitted",
-          currentStep: "بدء العمل",
-          notes: "",
-          expectedResponseDate: "",
-        });
-        alert(
-          `تم إنشاء الطلب بنجاح! رقم التتبع: ${trackingId}\n\nيمكن للعميل البحث بالبريد الإلكتروني أو رقم التتبع`,
-        );
-      } else {
-        alert(data.message || "فشل في حفظ الطلب");
-      }
-    } catch (error) {
-      console.error("Error saving application:", error);
-      alert("حدث خطأ في إضافة الطلب. تأكد من الاتصال بالشبكة.");
+✨ العميل يمكنه البحث بالبريد الإلكتروني أو رقم التتبع في صفحة التتبع`,
+      );
+    } else {
+      alert("❌ فشل في حفظ الطلب. يوجد طلب بهذا البريد الإلكتروني مسبقاً.");
     }
   };
 
@@ -459,7 +447,7 @@ export default function Admin() {
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
                 <Input
-                  placeholder="بحث بالاسم، رقم التتبع، البريد، أو الهاتف..."
+                  placeholder="بحث بالاسم، ��قم التتبع، البريد، أو الهاتف..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full"
@@ -489,7 +477,7 @@ export default function Admin() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <FileText className="w-5 h-5" />
-              قائمة الطلبات ({filteredApplications.length})
+              قائمة الطلبا�� ({filteredApplications.length})
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -737,7 +725,7 @@ export default function Admin() {
               <p className="font-medium">تنسيق الملف المطلوب:</p>
               <div className="bg-white p-3 rounded border font-mono text-xs">
                 رقم التتبع,اسم الطالب,البريد الإلكتروني,رقم الهاتف,اسم
-                ال��نحة,الجامعة,ملاحظات
+                المنحة,الجامعة,ملاحظات
                 <br />
                 TRK001,أحمد محمد,ahmed@email.com,+249123456789,منحة تركيا,جامعة
                 إسطنبول,عميل جديد
