@@ -3,6 +3,7 @@
     {
       "id": "TRK001",
       "email": "ahmed.mohamed@email.com",
+      "phone": "+249123456789",
       "studentName": "أحمد محمد علي",
       "scholarshipName": "منحة Study in Iraq - الدراسة في العراق",
       "university": "جامعة بغداد",
@@ -58,7 +59,7 @@
       "status": "قيد التجهيز",
       "statusCode": "in_progress",
       "progress": 65,
-      "currentStep": "إعداد رسالة الدافع",
+      "currentStep": "إعداد ��سالة الدافع",
       "documents": {
         "cv": "جاهز",
         "motivationLetter": "قيد التجهيز",
@@ -190,7 +191,7 @@
       "status": "قيد التجهيز",
       "statusCode": "in_progress",
       "progress": 40,
-      "currentStep": "مراجعة المستندات",
+      "currentStep": "مراجعة ال��ستندات",
       "documents": {
         "cv": "جاهز",
         "motivationLetter": "قيد التجهيز",
@@ -246,16 +247,4 @@
       "description": "لم يتم تقديم الطلب بعد"
     }
   }
-}
-"TRK006": {
-  "name": "عبد الله عمر",
-  "email": "abdullah.omar@email.com",
-  "letterStatus": "ready",
-  "submissionStatus": "done"
-},
-"TRK007": {
-  "name": "فاطمة النور",
-  "email": "fatima.noor@email.com",
-  "letterStatus": "not_ready",
-  "submissionStatus": "not_submitted"
 }
