@@ -129,7 +129,7 @@ export const addCustomer = (req: Request, res: Response) => {
       statusCode: customerData.statusCode || "not_submitted",
       progress: customerData.progress || 20,
       currentStep: customerData.currentStep || "بدء العمل",
-      documents: {
+      documents: customerData.documents || {
         cv: "غير مبدوء",
         motivationLetter: "غير مبدوء",
         transcripts: "غير مبدوء",
@@ -143,7 +143,7 @@ export const addCustomer = (req: Request, res: Response) => {
           description: "تم إنشاء الطلب من لوحة التحكم",
         },
       ],
-      nextSteps: [
+      nextSteps: customerData.nextSteps || [
         "البدء في إعداد المستندات",
         "التواصل مع العميل لجمع البيانات",
       ],
@@ -179,8 +179,17 @@ export const updateCustomer = (req: Request, res: Response) => {
       return res.status(404).json({ error: "Customer not found" });
     }
 
-    // تحديث البيانات
-    customers[customerIndex] = { ...customers[customerIndex], ...updateData };
+    // تحديث البيانات مع الحفاظ على البنية
+    const updatedCustomer = {
+      ...customers[customerIndex],
+      ...updateData,
+      // التأكد من أن المصفوفات والكائنات يتم تحديثها بشكل صحيح
+      documents: updateData.documents || customers[customerIndex].documents,
+      timeline: updateData.timeline || customers[customerIndex].timeline,
+      nextSteps: updateData.nextSteps || customers[customerIndex].nextSteps
+    };
+
+    customers[customerIndex] = updatedCustomer;
 
     if (writeCustomers(customers)) {
       res.json(customers[customerIndex]);
