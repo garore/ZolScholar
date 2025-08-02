@@ -244,7 +244,7 @@ export default function ApplicationTracker() {
                 <div className="text-sm text-red-600 space-y-1">
                   <p>• تأكد من صحة البريد الإلكتروني</p>
                   <p>• تأكد من رقم التتبع</p>
-                  <p>• تواصل معنا إذا ك��ت تواجه مشكلة</p>
+                  <p>• تواصل معنا إذا كنت تواجه مشكلة</p>
                 </div>
                 <a
                   href={whatsappLink}
@@ -333,7 +333,7 @@ export default function ApplicationTracker() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-sm text-muted-foreground mb-1">
-                          ��لجامعة
+                          الجامعة
                         </h4>
                         <p className="mobile-arabic-text">
                           {searchResult.university}
@@ -528,7 +528,7 @@ export default function ApplicationTracker() {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
-                      {searchResult.nextSteps.map((step, index) => (
+                      {searchResult.nextSteps?.map((step, index) => (
                         <div key={index} className="flex items-start gap-2">
                           <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
                             {index + 1}
