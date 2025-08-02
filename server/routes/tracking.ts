@@ -16,6 +16,18 @@ const getTrackingData = () => {
   }
 };
 
+// حفظ بيانات التتبع إلى ملف JSON
+const saveTrackingData = (data: any) => {
+  try {
+    const dataPath = path.join(__dirname, "../data/applications.json");
+    fs.writeFileSync(dataPath, JSON.stringify(data, null, 2), "utf8");
+    return true;
+  } catch (error) {
+    console.error("Error saving tracking data:", error);
+    return false;
+  }
+};
+
 // البحث عن طلب بالبريد الإلكتروني أو رقم التتبع
 router.post("/search", (req, res) => {
   try {
