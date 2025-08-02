@@ -62,19 +62,16 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    fetchApplications();
+    loadApplications();
   }, []);
 
-  const fetchApplications = async () => {
+  const loadApplications = () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/tracking/all");
-      const data = await response.json();
-      if (data.success) {
-        setApplications(data.applications);
-      }
+      const apps = getApplications();
+      setApplications(apps);
     } catch (error) {
-      console.error("Error fetching applications:", error);
+      console.error("Error loading applications:", error);
     } finally {
       setLoading(false);
     }
@@ -740,7 +737,7 @@ export default function Admin() {
               <p className="font-medium">تنسيق الملف المطلوب:</p>
               <div className="bg-white p-3 rounded border font-mono text-xs">
                 رقم التتبع,اسم الطالب,البريد الإلكتروني,رقم الهاتف,اسم
-                المنحة,الجامعة,ملاحظات
+                ال��نحة,الجامعة,ملاحظات
                 <br />
                 TRK001,أحمد محمد,ahmed@email.com,+249123456789,منحة تركيا,جامعة
                 إسطنبول,عميل جديد
