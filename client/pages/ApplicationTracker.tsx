@@ -29,40 +29,6 @@ import {
   Star,
 } from "lucide-react";
 
-interface Application {
-  id: string;
-  email: string;
-  studentName: string;
-  scholarshipName: string;
-  university: string;
-  submissionDate: string | null;
-  status: string;
-  statusCode: string;
-  progress: number;
-  currentStep: string;
-  documents: {
-    cv: string;
-    motivationLetter: string;
-    transcripts: string;
-    passport: string;
-    languageCert: string;
-  };
-  timeline: Array<{
-    date: string;
-    status: string;
-    description: string;
-  }>;
-  nextSteps: string[];
-  expectedResponseDate: string;
-  notes: string;
-  statusInfo?: {
-    label: string;
-    icon: string;
-    color: string;
-    description: string;
-  };
-}
-
 export default function ApplicationTracker() {
   const { t, language } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
