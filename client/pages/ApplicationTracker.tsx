@@ -57,7 +57,13 @@ export default function ApplicationTracker() {
     setSearchResult(null);
 
     try {
+      // التحقق من البيانات المحفوظة
+      const allApplications = JSON.parse(localStorage.getItem("zol_scholar_applications") || "[]");
+      console.log("All applications in localStorage:", allApplications);
+      console.log("Searching for:", searchQuery.trim());
+
       const result = searchApplication(searchQuery.trim());
+      console.log("Search result:", result);
 
       if (result) {
         // إضافة معلومات الحالة

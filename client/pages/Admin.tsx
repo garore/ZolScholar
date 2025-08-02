@@ -79,7 +79,7 @@ export default function Admin() {
 
   const handleAddApplication = () => {
     if (!newApp.email || !newApp.studentName || !newApp.scholarshipName) {
-      alert("يرجى ملء الحقول المطلوبة");
+      alert("يرجى مل�� الحقول المطلوبة");
       return;
     }
 
@@ -126,7 +126,17 @@ export default function Admin() {
 
     if (success) {
       // تحديث القائمة المحلية
-      setApplications([...applications, application]);
+      const updatedApplications = [...applications, application];
+      setApplications(updatedApplications);
+
+      // التأكد من حفظ البيانات في localStorage فوراً
+      try {
+        localStorage.setItem("zol_scholar_applications", JSON.stringify(updatedApplications));
+        console.log("Data saved to localStorage:", updatedApplications);
+      } catch (error) {
+        console.error("Error saving to localStorage:", error);
+      }
+
       setShowAddForm(false);
       setNewApp({
         email: "",
@@ -139,13 +149,16 @@ export default function Admin() {
         notes: "",
         expectedResponseDate: "",
       });
+
       alert(
         `✅ تم إنشاء الطلب بنجاح!
 
 📧 البريد: ${newApp.email}
 🆔 رقم التتبع: ${trackingId}
 
-✨ العميل يمكنه البحث بالبريد الإلكتروني أو رقم التتبع في صفحة التتبع`,
+✨ العميل يمكنه الآن البحث بالبريد الإلكتروني أو رقم التتبع في صفح�� التتبع
+
+🔗 رابط صفحة التتبع: ${window.location.origin}/tracker`,
       );
     } else {
       alert("❌ فشل في حفظ الطلب. يوجد طلب بهذا البريد الإلكتروني مسبقاً.");
@@ -431,7 +444,7 @@ export default function Admin() {
                 <option value="submitted">تم التقديم</option>
                 <option value="not_submitted">لم يتم التقديم</option>
               </select>
-              <Button onClick={fetchApplications} variant="outline">
+              <Button onClick={loadApplications} variant="outline">
                 <RefreshCw className="w-4 h-4 ml-2" />
                 تحديث
               </Button>
