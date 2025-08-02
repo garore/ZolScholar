@@ -98,7 +98,7 @@
       "id": "TRK003",
       "email": "omar.salim@email.com",
       "phone": "+249111222333",
-      "studentName": "عمر سليم محم��",
+      "studentName": "عمر سليم محمد",
       "scholarshipName": "منحة الأمير سلطان - السعودية",
       "university": "جامعة الأمير سلطان",
       "submissionDate": null,
@@ -162,7 +162,7 @@
         {
           "date": "2024-12-05",
           "status": "مراجعة نهائية",
-          "description": "مراجعة شاملة لجميع المستندا��"
+          "description": "مراجعة شاملة لجميع المستندات"
         },
         {
           "date": "2024-12-10",
@@ -187,6 +187,7 @@
     {
       "id": "TRK005",
       "email": "khalid.ahmad@email.com",
+      "phone": "+249888999000",
       "studentName": "خالد أحمد محمود",
       "scholarshipName": "منحة الحكومة التركية 2024",
       "university": "جامعة إسطنبول التقنية",
