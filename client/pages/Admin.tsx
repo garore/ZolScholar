@@ -131,12 +131,12 @@ export default function Admin() {
         {
           date: currentDate,
           status: "بدء العمل",
-          description: "تم إنشاء الطلب من لوحة التحكم"
-        }
+          description: "تم إنشاء الطلب من لوحة التحكم",
+        },
       ],
       nextSteps: [
         "البدء في إعداد المستندات",
-        "التواصل مع العميل لجمع البيانات"
+        "التواصل مع العميل لجمع البيانات",
       ],
       notes: newApp.notes,
       expectedResponseDate: newApp.expectedResponseDate || "2025-06-01",

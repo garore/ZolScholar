@@ -466,7 +466,8 @@ export default function ApplicationTracker() {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
-                      {searchResult.timeline && searchResult.timeline.length > 0 ? (
+                      {searchResult.timeline &&
+                      searchResult.timeline.length > 0 ? (
                         searchResult.timeline.map((item, index) => (
                           <div key={index} className="flex gap-4">
                             <div className="flex flex-col items-center">
@@ -534,7 +535,8 @@ export default function ApplicationTracker() {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
-                      {searchResult.nextSteps && searchResult.nextSteps.length > 0 ? (
+                      {searchResult.nextSteps &&
+                      searchResult.nextSteps.length > 0 ? (
                         searchResult.nextSteps.map((step, index) => (
                           <div key={index} className="flex items-start gap-2">
                             <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
