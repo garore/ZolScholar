@@ -152,82 +152,59 @@ export default function Admin() {
     }
   };
 
-  const handleUpdateStatus = async (
+  const handleUpdateStatus = (
     appId: string,
     newStatus: string,
     newProgress: number,
   ) => {
-    try {
-      const updatedData = {
-        statusCode: newStatus,
-        status: statusOptions[newStatus as keyof typeof statusOptions].label,
-        progress: newProgress,
-        submissionDate:
-          newStatus === "submitted"
-            ? new Date().toISOString().split("T")[0]
-            : null,
-      };
+    const updatedData = {
+      statusCode: newStatus,
+      status: statusOptions[newStatus as keyof typeof statusOptions].label,
+      progress: newProgress,
+      submissionDate:
+        newStatus === "submitted"
+          ? new Date().toISOString().split("T")[0]
+          : null,
+    };
 
-      const response = await fetch(`/api/tracking/update/${appId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedData),
-      });
+    const success = updateApplication(appId, updatedData);
 
-      const data = await response.json();
-
-      if (data.success) {
-        // تحديث القائمة المحلية
-        setApplications(
-          applications.map((app) =>
-            app.id === appId
-              ? {
-                  ...app,
-                  statusCode: newStatus,
-                  status:
-                    statusOptions[newStatus as keyof typeof statusOptions]
-                      .label,
-                  progress: newProgress,
-                  submissionDate:
-                    newStatus === "submitted"
-                      ? new Date().toISOString().split("T")[0]
-                      : app.submissionDate,
-                }
-              : app,
-          ),
-        );
-      } else {
-        alert("فشل في تحديث الطلب");
-      }
-    } catch (error) {
-      console.error("Error updating application:", error);
-      alert("حدث خطأ في تحديث الطلب");
+    if (success) {
+      // تحديث القائمة المحلية
+      setApplications(
+        applications.map((app) =>
+          app.id === appId
+            ? {
+                ...app,
+                statusCode: newStatus,
+                status:
+                  statusOptions[newStatus as keyof typeof statusOptions].label,
+                progress: newProgress,
+                submissionDate:
+                  newStatus === "submitted"
+                    ? new Date().toISOString().split("T")[0]
+                    : app.submissionDate,
+              }
+            : app,
+        ),
+      );
+    } else {
+      alert("فشل في تحديث الطلب");
     }
   };
 
-  const handleDeleteApplication = async (appId: string) => {
+  const handleDeleteApplication = (appId: string) => {
     if (!confirm("هل أنت متأكد من حذف هذا الطلب؟")) {
       return;
     }
 
-    try {
-      const response = await fetch(`/api/tracking/delete/${appId}`, {
-        method: "DELETE",
-      });
+    const success = deleteApplication(appId);
 
-      const data = await response.json();
-
-      if (data.success) {
-        setApplications(applications.filter((app) => app.id !== appId));
-        alert("تم حذف الطلب بنجاح");
-      } else {
-        alert("فشل في حذف الطلب");
-      }
-    } catch (error) {
-      console.error("Error deleting application:", error);
-      alert("حدث خطأ في حذف الطلب");
+    if (success) {
+      setApplications(applications.filter((app) => app.id !== appId));
+      alert("تم حذف الطلب بنجاح");
+    } else {
+      alert("فشل في حذف الطلب");
     }
   };
 
@@ -248,7 +225,7 @@ export default function Admin() {
     const headers = [
       "رقم التتبع",
       "اسم الطالب",
-      "البريد الإلكتروني",
+      "ا��بريد الإلكتروني",
       "ا��هاتف",
       "المنحة",
       "الحالة",
@@ -447,7 +424,7 @@ export default function Admin() {
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
                 <Input
-                  placeholder="بحث بالاسم، ��قم التتبع، البريد، أو الهاتف..."
+                  placeholder="بحث بالاسم، رقم التتبع، البريد، أو الهاتف..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full"
@@ -477,7 +454,7 @@ export default function Admin() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <FileText className="w-5 h-5" />
-              قائمة الطلبا�� ({filteredApplications.length})
+              قائمة الطلبات ({filteredApplications.length})
             </CardTitle>
           </CardHeader>
           <CardContent>
