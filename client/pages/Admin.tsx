@@ -225,7 +225,7 @@ export default function Admin() {
     const headers = [
       "رقم التتبع",
       "اسم الطالب",
-      "ا��بريد الإلكتروني",
+      "البريد الإلكتروني",
       "ا��هاتف",
       "المنحة",
       "الحالة",
@@ -381,10 +381,7 @@ export default function Admin() {
             <CardContent className="p-4 text-center">
               <CheckCircle className="w-8 h-8 text-green-500 mx-auto mb-2" />
               <div className="text-2xl font-bold">
-                {
-                  applications.filter((app) => app.statusCode === "ready")
-                    .length
-                }
+                {getStats().ready}
               </div>
               <div className="text-sm text-muted-foreground">جاهز</div>
             </CardContent>
@@ -393,10 +390,7 @@ export default function Admin() {
             <CardContent className="p-4 text-center">
               <Clock className="w-8 h-8 text-blue-500 mx-auto mb-2" />
               <div className="text-2xl font-bold">
-                {
-                  applications.filter((app) => app.statusCode === "in_progress")
-                    .length
-                }
+                {getStats().inProgress}
               </div>
               <div className="text-sm text-muted-foreground">قيد التجهيز</div>
             </CardContent>
@@ -405,11 +399,7 @@ export default function Admin() {
             <CardContent className="p-4 text-center">
               <AlertCircle className="w-8 h-8 text-red-500 mx-auto mb-2" />
               <div className="text-2xl font-bold">
-                {
-                  applications.filter(
-                    (app) => app.statusCode === "not_submitted",
-                  ).length
-                }
+                {getStats().notSubmitted}
               </div>
               <div className="text-sm text-muted-foreground">
                 لم يتم التقديم
@@ -701,7 +691,7 @@ export default function Admin() {
             <div className="text-sm space-y-2">
               <p className="font-medium">تنسيق الملف المطلوب:</p>
               <div className="bg-white p-3 rounded border font-mono text-xs">
-                رقم التتبع,اسم الطالب,البريد الإلكتروني,رقم الهاتف,اسم
+                رقم التتبع,اسم الطالب,البريد ا��إلكتروني,رقم الهاتف,اسم
                 المنحة,الجامعة,ملاحظات
                 <br />
                 TRK001,أحمد محمد,ahmed@email.com,+249123456789,منحة تركيا,جامعة
