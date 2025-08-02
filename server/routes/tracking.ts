@@ -9,13 +9,14 @@ const getTrackingData = () => {
   try {
     // البحث عن الملف في المسارات المختلفة
     const possiblePaths = [
-      path.join(__dirname, "../data/applications.json"),
       path.join(process.cwd(), "server/data/applications.json"),
+      path.join(__dirname, "../data/applications.json"),
       path.join(process.cwd(), "data/applications.json"),
     ];
 
     let dataPath = "";
     for (const testPath of possiblePaths) {
+      console.log(`Checking path: ${testPath}, exists: ${fs.existsSync(testPath)}`);
       if (fs.existsSync(testPath)) {
         dataPath = testPath;
         break;
@@ -24,11 +25,16 @@ const getTrackingData = () => {
 
     if (!dataPath) {
       console.error("applications.json not found in any expected location");
+      console.error("Current working directory:", process.cwd());
+      console.error("__dirname:", __dirname);
       return { applications: [], statusOptions: {} };
     }
 
+    console.log(`Reading data from: ${dataPath}`);
     const data = fs.readFileSync(dataPath, "utf8");
-    return JSON.parse(data);
+    const parsedData = JSON.parse(data);
+    console.log(`Found ${parsedData.applications?.length || 0} applications`);
+    return parsedData;
   } catch (error) {
     console.error("Error reading tracking data:", error);
     return { applications: [], statusOptions: {} };
@@ -326,7 +332,7 @@ router.delete("/delete/:id", (req, res) => {
   }
 });
 
-// البحث برقم الهاتف أيضاً
+// البحث بر��م الهاتف أيضاً
 router.post("/search", (req, res) => {
   try {
     const { query } = req.body;
