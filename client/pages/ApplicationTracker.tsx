@@ -37,7 +37,7 @@ export default function ApplicationTracker() {
   const [error, setError] = useState("");
   const [searched, setSearched] = useState(false);
 
-  const handleSearch = async () => {
+  const handleSearch = () => {
     if (!searchQuery.trim()) {
       setError("يرجى إدخال البريد الإلكتروني أو رقم التتبع");
       return;
@@ -48,25 +48,35 @@ export default function ApplicationTracker() {
     setSearchResult(null);
 
     try {
-      const response = await fetch("/api/tracking/search", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ query: searchQuery.trim() }),
-      });
+      const result = searchApplication(searchQuery.trim());
 
-      const data = await response.json();
+      if (result) {
+        // إضافة معلومات الحالة
+        const statusInfo = {
+          ready: { label: "جاهز", icon: "✅", color: "green", description: "تم قبول الطلب أو العمل مكتمل" },
+          in_progress: { label: "قيد التجهيز", icon: "⏳", color: "blue", description: "جاري العمل على إعداد المستندات" },
+          submitted: { label: "تم التقديم", icon: "✅", color: "purple", description: "تم تقديم الطلب وننتظر الرد" },
+          not_submitted: { label: "لم يتم التقديم", icon: "❌", color: "red", description: "لم يتم تقديم الطلب بعد" }
+        };
 
-      if (data.success) {
-        setSearchResult(data.application);
+        const resultWithStatus = {
+          ...result,
+          statusInfo: statusInfo[result.statusCode as keyof typeof statusInfo] || {
+            label: result.status,
+            icon: "❓",
+            color: "gray",
+            description: "حالة غير معروفة"
+          }
+        };
+
+        setSearchResult(resultWithStatus);
         setSearched(true);
       } else {
-        setError(data.message || "لم يتم العثور على نتائج");
+        setError("لم يتم العثور على طلب بهذا البريد الإلكتروني، رقم التتبع، أو رقم الهاتف");
         setSearched(true);
       }
     } catch (err) {
-      setError("حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.");
+      setError("حدث خطأ في البحث. يرجى المحاولة مرة أخرى.");
       console.error("Search error:", err);
     } finally {
       setLoading(false);
@@ -460,7 +470,7 @@ export default function ApplicationTracker() {
                         ))
                       ) : (
                         <p className="text-muted-foreground text-center py-4">
-                          لا توجد مراحل محفوظة بعد
+                          لا توج�� مراحل محفوظة بعد
                         </p>
                       )}
                     </div>
@@ -576,7 +586,7 @@ export default function ApplicationTracker() {
                   </div>
                   <h3 className="font-bold mb-2">1. أدخل بيانا��ك</h3>
                   <p className="text-sm text-muted-foreground">
-                    أدخل بريدك الإلكتروني أو رقم التتبع الذي تم إرساله لك
+                    أ��خل بريدك الإلكتروني أو رقم التتبع الذي تم إرساله لك
                   </p>
                 </CardContent>
               </Card>
@@ -600,7 +610,7 @@ export default function ApplicationTracker() {
                   </div>
                   <h3 className="font-bold mb-2">3. تابع التقدم</h3>
                   <p className="text-sm text-muted-foreground">
-                    شاهد تفاصيل حالة طلبك والخطوات التالية المطلوبة
+                    شاهد تفاصيل حالة طلبك و��لخطوات التالية المطلوبة
                   </p>
                 </CardContent>
               </Card>
