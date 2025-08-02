@@ -172,7 +172,7 @@ export default function ApplicationTracker() {
                 <div className="flex-1">
                   <Input
                     type="text"
-                    placeholder="أدخل بريدك الإلكتروني، رقم التتبع، أو رقم ال��اتف"
+                    placeholder="أدخل بريدك الإلكتروني، رقم التتبع، أو رقم الهاتف"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="text-lg py-3 px-4 mobile-arabic-text"
@@ -217,6 +217,12 @@ export default function ApplicationTracker() {
                   >
                     TRK004
                   </button>
+                  <button
+                    onClick={() => setSearchQuery("+249123456789")}
+                    className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full hover:bg-blue-100 transition-colors"
+                  >
+                    +249123456789
+                  </button>
                 </div>
               </div>
             </CardContent>
@@ -232,7 +238,7 @@ export default function ApplicationTracker() {
               <CardContent className="p-6 text-center">
                 <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-red-800 mb-2">
-                  لم يتم العثور على نتائج
+                  لم ي��م العثور على نتائج
                 </h3>
                 <p className="text-red-700 mb-4">{error}</p>
                 <div className="text-sm text-red-600 space-y-1">
@@ -540,7 +546,7 @@ export default function ApplicationTracker() {
                 <Card className="bg-gradient-to-r from-purple-50 to-blue-50 border-purple-200">
                   <CardContent className="p-6 text-center">
                     <MessageCircle className="w-12 h-12 text-purple-500 mx-auto mb-4" />
-                    <h3 className="font-bold mb-2">تحتاج مساعد��؟</h3>
+                    <h3 className="font-bold mb-2">تحتاج مساعدة؟</h3>
                     <p className="text-sm text-muted-foreground mb-4">
                       فريقنا جاهز لمساعدتك
                     </p>
