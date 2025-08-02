@@ -52,6 +52,7 @@
     {
       "id": "TRK002",
       "email": "fatima.hassan@email.com",
+      "phone": "+249987654321",
       "studentName": "فاطمة حسن أحمد",
       "scholarshipName": "منحة جامعة المحمدية - إندونيسيا",
       "university": "الجامعة المحمدية سوراكارتا",
@@ -59,7 +60,7 @@
       "status": "قيد التجهيز",
       "statusCode": "in_progress",
       "progress": 65,
-      "currentStep": "إعداد ��سالة الدافع",
+      "currentStep": "إعداد رسالة الدافع",
       "documents": {
         "cv": "جاهز",
         "motivationLetter": "قيد التجهيز",
@@ -191,7 +192,7 @@
       "status": "قيد التجهيز",
       "statusCode": "in_progress",
       "progress": 40,
-      "currentStep": "مراجعة ال��ستندات",
+      "currentStep": "مراجعة المستندات",
       "documents": {
         "cv": "جاهز",
         "motivationLetter": "قيد التجهيز",
