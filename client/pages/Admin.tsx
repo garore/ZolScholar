@@ -168,33 +168,74 @@ export default function Admin() {
     }
   };
 
-  const handleUpdateStatus = (
+  const handleUpdateStatus = async (
     appId: string,
     newStatus: string,
     newProgress: number,
   ) => {
-    setApplications(
-      applications.map((app) =>
-        app.id === appId
-          ? {
-              ...app,
-              statusCode: newStatus,
-              status:
-                statusOptions[newStatus as keyof typeof statusOptions].label,
-              progress: newProgress,
-              submissionDate:
-                newStatus === "submitted"
-                  ? new Date().toISOString().split("T")[0]
-                  : app.submissionDate,
-            }
-          : app,
-      ),
-    );
+    try {
+      const updatedData = {
+        statusCode: newStatus,
+        status: statusOptions[newStatus as keyof typeof statusOptions].label,
+        progress: newProgress,
+        submissionDate: newStatus === "submitted" ? new Date().toISOString().split("T")[0] : null,
+      };
+
+      const response = await fetch(`/api/tracking/update/${appId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // تحديث القائمة المحلية
+        setApplications(
+          applications.map((app) =>
+            app.id === appId
+              ? {
+                  ...app,
+                  statusCode: newStatus,
+                  status: statusOptions[newStatus as keyof typeof statusOptions].label,
+                  progress: newProgress,
+                  submissionDate: newStatus === "submitted" ? new Date().toISOString().split("T")[0] : app.submissionDate,
+                }
+              : app,
+          ),
+        );
+      } else {
+        alert("فشل في تحديث الطلب");
+      }
+    } catch (error) {
+      console.error("Error updating application:", error);
+      alert("حدث خطأ في تحديث الطلب");
+    }
   };
 
-  const handleDeleteApplication = (appId: string) => {
-    if (confirm("هل أنت متأكد من حذف هذا الطلب؟")) {
-      setApplications(applications.filter((app) => app.id !== appId));
+  const handleDeleteApplication = async (appId: string) => {
+    if (!confirm("هل أنت متأكد من حذف هذا الطلب؟")) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/tracking/delete/${appId}`, {
+        method: "DELETE",
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setApplications(applications.filter((app) => app.id !== appId));
+        alert("تم حذف الطلب بنجاح");
+      } else {
+        alert("فشل في حذف الطلب");
+      }
+    } catch (error) {
+      console.error("Error deleting application:", error);
+      alert("حدث خطأ في حذف الطلب");
     }
   };
 
@@ -277,7 +318,7 @@ export default function Admin() {
               cv: "غير مبدوء",
               motivationLetter: "غير مبدوء",
               transcripts: "غير مبدوء",
-              passport: "غير مبدو��",
+              passport: "غير مبدوء",
               languageCert: "غير مبدوء",
             },
             notes: values[6] || "",
@@ -363,7 +404,7 @@ export default function Admin() {
               <Users className="w-8 h-8 text-blue-500 mx-auto mb-2" />
               <div className="text-2xl font-bold">{applications.length}</div>
               <div className="text-sm text-muted-foreground">
-                إجمالي الطلبات
+                إجمالي ال��لبات
               </div>
             </CardContent>
           </Card>
@@ -453,7 +494,7 @@ export default function Admin() {
                 <thead>
                   <tr className="border-b">
                     <th className="text-right p-3">رقم التتبع</th>
-                    <th className="text-right p-3">اسم ال��الب</th>
+                    <th className="text-right p-3">اسم الطالب</th>
                     <th className="text-right p-3">البريد/الهاتف</th>
                     <th className="text-right p-3">المنحة</th>
                     <th className="text-right p-3">الحالة</th>
@@ -698,7 +739,7 @@ export default function Admin() {
                 إسطنبول,عميل جديد
               </div>
               <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                <li>أترك رقم التتبع فارغاً لتوليد رقم تلقائياً</li>
+                <li>أترك رقم التتبع فارغا�� لتوليد رقم تلقائياً</li>
                 <li>
                   الحقول المطلوبة: اسم الطالب، البريد الإلكتروني، اسم المنحة
                 </li>
