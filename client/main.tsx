@@ -29,6 +29,7 @@ import Scholarships from "./pages/Scholarships";
 import Admin from "./pages/Admin";
 import TestAPI from "./pages/TestAPI";
 import TestLocal from "./pages/TestLocal";
+import TestLocalStorage from "./pages/TestLocalStorage";
 
 const queryClient = new QueryClient();
 
@@ -70,6 +71,7 @@ const App = () => (
             <Route path="/admin" element={<Admin />} />
             <Route path="/test-api" element={<TestAPI />} />
             <Route path="/test-local" element={<TestLocal />} />
+            <Route path="/test-localstorage" element={<TestLocalStorage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
