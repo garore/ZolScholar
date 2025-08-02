@@ -16,7 +16,9 @@ const getTrackingData = () => {
 
     let dataPath = "";
     for (const testPath of possiblePaths) {
-      console.log(`Checking path: ${testPath}, exists: ${fs.existsSync(testPath)}`);
+      console.log(
+        `Checking path: ${testPath}, exists: ${fs.existsSync(testPath)}`,
+      );
       if (fs.existsSync(testPath)) {
         dataPath = testPath;
         break;
@@ -347,22 +349,24 @@ router.post("/search", (req, res) => {
     }
 
     const data = getTrackingData();
-    console.log(`Data loaded with ${data.applications?.length || 0} applications`);
+    console.log(
+      `Data loaded with ${data.applications?.length || 0} applications`,
+    );
 
     const searchQuery = query.trim().toLowerCase();
 
     // البحث بالبريد الإلكتروني، رقم التتبع، أو رقم الهاتف
-    const application = data.applications.find(
-      (app: any) => {
-        const emailMatch = app.email.toLowerCase() === searchQuery;
-        const idMatch = app.id.toLowerCase() === searchQuery;
-        const phoneMatch = app.phone === query.trim();
+    const application = data.applications.find((app: any) => {
+      const emailMatch = app.email.toLowerCase() === searchQuery;
+      const idMatch = app.id.toLowerCase() === searchQuery;
+      const phoneMatch = app.phone === query.trim();
 
-        console.log(`Checking app ${app.id}: email(${emailMatch}), id(${idMatch}), phone(${phoneMatch})`);
+      console.log(
+        `Checking app ${app.id}: email(${emailMatch}), id(${idMatch}), phone(${phoneMatch})`,
+      );
 
-        return emailMatch || idMatch || phoneMatch;
-      }
-    );
+      return emailMatch || idMatch || phoneMatch;
+    });
 
     if (!application) {
       return res.json({
