@@ -152,4 +152,196 @@ router.get("/all", (req, res) => {
   }
 });
 
+// إضافة طلب جديد
+router.post("/add", (req, res) => {
+  try {
+    const data = getTrackingData();
+    const newApplication = req.body;
+
+    // التحقق من البيانات المطلوبة
+    if (!newApplication.email || !newApplication.studentName || !newApplication.scholarshipName) {
+      return res.status(400).json({
+        success: false,
+        message: "البيانات المطلوبة مفقودة"
+      });
+    }
+
+    // التحقق من عدم تكرار البريد الإلكتروني
+    const existingApp = data.applications.find((app: any) =>
+      app.email.toLowerCase() === newApplication.email.toLowerCase()
+    );
+
+    if (existingApp) {
+      return res.status(400).json({
+        success: false,
+        message: "يوجد طلب مسجل بهذا البريد الإلكتروني بالفعل"
+      });
+    }
+
+    // إضافة الطلب الجديد
+    data.applications.push(newApplication);
+
+    if (saveTrackingData(data)) {
+      res.json({
+        success: true,
+        message: "تم إضافة الطلب بنجاح",
+        application: newApplication
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: "فشل في حفظ البيانات"
+      });
+    }
+
+  } catch (error) {
+    console.error("Error adding application:", error);
+    res.status(500).json({
+      success: false,
+      message: "حدث خطأ في إضافة الطلب"
+    });
+  }
+});
+
+// تحديث طلب موجود
+router.put("/update/:id", (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedData = req.body;
+    const data = getTrackingData();
+
+    const appIndex = data.applications.findIndex((app: any) => app.id === id);
+
+    if (appIndex === -1) {
+      return res.status(404).json({
+        success: false,
+        message: "الطلب غير موجود"
+      });
+    }
+
+    // تحديث البيانات
+    data.applications[appIndex] = { ...data.applications[appIndex], ...updatedData };
+
+    if (saveTrackingData(data)) {
+      res.json({
+        success: true,
+        message: "تم تحديث الطلب بنجاح",
+        application: data.applications[appIndex]
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: "فشل في حفظ التحديثات"
+      });
+    }
+
+  } catch (error) {
+    console.error("Error updating application:", error);
+    res.status(500).json({
+      success: false,
+      message: "حدث خطأ في تحديث الطلب"
+    });
+  }
+});
+
+// حذف طلب
+router.delete("/delete/:id", (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = getTrackingData();
+
+    const appIndex = data.applications.findIndex((app: any) => app.id === id);
+
+    if (appIndex === -1) {
+      return res.status(404).json({
+        success: false,
+        message: "الطلب غير موجود"
+      });
+    }
+
+    // حذف الطلب
+    data.applications.splice(appIndex, 1);
+
+    if (saveTrackingData(data)) {
+      res.json({
+        success: true,
+        message: "تم حذف الطلب بنجاح"
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: "فشل في ح��ظ التغييرات"
+      });
+    }
+
+  } catch (error) {
+    console.error("Error deleting application:", error);
+    res.status(500).json({
+      success: false,
+      message: "حدث خطأ في حذف الطلب"
+    });
+  }
+});
+
+// البحث برقم الهاتف أيضاً
+router.post("/search", (req, res) => {
+  try {
+    const { query } = req.body;
+
+    if (!query || query.trim() === "") {
+      return res.status(400).json({
+        success: false,
+        message: "يرجى إدخال البريد الإلكتروني، رقم التتبع، أو رقم الهاتف"
+      });
+    }
+
+    const data = getTrackingData();
+    const searchQuery = query.trim().toLowerCase();
+
+    // البحث بالبريد الإلكتروني، رقم التتبع، أو رقم الهاتف
+    const application = data.applications.find((app: any) =>
+      app.email.toLowerCase() === searchQuery ||
+      app.id.toLowerCase() === searchQuery ||
+      app.phone === query.trim()
+    );
+
+    if (!application) {
+      return res.json({
+        success: false,
+        message: "لم يتم العثور على طلب بهذا البريد الإلكتروني، رقم التتبع، أو رقم الهاتف",
+        suggestions: [
+          "تأكد من صحة البريد الإ��كتروني",
+          "تأكد من رقم التتبع",
+          "تأكد من رقم الهاتف",
+          "تواصل معنا إذا كنت تواجه مشكلة",
+        ],
+      });
+    }
+
+    // إضافة تفاصيل الحالة
+    const statusInfo = data.statusOptions[application.statusCode] || {
+      label: application.status,
+      icon: "❓",
+      color: "gray",
+      description: "حالة غير معروفة",
+    };
+
+    res.json({
+      success: true,
+      application: {
+        ...application,
+        statusInfo,
+      },
+      message: `تم العثور على طلب ${application.studentName}`,
+    });
+
+  } catch (error) {
+    console.error("Error in tracking search:", error);
+    res.status(500).json({
+      success: false,
+      message: "حدث خطأ في البحث. يرجى المحاولة مرة أخرى.",
+    });
+  }
+});
+
 export default router;
