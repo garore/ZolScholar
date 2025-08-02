@@ -97,6 +97,7 @@
     {
       "id": "TRK003",
       "email": "omar.salim@email.com",
+      "phone": "+249111222333",
       "studentName": "عمر سليم محمد",
       "scholarshipName": "منحة الأمير سلطان - السعودية",
       "university": "جامعة الأمير سلطان",
@@ -196,7 +197,7 @@
       "documents": {
         "cv": "جاهز",
         "motivationLetter": "قيد التجهيز",
-        "transcripts": "قيد المراجعة",
+        "transcripts": "ق��د المراجعة",
         "passport": "جاهز",
         "languageCert": "جاهز"
       },
