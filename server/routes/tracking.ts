@@ -7,7 +7,26 @@ const router = Router();
 // قراءة بيانات التتبع من ملف JSON
 const getTrackingData = () => {
   try {
-    const dataPath = path.join(__dirname, "../data/applications.json");
+    // البحث عن الملف في المسارات المختلفة
+    const possiblePaths = [
+      path.join(__dirname, "../data/applications.json"),
+      path.join(process.cwd(), "server/data/applications.json"),
+      path.join(process.cwd(), "data/applications.json"),
+    ];
+
+    let dataPath = "";
+    for (const testPath of possiblePaths) {
+      if (fs.existsSync(testPath)) {
+        dataPath = testPath;
+        break;
+      }
+    }
+
+    if (!dataPath) {
+      console.error("applications.json not found in any expected location");
+      return { applications: [], statusOptions: {} };
+    }
+
     const data = fs.readFileSync(dataPath, "utf8");
     return JSON.parse(data);
   } catch (error) {
@@ -207,7 +226,7 @@ router.post("/add", (req, res) => {
   }
 });
 
-// تحديث طلب موجود
+// تحد��ث طلب موجود
 router.put("/update/:id", (req, res) => {
   try {
     const { id } = req.params;
