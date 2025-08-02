@@ -20,11 +20,11 @@ const getTrackingData = () => {
 router.post("/search", (req, res) => {
   try {
     const { query } = req.body;
-    
+
     if (!query || query.trim() === "") {
       return res.status(400).json({
         success: false,
-        message: "يرجى إدخال البريد الإلكتروني أو رقم التتبع"
+        message: "يرجى إدخال البريد الإلكتروني أو رقم التتبع",
       });
     }
 
@@ -32,9 +32,10 @@ router.post("/search", (req, res) => {
     const searchQuery = query.trim().toLowerCase();
 
     // البحث بالبريد الإلكتروني أو رقم التتبع
-    const application = data.applications.find((app: any) => 
-      app.email.toLowerCase() === searchQuery || 
-      app.id.toLowerCase() === searchQuery
+    const application = data.applications.find(
+      (app: any) =>
+        app.email.toLowerCase() === searchQuery ||
+        app.id.toLowerCase() === searchQuery,
     );
 
     if (!application) {
@@ -44,8 +45,8 @@ router.post("/search", (req, res) => {
         suggestions: [
           "تأكد من صحة البريد الإلكتروني",
           "تأكد من رقم التتبع",
-          "تواصل معنا إذا كنت تواجه مشكلة"
-        ]
+          "تواصل معنا إذا كنت تواجه مشكلة",
+        ],
       });
     }
 
@@ -54,23 +55,22 @@ router.post("/search", (req, res) => {
       label: application.status,
       icon: "❓",
       color: "gray",
-      description: "حالة غير معروفة"
+      description: "حالة غير معروفة",
     };
 
     res.json({
       success: true,
       application: {
         ...application,
-        statusInfo
+        statusInfo,
       },
-      message: `تم العثور على ��لب ${application.studentName}`
+      message: `تم العثور على ��لب ${application.studentName}`,
     });
-
   } catch (error) {
     console.error("Error in tracking search:", error);
     res.status(500).json({
       success: false,
-      message: "حدث خطأ في البحث. يرجى المحاولة مرة أخرى."
+      message: "حدث خطأ في البحث. يرجى المحاولة مرة أخرى.",
     });
   }
 });
@@ -83,23 +83,29 @@ router.get("/stats", (req, res) => {
 
     const stats = {
       total: applications.length,
-      ready: applications.filter((app: any) => app.statusCode === "ready").length,
-      inProgress: applications.filter((app: any) => app.statusCode === "in_progress").length,
-      submitted: applications.filter((app: any) => app.statusCode === "submitted").length,
-      notSubmitted: applications.filter((app: any) => app.statusCode === "not_submitted").length,
+      ready: applications.filter((app: any) => app.statusCode === "ready")
+        .length,
+      inProgress: applications.filter(
+        (app: any) => app.statusCode === "in_progress",
+      ).length,
+      submitted: applications.filter(
+        (app: any) => app.statusCode === "submitted",
+      ).length,
+      notSubmitted: applications.filter(
+        (app: any) => app.statusCode === "not_submitted",
+      ).length,
     };
 
     res.json({
       success: true,
       stats,
-      statusOptions: data.statusOptions
+      statusOptions: data.statusOptions,
     });
-
   } catch (error) {
     console.error("Error getting stats:", error);
     res.status(500).json({
       success: false,
-      message: "حدث خطأ في جلب الإحصائيات"
+      message: "حدث خطأ في جلب الإحصائيات",
     });
   }
 });
@@ -108,29 +114,28 @@ router.get("/stats", (req, res) => {
 router.get("/all", (req, res) => {
   try {
     const data = getTrackingData();
-    
+
     // إضافة معلومات الحالة لكل طلب
     const applicationsWithStatus = data.applications.map((app: any) => ({
       ...app,
       statusInfo: data.statusOptions[app.statusCode] || {
         label: app.status,
-        icon: "❓", 
+        icon: "❓",
         color: "gray",
-        description: "حالة غير معروفة"
-      }
+        description: "حالة غير معروفة",
+      },
     }));
 
     res.json({
       success: true,
       applications: applicationsWithStatus,
-      count: applicationsWithStatus.length
+      count: applicationsWithStatus.length,
     });
-
   } catch (error) {
     console.error("Error getting all applications:", error);
     res.status(500).json({
       success: false,
-      message: "حدث خطأ في جلب البيانات"
+      message: "حدث خطأ في جلب البيانات",
     });
   }
 });

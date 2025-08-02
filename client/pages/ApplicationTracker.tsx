@@ -240,7 +240,11 @@ export default function ApplicationTracker() {
                   <p>• تأكد من رقم التتبع</p>
                   <p>• تواصل معنا إذا كنت تواجه مشكلة</p>
                 </div>
-                <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button className="mt-4 bg-red-500 hover:bg-red-600">
                     <MessageCircle className="w-4 h-4 ml-2" />
                     تواصل معنا
@@ -407,7 +411,9 @@ export default function ApplicationTracker() {
                       <div className="flex items-center justify-between">
                         <span className="text-sm">رسالة الدافع</span>
                         <div className="flex items-center gap-2">
-                          {getDocumentIcon(searchResult.documents.motivationLetter)}
+                          {getDocumentIcon(
+                            searchResult.documents.motivationLetter,
+                          )}
                           <span className="text-sm font-medium">
                             {searchResult.documents.motivationLetter}
                           </span>
@@ -499,7 +505,9 @@ export default function ApplicationTracker() {
                     </div>
                     <div className="flex items-center gap-2">
                       <FileText className="w-4 h-4 text-muted-foreground" />
-                      <span className="text-sm">رقم التتبع: {searchResult.id}</span>
+                      <span className="text-sm">
+                        رقم التتبع: {searchResult.id}
+                      </span>
                     </div>
                   </CardContent>
                 </Card>

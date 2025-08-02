@@ -13,7 +13,7 @@
       "currentStep": "انتظار رد الجامعة",
       "documents": {
         "cv": "جاهز",
-        "motivationLetter": "جاهز", 
+        "motivationLetter": "جاهز",
         "transcripts": "جاهز",
         "passport": "جاهز",
         "languageCert": "جاهز"
@@ -49,7 +49,7 @@
       "notes": "تم التقديم في الموعد المحدد. جميع المستندات مكتملة ومراجعة."
     },
     {
-      "id": "TRK002", 
+      "id": "TRK002",
       "email": "fatima.hassan@email.com",
       "studentName": "فاطمة حسن أحمد",
       "scholarshipName": "منحة جامعة المحمدية - إندونيسيا",
@@ -62,7 +62,7 @@
       "documents": {
         "cv": "جاهز",
         "motivationLetter": "قيد التجهيز",
-        "transcripts": "جاهز", 
+        "transcripts": "جاهز",
         "passport": "جاهز",
         "languageCert": "مطلوب"
       },
@@ -73,7 +73,7 @@
           "description": "تم استلام الطلب وبدء العمل"
         },
         {
-          "date": "2024-12-19", 
+          "date": "2024-12-19",
           "status": "إعداد السيرة الذاتية",
           "description": "تم الانتهاء من إعداد السيرة الذاتية"
         },
@@ -94,26 +94,26 @@
     },
     {
       "id": "TRK003",
-      "email": "omar.salim@email.com", 
+      "email": "omar.salim@email.com",
       "studentName": "عمر سليم محمد",
       "scholarshipName": "منحة الأمير سلطان - السعودية",
       "university": "جامعة الأمير سلطان",
       "submissionDate": null,
       "status": "لم يتم التقديم",
-      "statusCode": "not_submitted", 
+      "statusCode": "not_submitted",
       "progress": 20,
       "currentStep": "جمع المستندات الأولية",
       "documents": {
         "cv": "قيد التجهيز",
         "motivationLetter": "غير مبدوء",
         "transcripts": "جاهز",
-        "passport": "جاهز", 
+        "passport": "جاهز",
         "languageCert": "غير مبدوء"
       },
       "timeline": [
         {
           "date": "2024-12-20",
-          "status": "بدء العمل", 
+          "status": "بدء العمل",
           "description": "تم استلام الطلب من العميل"
         }
       ],
@@ -129,7 +129,7 @@
     {
       "id": "TRK004",
       "email": "sara.ibrahim@email.com",
-      "studentName": "سارة إبراهيم عبدالله", 
+      "studentName": "سارة إبراهيم عبدالله",
       "scholarshipName": "منحة DAAD الألمانية",
       "university": "جامعة ميونخ التقنية",
       "submissionDate": "2024-12-10",
@@ -140,7 +140,7 @@
       "documents": {
         "cv": "جاهز",
         "motivationLetter": "جاهز",
-        "transcripts": "جاهز", 
+        "transcripts": "جاهز",
         "passport": "جاهز",
         "languageCert": "جاهز"
       },
@@ -152,7 +152,7 @@
         },
         {
           "date": "2024-11-25",
-          "status": "قيد التجهيز", 
+          "status": "قيد التجهيز",
           "description": "إعداد جميع المستندات المطلوبة"
         },
         {
@@ -184,7 +184,7 @@
       "id": "TRK005",
       "email": "khalid.ahmad@email.com",
       "studentName": "خالد أحمد محمود",
-      "scholarshipName": "منحة الحكومة التركية 2024", 
+      "scholarshipName": "منحة الحكومة التركية 2024",
       "university": "جامعة إسطنبول التقنية",
       "submissionDate": null,
       "status": "قيد التجهيز",
@@ -228,21 +228,21 @@
       "description": "تم قبول الطلب أو العمل مكتمل"
     },
     "in_progress": {
-      "label": "قيد التجهيز", 
+      "label": "قيد التجهيز",
       "icon": "⏳",
       "color": "blue",
       "description": "جاري العمل على إعداد المستندات"
     },
     "submitted": {
       "label": "تم التقديم",
-      "icon": "✅", 
+      "icon": "✅",
       "color": "purple",
       "description": "تم تقديم الطلب وننتظر الرد"
     },
     "not_submitted": {
       "label": "لم يتم التقديم",
       "icon": "❌",
-      "color": "red", 
+      "color": "red",
       "description": "لم يتم تقديم الطلب بعد"
     }
   }
