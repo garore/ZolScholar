@@ -38,7 +38,26 @@ const getTrackingData = () => {
 // حفظ بيانات التتبع إلى ملف JSON
 const saveTrackingData = (data: any) => {
   try {
-    const dataPath = path.join(__dirname, "../data/applications.json");
+    // البحث عن الملف في المسارات المختلفة
+    const possiblePaths = [
+      path.join(__dirname, "../data/applications.json"),
+      path.join(process.cwd(), "server/data/applications.json"),
+      path.join(process.cwd(), "data/applications.json"),
+    ];
+
+    let dataPath = "";
+    for (const testPath of possiblePaths) {
+      if (fs.existsSync(testPath)) {
+        dataPath = testPath;
+        break;
+      }
+    }
+
+    if (!dataPath) {
+      // إنشاء الملف في المسار الافتراضي
+      dataPath = path.join(process.cwd(), "server/data/applications.json");
+    }
+
     fs.writeFileSync(dataPath, JSON.stringify(data, null, 2), "utf8");
     return true;
   } catch (error) {
@@ -226,7 +245,7 @@ router.post("/add", (req, res) => {
   }
 });
 
-// تحد��ث طلب موجود
+// تحديث طلب موجود
 router.put("/update/:id", (req, res) => {
   try {
     const { id } = req.params;
