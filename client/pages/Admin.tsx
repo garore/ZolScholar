@@ -97,7 +97,7 @@ export default function Admin() {
   const loadApplications = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/customers');
+      const response = await fetch("/api/customers");
       if (response.ok) {
         const apps = await response.json();
         setApplications(apps);
@@ -124,7 +124,8 @@ export default function Admin() {
         studentName: newApp.studentName,
         scholarshipName: newApp.scholarshipName,
         university: newApp.university,
-        status: statusOptions[newApp.statusCode as keyof typeof statusOptions].label,
+        status:
+          statusOptions[newApp.statusCode as keyof typeof statusOptions].label,
         statusCode: newApp.statusCode,
         progress: newApp.statusCode === "ready" ? 100 : 20,
         currentStep: newApp.currentStep,
@@ -132,10 +133,10 @@ export default function Admin() {
         expectedResponseDate: newApp.expectedResponseDate || "2025-06-01",
       };
 
-      const response = await fetch('/api/customers', {
-        method: 'POST',
+      const response = await fetch("/api/customers", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(applicationData),
       });
@@ -172,10 +173,10 @@ export default function Admin() {
       } else if (response.status === 409) {
         alert("❌ فشل في حفظ الطلب. يوجد طلب بهذا البريد الإلكتروني مسبقاً.");
       } else {
-        throw new Error('Failed to save application');
+        throw new Error("Failed to save application");
       }
     } catch (error) {
-      console.error('Error adding application:', error);
+      console.error("Error adding application:", error);
       alert("❌ حدث خطأ في حفظ الطلب. يرجى المحاولة مرة أخرى.");
     }
   };
@@ -197,9 +198,9 @@ export default function Admin() {
       };
 
       const response = await fetch(`/api/customers/${appId}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedData),
       });
@@ -213,7 +214,8 @@ export default function Admin() {
                   ...app,
                   statusCode: newStatus,
                   status:
-                    statusOptions[newStatus as keyof typeof statusOptions].label,
+                    statusOptions[newStatus as keyof typeof statusOptions]
+                      .label,
                   progress: newProgress,
                   submissionDate:
                     newStatus === "submitted"
@@ -224,10 +226,10 @@ export default function Admin() {
           ),
         );
       } else {
-        throw new Error('Failed to update application');
+        throw new Error("Failed to update application");
       }
     } catch (error) {
-      console.error('Error updating application:', error);
+      console.error("Error updating application:", error);
       alert("فشل في تحديث الطلب");
     }
   };
@@ -239,17 +241,17 @@ export default function Admin() {
 
     try {
       const response = await fetch(`/api/customers/${appId}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
 
       if (response.ok) {
         setApplications(applications.filter((app) => app.id !== appId));
         alert("تم حذف الطلب بنجاح");
       } else {
-        throw new Error('Failed to delete application');
+        throw new Error("Failed to delete application");
       }
     } catch (error) {
-      console.error('Error deleting application:', error);
+      console.error("Error deleting application:", error);
       alert("فشل في حذف الطلب");
     }
   };
@@ -427,7 +429,10 @@ export default function Admin() {
             <CardContent className="p-4 text-center">
               <CheckCircle className="w-8 h-8 text-green-500 mx-auto mb-2" />
               <div className="text-2xl font-bold">
-                {applications.filter(app => app.statusCode === 'ready').length}
+                {
+                  applications.filter((app) => app.statusCode === "ready")
+                    .length
+                }
               </div>
               <div className="text-sm text-muted-foreground">جاهز</div>
             </CardContent>
@@ -436,7 +441,10 @@ export default function Admin() {
             <CardContent className="p-4 text-center">
               <Clock className="w-8 h-8 text-blue-500 mx-auto mb-2" />
               <div className="text-2xl font-bold">
-                {applications.filter(app => app.statusCode === 'in_progress').length}
+                {
+                  applications.filter((app) => app.statusCode === "in_progress")
+                    .length
+                }
               </div>
               <div className="text-sm text-muted-foreground">قيد التجهيز</div>
             </CardContent>
@@ -445,7 +453,11 @@ export default function Admin() {
             <CardContent className="p-4 text-center">
               <AlertCircle className="w-8 h-8 text-red-500 mx-auto mb-2" />
               <div className="text-2xl font-bold">
-                {applications.filter(app => app.statusCode === 'not_submitted').length}
+                {
+                  applications.filter(
+                    (app) => app.statusCode === "not_submitted",
+                  ).length
+                }
               </div>
               <div className="text-sm text-muted-foreground">
                 لم يتم التقديم

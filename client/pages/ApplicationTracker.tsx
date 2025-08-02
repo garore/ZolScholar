@@ -70,7 +70,8 @@ import {
 export default function ApplicationTracker() {
   const { t, language } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResult, setSearchResult] = useState<ApplicationWithStatus | null>(null);
+  const [searchResult, setSearchResult] =
+    useState<ApplicationWithStatus | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [searched, setSearched] = useState(false);
@@ -88,35 +89,61 @@ export default function ApplicationTracker() {
     try {
       // البحث باستخدام API
       console.log("Searching for:", searchQuery.trim());
-      
-      const response = await fetch(`/api/customers/search?q=${encodeURIComponent(searchQuery.trim())}`);
-      
+
+      const response = await fetch(
+        `/api/customers/search?q=${encodeURIComponent(searchQuery.trim())}`,
+      );
+
       if (response.ok) {
         const result = await response.json();
         console.log("Search result:", result);
 
         // إضافة معلومات الحالة
         const statusInfo = {
-          ready: { label: "جاهز", icon: "✅", color: "green", description: "تم قبول الطلب أو العمل مكتمل" },
-          in_progress: { label: "قيد التجهيز", icon: "⏳", color: "blue", description: "جاري العمل على إعداد المستندات" },
-          submitted: { label: "تم التقديم", icon: "✅", color: "purple", description: "تم تقديم الطلب وننتظر الرد" },
-          not_submitted: { label: "لم يتم التقديم", icon: "❌", color: "red", description: "لم يتم تقديم الطلب بعد" }
+          ready: {
+            label: "جاهز",
+            icon: "✅",
+            color: "green",
+            description: "تم قبول الطلب أو العمل مكتمل",
+          },
+          in_progress: {
+            label: "قيد التجهيز",
+            icon: "⏳",
+            color: "blue",
+            description: "جاري العمل على إعداد المستندات",
+          },
+          submitted: {
+            label: "تم التقديم",
+            icon: "✅",
+            color: "purple",
+            description: "تم تقديم الطلب وننتظر الرد",
+          },
+          not_submitted: {
+            label: "لم يتم التقديم",
+            icon: "❌",
+            color: "red",
+            description: "لم يتم تقديم الطلب بعد",
+          },
         };
 
         const resultWithStatus = {
           ...result,
-          statusInfo: statusInfo[result.statusCode as keyof typeof statusInfo] || {
+          statusInfo: statusInfo[
+            result.statusCode as keyof typeof statusInfo
+          ] || {
             label: result.status,
             icon: "❓",
             color: "gray",
-            description: "حالة غير معروفة"
-          }
+            description: "حالة غير معروفة",
+          },
         };
 
         setSearchResult(resultWithStatus);
         setSearched(true);
       } else if (response.status === 404) {
-        setError("لم يتم العثور على طلب بهذا البريد الإلكتروني، رقم التتبع، أو رقم الهاتف");
+        setError(
+          "لم يتم العثور على طلب بهذا البريد الإلكتروني، رقم التتبع، أو رقم الهاتف",
+        );
         setSearched(true);
       } else {
         throw new Error(`HTTP error! status: ${response.status}`);

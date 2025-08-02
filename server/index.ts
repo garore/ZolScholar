@@ -10,8 +10,8 @@ import {
   addCustomer,
   updateCustomer,
   deleteCustomer,
-  getCustomerStats
-} from './routes/customers';
+  getCustomerStats,
+} from "./routes/customers";
 
 export function createServer() {
   const app = express();
@@ -53,12 +53,12 @@ export function createServer() {
   app.use("/api/tracking", trackingRouter);
 
   // Customer API endpoints
-  app.get('/api/customers', getCustomers);
-  app.get('/api/customers/search', searchCustomer);
-  app.post('/api/customers', addCustomer);
-  app.put('/api/customers/:id', updateCustomer);
-  app.delete('/api/customers/:id', deleteCustomer);
-  app.get('/api/customers/stats', getCustomerStats);
+  app.get("/api/customers", getCustomers);
+  app.get("/api/customers/search", searchCustomer);
+  app.post("/api/customers", addCustomer);
+  app.put("/api/customers/:id", updateCustomer);
+  app.delete("/api/customers/:id", deleteCustomer);
+  app.get("/api/customers/stats", getCustomerStats);
 
   // Error handling middleware
   app.use(
