@@ -3,6 +3,7 @@ import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import { handleVisitorCount, handleGetVisitorCount } from "./routes/visitors";
 import scholarshipsRouter from "./routes/scholarships";
+import trackingRouter from "./routes/tracking";
 
 export function createServer() {
   const app = express();
