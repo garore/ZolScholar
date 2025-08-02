@@ -26,6 +26,7 @@ import Blog from "./pages/Blog";
 import ScholarshipDetails from "./pages/ScholarshipDetails";
 import Explore from "./pages/Explore";
 import Scholarships from "./pages/Scholarships";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
