@@ -92,7 +92,7 @@
         "تقديم الطلب"
       ],
       "expectedResponseDate": "2025-02-10",
-      "notes": "العمل متقدم بشكل جيد. يُتوقع إنهاء رسالة الدافع خلال يومين."
+      "notes": "��لعمل مت��دم ��شكل جيد. يُتوقع إنهاء رسالة الدافع خلال يومين."
     },
     {
       "id": "TRK003",
@@ -223,6 +223,39 @@
       ],
       "expectedResponseDate": "2025-01-31",
       "notes": "العمل يسير بخطى جيدة. العميل متفاعل ويرسل المطلوب في الوقت المناسب."
+    },
+    {
+      "id": "TRK006",
+      "email": "test@gmail.com",
+      "phone": "+249999888777",
+      "studentName": "عميل تجريبي",
+      "scholarshipName": "منحة تجريبية",
+      "university": "جامعة تجريبية",
+      "submissionDate": null,
+      "status": "لم يتم التقديم",
+      "statusCode": "not_submitted",
+      "progress": 20,
+      "currentStep": "بدء العمل",
+      "documents": {
+        "cv": "غير مبدوء",
+        "motivationLetter": "غير مبدوء",
+        "transcripts": "غير مبدوء",
+        "passport": "غير مبدوء",
+        "languageCert": "غير مبدوء"
+      },
+      "timeline": [
+        {
+          "date": "2024-12-22",
+          "status": "بدء العمل",
+          "description": "تم إنشاء الطلب من لوحة التحكم"
+        }
+      ],
+      "nextSteps": [
+        "البدء في إعداد المستندات",
+        "التواصل مع العميل لجمع البيانات"
+      ],
+      "expectedResponseDate": "2025-06-01",
+      "notes": "عميل تجريبي لاختبار النظام"
     }
   ],
   "statusOptions": {
