@@ -159,22 +159,27 @@ router.post("/add", (req, res) => {
     const newApplication = req.body;
 
     // التحقق من البيانات المطلوبة
-    if (!newApplication.email || !newApplication.studentName || !newApplication.scholarshipName) {
+    if (
+      !newApplication.email ||
+      !newApplication.studentName ||
+      !newApplication.scholarshipName
+    ) {
       return res.status(400).json({
         success: false,
-        message: "البيانات المطلوبة مفقودة"
+        message: "البيانات المطلوبة مفقودة",
       });
     }
 
     // التحقق من عدم تكرار البريد الإلكتروني
-    const existingApp = data.applications.find((app: any) =>
-      app.email.toLowerCase() === newApplication.email.toLowerCase()
+    const existingApp = data.applications.find(
+      (app: any) =>
+        app.email.toLowerCase() === newApplication.email.toLowerCase(),
     );
 
     if (existingApp) {
       return res.status(400).json({
         success: false,
-        message: "يوجد طلب مسجل بهذا البريد الإلكتروني بالفعل"
+        message: "يوجد طلب مسجل بهذا البريد الإلكتروني بالفعل",
       });
     }
 
@@ -185,20 +190,19 @@ router.post("/add", (req, res) => {
       res.json({
         success: true,
         message: "تم إضافة الطلب بنجاح",
-        application: newApplication
+        application: newApplication,
       });
     } else {
       res.status(500).json({
         success: false,
-        message: "فشل في حفظ البيانات"
+        message: "فشل في حفظ البيانات",
       });
     }
-
   } catch (error) {
     console.error("Error adding application:", error);
     res.status(500).json({
       success: false,
-      message: "حدث خطأ في إضافة الطلب"
+      message: "حدث خطأ في إضافة الطلب",
     });
   }
 });
@@ -215,31 +219,33 @@ router.put("/update/:id", (req, res) => {
     if (appIndex === -1) {
       return res.status(404).json({
         success: false,
-        message: "الطلب غير موجود"
+        message: "الطلب غير موجود",
       });
     }
 
     // تحديث البيانات
-    data.applications[appIndex] = { ...data.applications[appIndex], ...updatedData };
+    data.applications[appIndex] = {
+      ...data.applications[appIndex],
+      ...updatedData,
+    };
 
     if (saveTrackingData(data)) {
       res.json({
         success: true,
         message: "تم تحديث الطلب بنجاح",
-        application: data.applications[appIndex]
+        application: data.applications[appIndex],
       });
     } else {
       res.status(500).json({
         success: false,
-        message: "فشل في حفظ التحديثات"
+        message: "فشل في حفظ التحديثات",
       });
     }
-
   } catch (error) {
     console.error("Error updating application:", error);
     res.status(500).json({
       success: false,
-      message: "حدث خطأ في تحديث الطلب"
+      message: "حدث خطأ في تحديث الطلب",
     });
   }
 });
@@ -255,7 +261,7 @@ router.delete("/delete/:id", (req, res) => {
     if (appIndex === -1) {
       return res.status(404).json({
         success: false,
-        message: "الطلب غير موجود"
+        message: "الطلب غير موجود",
       });
     }
 
@@ -265,20 +271,19 @@ router.delete("/delete/:id", (req, res) => {
     if (saveTrackingData(data)) {
       res.json({
         success: true,
-        message: "تم حذف الطلب بنجاح"
+        message: "تم حذف الطلب بنجاح",
       });
     } else {
       res.status(500).json({
         success: false,
-        message: "فشل في ح��ظ التغييرات"
+        message: "فشل في ح��ظ التغييرات",
       });
     }
-
   } catch (error) {
     console.error("Error deleting application:", error);
     res.status(500).json({
       success: false,
-      message: "حدث خطأ في حذف الطلب"
+      message: "حدث خطأ في حذف الطلب",
     });
   }
 });
@@ -291,7 +296,7 @@ router.post("/search", (req, res) => {
     if (!query || query.trim() === "") {
       return res.status(400).json({
         success: false,
-        message: "يرجى إدخال البريد الإلكتروني، رقم التتبع، أو رقم الهاتف"
+        message: "يرجى إدخال البريد الإلكتروني، رقم التتبع، أو رقم الهاتف",
       });
     }
 
@@ -299,16 +304,18 @@ router.post("/search", (req, res) => {
     const searchQuery = query.trim().toLowerCase();
 
     // البحث بالبريد الإلكتروني، رقم التتبع، أو رقم الهاتف
-    const application = data.applications.find((app: any) =>
-      app.email.toLowerCase() === searchQuery ||
-      app.id.toLowerCase() === searchQuery ||
-      app.phone === query.trim()
+    const application = data.applications.find(
+      (app: any) =>
+        app.email.toLowerCase() === searchQuery ||
+        app.id.toLowerCase() === searchQuery ||
+        app.phone === query.trim(),
     );
 
     if (!application) {
       return res.json({
         success: false,
-        message: "لم يتم العثور على طلب بهذا البريد الإلكتروني، رقم التتبع، أو رقم الهاتف",
+        message:
+          "لم يتم العثور على طلب بهذا البريد الإلكتروني، رقم التتبع، أو رقم الهاتف",
         suggestions: [
           "تأكد من صحة البريد الإ��كتروني",
           "تأكد من رقم التتبع",
@@ -334,7 +341,6 @@ router.post("/search", (req, res) => {
       },
       message: `تم العثور على طلب ${application.studentName}`,
     });
-
   } catch (error) {
     console.error("Error in tracking search:", error);
     res.status(500).json({

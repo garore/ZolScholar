@@ -115,7 +115,8 @@ export default function Admin() {
       scholarshipName: newApp.scholarshipName,
       university: newApp.university,
       submissionDate: null,
-      status: statusOptions[newApp.statusCode as keyof typeof statusOptions].label,
+      status:
+        statusOptions[newApp.statusCode as keyof typeof statusOptions].label,
       statusCode: newApp.statusCode,
       progress: newApp.statusCode === "ready" ? 100 : 20,
       currentStep: newApp.currentStep,
@@ -151,51 +152,72 @@ export default function Admin() {
     }
   };
 
-  const handleUpdateStatus = (appId: string, newStatus: string, newProgress: number) => {
-    setApplications(applications.map(app => 
-      app.id === appId 
-        ? { 
-            ...app, 
-            statusCode: newStatus,
-            status: statusOptions[newStatus as keyof typeof statusOptions].label,
-            progress: newProgress,
-            submissionDate: newStatus === "submitted" ? new Date().toISOString().split("T")[0] : app.submissionDate
-          }
-        : app
-    ));
+  const handleUpdateStatus = (
+    appId: string,
+    newStatus: string,
+    newProgress: number,
+  ) => {
+    setApplications(
+      applications.map((app) =>
+        app.id === appId
+          ? {
+              ...app,
+              statusCode: newStatus,
+              status:
+                statusOptions[newStatus as keyof typeof statusOptions].label,
+              progress: newProgress,
+              submissionDate:
+                newStatus === "submitted"
+                  ? new Date().toISOString().split("T")[0]
+                  : app.submissionDate,
+            }
+          : app,
+      ),
+    );
   };
 
   const handleDeleteApplication = (appId: string) => {
     if (confirm("هل أنت متأكد من حذف هذا الطلب؟")) {
-      setApplications(applications.filter(app => app.id !== appId));
+      setApplications(applications.filter((app) => app.id !== appId));
     }
   };
 
-  const filteredApplications = applications.filter(app => {
-    const matchesSearch = 
+  const filteredApplications = applications.filter((app) => {
+    const matchesSearch =
       app.studentName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       app.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
       app.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       app.phone.includes(searchTerm);
-    
-    const matchesStatus = statusFilter === "all" || app.statusCode === statusFilter;
-    
+
+    const matchesStatus =
+      statusFilter === "all" || app.statusCode === statusFilter;
+
     return matchesSearch && matchesStatus;
   });
 
   const exportToCSV = () => {
-    const headers = ["رقم التتبع", "اسم الطالب", "البريد الإلكتروني", "ا��هاتف", "المنحة", "الحالة", "التقدم"];
+    const headers = [
+      "رقم التتبع",
+      "اسم الطالب",
+      "البريد الإلكتروني",
+      "ا��هاتف",
+      "المنحة",
+      "الحالة",
+      "التقدم",
+    ];
     const csvContent = [
       headers.join(","),
-      ...applications.map(app => [
-        app.id,
-        app.studentName,
-        app.email,
-        app.phone,
-        app.scholarshipName,
-        app.status,
-        `${app.progress}%`
-      ].join(","))
+      ...applications.map((app) =>
+        [
+          app.id,
+          app.studentName,
+          app.email,
+          app.phone,
+          app.scholarshipName,
+          app.status,
+          `${app.progress}%`,
+        ].join(","),
+      ),
     ].join("\n");
 
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
@@ -214,40 +236,43 @@ export default function Admin() {
       const text = e.target?.result as string;
       const lines = text.split("\n");
       const headers = lines[0].split(",");
-      
+
       // تحويل CSV إلى طلبات
-      const newApplications = lines.slice(1).filter(line => line.trim()).map(line => {
-        const values = line.split(",");
-        const trackingId = values[0] || generateTrackingId();
-        
-        return {
-          id: trackingId,
-          studentName: values[1] || "",
-          email: values[2] || "",
-          phone: values[3] || "",
-          scholarshipName: values[4] || "",
-          university: values[5] || "غير محدد",
-          submissionDate: null,
-          status: "لم يتم التقديم",
-          statusCode: "not_submitted",
-          progress: 20,
-          currentStep: "بدء العمل",
-          documents: {
-            cv: "غير مبدوء",
-            motivationLetter: "غير مبدوء",
-            transcripts: "غير مبدوء",
-            passport: "غير مبدوء",
-            languageCert: "غير مبدوء",
-          },
-          notes: values[6] || "",
-          expectedResponseDate: "2025-06-01",
-        };
-      });
+      const newApplications = lines
+        .slice(1)
+        .filter((line) => line.trim())
+        .map((line) => {
+          const values = line.split(",");
+          const trackingId = values[0] || generateTrackingId();
+
+          return {
+            id: trackingId,
+            studentName: values[1] || "",
+            email: values[2] || "",
+            phone: values[3] || "",
+            scholarshipName: values[4] || "",
+            university: values[5] || "غير محدد",
+            submissionDate: null,
+            status: "لم يتم التقديم",
+            statusCode: "not_submitted",
+            progress: 20,
+            currentStep: "بدء العمل",
+            documents: {
+              cv: "غير مبدوء",
+              motivationLetter: "غير مبدوء",
+              transcripts: "غير مبدوء",
+              passport: "غير مبدوء",
+              languageCert: "غير مبدوء",
+            },
+            notes: values[6] || "",
+            expectedResponseDate: "2025-06-01",
+          };
+        });
 
       setApplications([...applications, ...newApplications]);
       alert(`تم إضافة ${newApplications.length} طلب جديد`);
     };
-    
+
     reader.readAsText(file);
   };
 
@@ -258,7 +283,9 @@ export default function Admin() {
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-lg text-muted-foreground">جاري تحميل البيانات...</p>
+            <p className="text-lg text-muted-foreground">
+              جاري تحميل البيانات...
+            </p>
           </div>
         </div>
       </div>
@@ -319,14 +346,19 @@ export default function Admin() {
             <CardContent className="p-4 text-center">
               <Users className="w-8 h-8 text-blue-500 mx-auto mb-2" />
               <div className="text-2xl font-bold">{applications.length}</div>
-              <div className="text-sm text-muted-foreground">إجمالي الطلبات</div>
+              <div className="text-sm text-muted-foreground">
+                إجمالي الطلبات
+              </div>
             </CardContent>
           </Card>
           <Card>
             <CardContent className="p-4 text-center">
               <CheckCircle className="w-8 h-8 text-green-500 mx-auto mb-2" />
               <div className="text-2xl font-bold">
-                {applications.filter(app => app.statusCode === "ready").length}
+                {
+                  applications.filter((app) => app.statusCode === "ready")
+                    .length
+                }
               </div>
               <div className="text-sm text-muted-foreground">جاهز</div>
             </CardContent>
@@ -335,7 +367,10 @@ export default function Admin() {
             <CardContent className="p-4 text-center">
               <Clock className="w-8 h-8 text-blue-500 mx-auto mb-2" />
               <div className="text-2xl font-bold">
-                {applications.filter(app => app.statusCode === "in_progress").length}
+                {
+                  applications.filter((app) => app.statusCode === "in_progress")
+                    .length
+                }
               </div>
               <div className="text-sm text-muted-foreground">قيد التجهيز</div>
             </CardContent>
@@ -344,9 +379,15 @@ export default function Admin() {
             <CardContent className="p-4 text-center">
               <AlertCircle className="w-8 h-8 text-red-500 mx-auto mb-2" />
               <div className="text-2xl font-bold">
-                {applications.filter(app => app.statusCode === "not_submitted").length}
+                {
+                  applications.filter(
+                    (app) => app.statusCode === "not_submitted",
+                  ).length
+                }
               </div>
-              <div className="text-sm text-muted-foreground">لم يتم التقديم</div>
+              <div className="text-sm text-muted-foreground">
+                لم يتم التقديم
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -412,13 +453,21 @@ export default function Admin() {
                       <td className="p-3">
                         <div className="text-sm">
                           <div>{app.email}</div>
-                          {app.phone && <div className="text-muted-foreground">{app.phone}</div>}
+                          {app.phone && (
+                            <div className="text-muted-foreground">
+                              {app.phone}
+                            </div>
+                          )}
                         </div>
                       </td>
                       <td className="p-3">
                         <div className="text-sm">
-                          <div className="font-medium">{app.scholarshipName}</div>
-                          <div className="text-muted-foreground">{app.university}</div>
+                          <div className="font-medium">
+                            {app.scholarshipName}
+                          </div>
+                          <div className="text-muted-foreground">
+                            {app.university}
+                          </div>
                         </div>
                       </td>
                       <td className="p-3">
@@ -426,18 +475,25 @@ export default function Admin() {
                           value={app.statusCode}
                           onChange={(e) => {
                             const newStatus = e.target.value;
-                            const newProgress = newStatus === "ready" ? 100 : 
-                                              newStatus === "submitted" ? 100 :
-                                              newStatus === "in_progress" ? 60 : 20;
+                            const newProgress =
+                              newStatus === "ready"
+                                ? 100
+                                : newStatus === "submitted"
+                                  ? 100
+                                  : newStatus === "in_progress"
+                                    ? 60
+                                    : 20;
                             handleUpdateStatus(app.id, newStatus, newProgress);
                           }}
                           className="px-2 py-1 border rounded text-sm"
                         >
-                          {Object.entries(statusOptions).map(([key, option]) => (
-                            <option key={key} value={key}>
-                              {option.icon} {option.label}
-                            </option>
-                          ))}
+                          {Object.entries(statusOptions).map(
+                            ([key, option]) => (
+                              <option key={key} value={key}>
+                                {option.icon} {option.label}
+                              </option>
+                            ),
+                          )}
                         </select>
                       </td>
                       <td className="p-3">
@@ -502,7 +558,9 @@ export default function Admin() {
                     </label>
                     <Input
                       value={newApp.studentName}
-                      onChange={(e) => setNewApp({...newApp, studentName: e.target.value})}
+                      onChange={(e) =>
+                        setNewApp({ ...newApp, studentName: e.target.value })
+                      }
                       placeholder="أدخل اسم الطالب"
                     />
                   </div>
@@ -513,7 +571,9 @@ export default function Admin() {
                     <Input
                       type="email"
                       value={newApp.email}
-                      onChange={(e) => setNewApp({...newApp, email: e.target.value})}
+                      onChange={(e) =>
+                        setNewApp({ ...newApp, email: e.target.value })
+                      }
                       placeholder="example@email.com"
                     />
                   </div>
@@ -523,7 +583,9 @@ export default function Admin() {
                     </label>
                     <Input
                       value={newApp.phone}
-                      onChange={(e) => setNewApp({...newApp, phone: e.target.value})}
+                      onChange={(e) =>
+                        setNewApp({ ...newApp, phone: e.target.value })
+                      }
                       placeholder="+249123456789"
                     />
                   </div>
@@ -533,7 +595,12 @@ export default function Admin() {
                     </label>
                     <Input
                       value={newApp.scholarshipName}
-                      onChange={(e) => setNewApp({...newApp, scholarshipName: e.target.value})}
+                      onChange={(e) =>
+                        setNewApp({
+                          ...newApp,
+                          scholarshipName: e.target.value,
+                        })
+                      }
                       placeholder="اسم المنحة"
                     />
                   </div>
@@ -543,7 +610,9 @@ export default function Admin() {
                     </label>
                     <Input
                       value={newApp.university}
-                      onChange={(e) => setNewApp({...newApp, university: e.target.value})}
+                      onChange={(e) =>
+                        setNewApp({ ...newApp, university: e.target.value })
+                      }
                       placeholder="اسم الجامعة"
                     />
                   </div>
@@ -553,7 +622,9 @@ export default function Admin() {
                     </label>
                     <select
                       value={newApp.statusCode}
-                      onChange={(e) => setNewApp({...newApp, statusCode: e.target.value})}
+                      onChange={(e) =>
+                        setNewApp({ ...newApp, statusCode: e.target.value })
+                      }
                       className="w-full px-3 py-2 border border-input rounded-md bg-background"
                     >
                       {Object.entries(statusOptions).map(([key, option]) => (
@@ -570,7 +641,9 @@ export default function Admin() {
                   </label>
                   <Textarea
                     value={newApp.notes}
-                    onChange={(e) => setNewApp({...newApp, notes: e.target.value})}
+                    onChange={(e) =>
+                      setNewApp({ ...newApp, notes: e.target.value })
+                    }
                     placeholder="أي ملاحظات إضافية..."
                     rows={3}
                   />
@@ -580,7 +653,10 @@ export default function Admin() {
                     <Save className="w-4 h-4 ml-2" />
                     حفظ العميل
                   </Button>
-                  <Button variant="outline" onClick={() => setShowAddForm(false)}>
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowAddForm(false)}
+                  >
                     إلغاء
                   </Button>
                 </div>
@@ -599,12 +675,17 @@ export default function Admin() {
             <div className="text-sm space-y-2">
               <p className="font-medium">تنسيق الملف المطلوب:</p>
               <div className="bg-white p-3 rounded border font-mono text-xs">
-                رقم التتبع,اسم الطالب,البريد الإلكتروني,رقم الهاتف,اسم المنحة,الجامعة,ملاحظات<br />
-                TRK001,أحمد محمد,ahmed@email.com,+249123456789,منحة تركيا,جامعة إسطنبول,عميل جديد
+                رقم التتبع,اسم الطالب,البريد الإلكتروني,رقم الهاتف,اسم
+                المنحة,الجامعة,ملاحظات
+                <br />
+                TRK001,أحمد محمد,ahmed@email.com,+249123456789,منحة تركيا,جامعة
+                إسطنبول,عميل جديد
               </div>
               <ul className="list-disc list-inside space-y-1 text-muted-foreground">
                 <li>أترك رقم التتبع فارغاً لتوليد رقم تلقائياً</li>
-                <li>الحقول المطلوبة: اسم الطالب، البريد الإلكتروني، اسم المنحة</li>
+                <li>
+                  الحقول المطلوبة: اسم الطالب، البريد الإلكتروني، اسم المنحة
+                </li>
                 <li>يمكن رفع ملفات .csv أو .xlsx</li>
                 <li>الحالة الأولية ستكون "لم يتم التقديم"</li>
               </ul>
