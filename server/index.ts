@@ -41,6 +41,9 @@ export function createServer() {
   // Scholarships routes
   app.use("/api/scholarships", scholarshipsRouter);
 
+  // Application tracking routes
+  app.use("/api/tracking", trackingRouter);
+
   // Error handling middleware
   app.use(
     (
