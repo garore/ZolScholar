@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navigation from "@/components/Navigation";
 import SEOHead from "@/components/SEOHead";
 import { useTranslation } from "@/hooks/useTranslation";
+import { searchApplication, type Application } from "@/lib/localDB";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
