@@ -238,13 +238,13 @@ export default function ApplicationTracker() {
               <CardContent className="p-6 text-center">
                 <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-red-800 mb-2">
-                  لم ي��م العثور على نتائج
+                  لم يتم العثور على نتائج
                 </h3>
                 <p className="text-red-700 mb-4">{error}</p>
                 <div className="text-sm text-red-600 space-y-1">
                   <p>• تأكد من صحة البريد الإلكتروني</p>
                   <p>• تأكد من رقم التتبع</p>
-                  <p>• تواصل معنا إذا كنت تواجه مشكلة</p>
+                  <p>• تواصل معنا إذا ك��ت تواجه مشكلة</p>
                 </div>
                 <a
                   href={whatsappLink}
@@ -333,7 +333,7 @@ export default function ApplicationTracker() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-sm text-muted-foreground mb-1">
-                          الجامعة
+                          ��لجامعة
                         </h4>
                         <p className="mobile-arabic-text">
                           {searchResult.university}
@@ -444,7 +444,7 @@ export default function ApplicationTracker() {
                         </div>
                       </div>
                       <div className="flex items-center justify-between md:col-span-2">
-                        <span className="text-sm">شهادة اللغة</span>
+                        <span className="text-sm">��هادة اللغة</span>
                         <div className="flex items-center gap-2">
                           {getDocumentIcon(searchResult.documents.languageCert)}
                           <span className="text-sm font-medium">
@@ -465,8 +465,8 @@ export default function ApplicationTracker() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-4">
-                      {searchResult.timeline.map((item, index) => (
+                  <div className="space-y-4">
+                      {searchResult.timeline?.map((item, index) => (
                         <div key={index} className="flex gap-4">
                           <div className="flex flex-col items-center">
                             <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
@@ -593,7 +593,7 @@ export default function ApplicationTracker() {
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Mail className="w-8 h-8 text-blue-500" />
                   </div>
-                  <h3 className="font-bold mb-2">1. أدخل بياناتك</h3>
+                  <h3 className="font-bold mb-2">1. أدخل بيانا��ك</h3>
                   <p className="text-sm text-muted-foreground">
                     أدخل بريدك الإلكتروني أو رقم التتبع الذي تم إرساله لك
                   </p>
