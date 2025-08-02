@@ -534,16 +534,22 @@ export default function ApplicationTracker() {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
-                      {searchResult.nextSteps?.map((step, index) => (
-                        <div key={index} className="flex items-start gap-2">
-                          <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
-                            {index + 1}
-                          </span>
-                          <span className="text-sm mobile-arabic-text">
-                            {step}
-                          </span>
-                        </div>
-                      ))}
+                      {searchResult.nextSteps && searchResult.nextSteps.length > 0 ? (
+                        searchResult.nextSteps.map((step, index) => (
+                          <div key={index} className="flex items-start gap-2">
+                            <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+                              {index + 1}
+                            </span>
+                            <span className="text-sm mobile-arabic-text">
+                              {step}
+                            </span>
+                          </div>
+                        ))
+                      ) : (
+                        <p className="text-muted-foreground text-center py-4">
+                          لا توجد خطوات محددة بعد
+                        </p>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
