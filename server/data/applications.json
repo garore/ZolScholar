@@ -298,6 +298,17 @@
         "passport": "غير مبدوء",
         "languageCert": "غير مبدوء"
       },
+      "timeline": [
+        {
+          "date": "2024-12-22",
+          "status": "بدء العمل",
+          "description": "تم إنشاء الطلب من لوحة التحكم"
+        }
+      ],
+      "nextSteps": [
+        "البدء في إعداد المستندات",
+        "التواصل مع العميل لجمع البيانات"
+      ],
       "notes": "uighughghgyu",
       "expectedResponseDate": "2025-06-01"
     }
