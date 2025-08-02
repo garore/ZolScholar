@@ -4,6 +4,14 @@ import { handleDemo } from "./routes/demo";
 import { handleVisitorCount, handleGetVisitorCount } from "./routes/visitors";
 import scholarshipsRouter from "./routes/scholarships";
 import trackingRouter from "./routes/tracking";
+import {
+  getCustomers,
+  searchCustomer,
+  addCustomer,
+  updateCustomer,
+  deleteCustomer,
+  getCustomerStats
+} from './routes/customers';
 
 export function createServer() {
   const app = express();
@@ -43,6 +51,14 @@ export function createServer() {
 
   // Application tracking routes
   app.use("/api/tracking", trackingRouter);
+
+  // Customer API endpoints
+  app.get('/api/customers', getCustomers);
+  app.get('/api/customers/search', searchCustomer);
+  app.post('/api/customers', addCustomer);
+  app.put('/api/customers/:id', updateCustomer);
+  app.delete('/api/customers/:id', deleteCustomer);
+  app.get('/api/customers/stats', getCustomerStats);
 
   // Error handling middleware
   app.use(
