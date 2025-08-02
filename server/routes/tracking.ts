@@ -72,7 +72,7 @@ const saveTrackingData = (data: any) => {
   }
 };
 
-// البحث عن طلب بالبريد الإلكتروني أو رقم التتبع
+// البحث عن ط��ب بالبريد الإلكتروني أو رقم التتبع
 router.post("/search", (req, res) => {
   try {
     const { query } = req.body;
@@ -332,10 +332,12 @@ router.delete("/delete/:id", (req, res) => {
   }
 });
 
-// البحث بر��م الهاتف أيضاً
+// البحث برقم الهاتف أيضاً
 router.post("/search", (req, res) => {
   try {
     const { query } = req.body;
+
+    console.log(`Search request received with query: "${query}"`);
 
     if (!query || query.trim() === "") {
       return res.status(400).json({
@@ -345,14 +347,21 @@ router.post("/search", (req, res) => {
     }
 
     const data = getTrackingData();
+    console.log(`Data loaded with ${data.applications?.length || 0} applications`);
+
     const searchQuery = query.trim().toLowerCase();
 
     // البحث بالبريد الإلكتروني، رقم التتبع، أو رقم الهاتف
     const application = data.applications.find(
-      (app: any) =>
-        app.email.toLowerCase() === searchQuery ||
-        app.id.toLowerCase() === searchQuery ||
-        app.phone === query.trim(),
+      (app: any) => {
+        const emailMatch = app.email.toLowerCase() === searchQuery;
+        const idMatch = app.id.toLowerCase() === searchQuery;
+        const phoneMatch = app.phone === query.trim();
+
+        console.log(`Checking app ${app.id}: email(${emailMatch}), id(${idMatch}), phone(${phoneMatch})`);
+
+        return emailMatch || idMatch || phoneMatch;
+      }
     );
 
     if (!application) {
