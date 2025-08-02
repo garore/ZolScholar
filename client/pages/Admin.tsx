@@ -6,15 +6,44 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  getApplications,
-  addApplication,
-  updateApplication,
-  deleteApplication,
-  generateTrackingId,
-  getStats,
-  type Application
-} from "@/lib/localDB";
+// import {
+//   getApplications,
+//   addApplication,
+//   updateApplication,
+//   deleteApplication,
+//   generateTrackingId,
+//   getStats,
+//   type Application
+// } from "@/lib/localDB";
+
+interface Application {
+  id: string;
+  email: string;
+  phone: string;
+  studentName: string;
+  scholarshipName: string;
+  university: string;
+  submissionDate: string | null;
+  status: string;
+  statusCode: string;
+  progress: number;
+  currentStep: string;
+  documents: {
+    cv: string;
+    motivationLetter: string;
+    transcripts: string;
+    passport: string;
+    languageCert: string;
+  };
+  timeline: Array<{
+    date: string;
+    status: string;
+    description: string;
+  }>;
+  nextSteps: string[];
+  notes: string;
+  expectedResponseDate: string;
+}
 import {
   Plus,
   Upload,
@@ -65,11 +94,16 @@ export default function Admin() {
     loadApplications();
   }, []);
 
-  const loadApplications = () => {
+  const loadApplications = async () => {
     try {
       setLoading(true);
-      const apps = getApplications();
-      setApplications(apps);
+      const response = await fetch('/api/customers');
+      if (response.ok) {
+        const apps = await response.json();
+        setApplications(apps);
+      } else {
+        console.error("Error loading applications:", response.statusText);
+      }
     } catch (error) {
       console.error("Error loading applications:", error);
     } finally {
@@ -77,146 +111,145 @@ export default function Admin() {
     }
   };
 
-  const handleAddApplication = () => {
+  const handleAddApplication = async () => {
     if (!newApp.email || !newApp.studentName || !newApp.scholarshipName) {
-      alert("يرجى مل�� الحقول المطلوبة");
+      alert("يرجى ملء الحقول المطلوبة");
       return;
     }
 
-    const trackingId = generateTrackingId();
-    const currentDate = new Date().toISOString().split("T")[0];
+    try {
+      const applicationData = {
+        email: newApp.email,
+        phone: newApp.phone,
+        studentName: newApp.studentName,
+        scholarshipName: newApp.scholarshipName,
+        university: newApp.university,
+        status: statusOptions[newApp.statusCode as keyof typeof statusOptions].label,
+        statusCode: newApp.statusCode,
+        progress: newApp.statusCode === "ready" ? 100 : 20,
+        currentStep: newApp.currentStep,
+        notes: newApp.notes,
+        expectedResponseDate: newApp.expectedResponseDate || "2025-06-01",
+      };
 
-    const application: Application = {
-      id: trackingId,
-      email: newApp.email,
-      phone: newApp.phone,
-      studentName: newApp.studentName,
-      scholarshipName: newApp.scholarshipName,
-      university: newApp.university,
-      submissionDate: null,
-      status:
-        statusOptions[newApp.statusCode as keyof typeof statusOptions].label,
-      statusCode: newApp.statusCode,
-      progress: newApp.statusCode === "ready" ? 100 : 20,
-      currentStep: newApp.currentStep,
-      documents: {
-        cv: "غير مبدوء",
-        motivationLetter: "غير مبدوء",
-        transcripts: "غير مبدوء",
-        passport: "غير مبدوء",
-        languageCert: "غير مبدوء",
-      },
-      timeline: [
-        {
-          date: currentDate,
-          status: "بدء العمل",
-          description: "تم إنشاء الطلب من لوحة التحكم",
+      const response = await fetch('/api/customers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      ],
-      nextSteps: [
-        "البدء في إعداد المستندات",
-        "التواصل مع العميل لجمع البيانات",
-      ],
-      notes: newApp.notes,
-      expectedResponseDate: newApp.expectedResponseDate || "2025-06-01",
-    };
-
-    // حفظ في قاعدة البيانات المحلية
-    const success = addApplication(application);
-
-    if (success) {
-      // تحديث القائمة المحلية
-      const updatedApplications = [...applications, application];
-      setApplications(updatedApplications);
-
-      // التأكد من حفظ البيانات في localStorage فوراً
-      try {
-        localStorage.setItem("zol_scholar_applications", JSON.stringify(updatedApplications));
-        console.log("Data saved to localStorage:", updatedApplications);
-      } catch (error) {
-        console.error("Error saving to localStorage:", error);
-      }
-
-      setShowAddForm(false);
-      setNewApp({
-        email: "",
-        phone: "",
-        studentName: "",
-        scholarshipName: "",
-        university: "",
-        statusCode: "not_submitted",
-        currentStep: "بدء العمل",
-        notes: "",
-        expectedResponseDate: "",
+        body: JSON.stringify(applicationData),
       });
 
-      alert(
-        `✅ تم إنشاء الطلب بنجاح!
+      if (response.ok) {
+        const newApplication = await response.json();
+
+        // تحديث القائمة المحلية
+        setApplications([...applications, newApplication]);
+
+        setShowAddForm(false);
+        setNewApp({
+          email: "",
+          phone: "",
+          studentName: "",
+          scholarshipName: "",
+          university: "",
+          statusCode: "not_submitted",
+          currentStep: "بدء العمل",
+          notes: "",
+          expectedResponseDate: "",
+        });
+
+        alert(
+          `✅ تم إنشاء الطلب بنجاح!
 
 📧 البريد: ${newApp.email}
-🆔 رقم التتبع: ${trackingId}
+🆔 رقم التتبع: ${newApplication.id}
 
-✨ العميل يمكنه الآن البحث بالبريد الإلكتروني أو رقم التتبع في صفح�� التتبع
+✨ العميل يمكنه الآن البحث بالبريد الإلكتروني أو رقم التتبع في صفحة التتبع
 
 🔗 رابط صفحة التتبع: ${window.location.origin}/tracker`,
-      );
-    } else {
-      alert("❌ فشل في حفظ الطلب. يوجد طلب بهذا البريد الإلكتروني مسبقاً.");
+        );
+      } else if (response.status === 409) {
+        alert("❌ فشل في حفظ الطلب. يوجد طلب بهذا البريد الإلكتروني مسبقاً.");
+      } else {
+        throw new Error('Failed to save application');
+      }
+    } catch (error) {
+      console.error('Error adding application:', error);
+      alert("❌ حدث خطأ في حفظ الطلب. يرجى المحاولة مرة أخرى.");
     }
   };
 
-  const handleUpdateStatus = (
+  const handleUpdateStatus = async (
     appId: string,
     newStatus: string,
     newProgress: number,
   ) => {
-    const updatedData = {
-      statusCode: newStatus,
-      status: statusOptions[newStatus as keyof typeof statusOptions].label,
-      progress: newProgress,
-      submissionDate:
-        newStatus === "submitted"
-          ? new Date().toISOString().split("T")[0]
-          : null,
-    };
+    try {
+      const updatedData = {
+        statusCode: newStatus,
+        status: statusOptions[newStatus as keyof typeof statusOptions].label,
+        progress: newProgress,
+        submissionDate:
+          newStatus === "submitted"
+            ? new Date().toISOString().split("T")[0]
+            : null,
+      };
 
-    const success = updateApplication(appId, updatedData);
+      const response = await fetch(`/api/customers/${appId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData),
+      });
 
-    if (success) {
-      // تحديث القائمة المحلية
-      setApplications(
-        applications.map((app) =>
-          app.id === appId
-            ? {
-                ...app,
-                statusCode: newStatus,
-                status:
-                  statusOptions[newStatus as keyof typeof statusOptions].label,
-                progress: newProgress,
-                submissionDate:
-                  newStatus === "submitted"
-                    ? new Date().toISOString().split("T")[0]
-                    : app.submissionDate,
-              }
-            : app,
-        ),
-      );
-    } else {
+      if (response.ok) {
+        // تحديث القائمة المحلية
+        setApplications(
+          applications.map((app) =>
+            app.id === appId
+              ? {
+                  ...app,
+                  statusCode: newStatus,
+                  status:
+                    statusOptions[newStatus as keyof typeof statusOptions].label,
+                  progress: newProgress,
+                  submissionDate:
+                    newStatus === "submitted"
+                      ? new Date().toISOString().split("T")[0]
+                      : app.submissionDate,
+                }
+              : app,
+          ),
+        );
+      } else {
+        throw new Error('Failed to update application');
+      }
+    } catch (error) {
+      console.error('Error updating application:', error);
       alert("فشل في تحديث الطلب");
     }
   };
 
-  const handleDeleteApplication = (appId: string) => {
+  const handleDeleteApplication = async (appId: string) => {
     if (!confirm("هل أنت متأكد من حذف هذا الطلب؟")) {
       return;
     }
 
-    const success = deleteApplication(appId);
+    try {
+      const response = await fetch(`/api/customers/${appId}`, {
+        method: 'DELETE',
+      });
 
-    if (success) {
-      setApplications(applications.filter((app) => app.id !== appId));
-      alert("تم حذف الطلب بنجاح");
-    } else {
+      if (response.ok) {
+        setApplications(applications.filter((app) => app.id !== appId));
+        alert("تم حذف الطلب بنجاح");
+      } else {
+        throw new Error('Failed to delete application');
+      }
+    } catch (error) {
+      console.error('Error deleting application:', error);
       alert("فشل في حذف الطلب");
     }
   };
@@ -394,7 +427,7 @@ export default function Admin() {
             <CardContent className="p-4 text-center">
               <CheckCircle className="w-8 h-8 text-green-500 mx-auto mb-2" />
               <div className="text-2xl font-bold">
-                {getStats().ready}
+                {applications.filter(app => app.statusCode === 'ready').length}
               </div>
               <div className="text-sm text-muted-foreground">جاهز</div>
             </CardContent>
@@ -403,7 +436,7 @@ export default function Admin() {
             <CardContent className="p-4 text-center">
               <Clock className="w-8 h-8 text-blue-500 mx-auto mb-2" />
               <div className="text-2xl font-bold">
-                {getStats().inProgress}
+                {applications.filter(app => app.statusCode === 'in_progress').length}
               </div>
               <div className="text-sm text-muted-foreground">قيد التجهيز</div>
             </CardContent>
@@ -412,7 +445,7 @@ export default function Admin() {
             <CardContent className="p-4 text-center">
               <AlertCircle className="w-8 h-8 text-red-500 mx-auto mb-2" />
               <div className="text-2xl font-bold">
-                {getStats().notSubmitted}
+                {applications.filter(app => app.statusCode === 'not_submitted').length}
               </div>
               <div className="text-sm text-muted-foreground">
                 لم يتم التقديم

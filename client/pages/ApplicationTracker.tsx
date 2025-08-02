@@ -2,7 +2,36 @@ import React, { useState } from "react";
 import Navigation from "@/components/Navigation";
 import SEOHead from "@/components/SEOHead";
 import { useTranslation } from "@/hooks/useTranslation";
-import { searchApplication, type Application } from "@/lib/localDB";
+// import { searchApplication, type Application } from "@/lib/localDB";
+
+interface Application {
+  id: string;
+  email: string;
+  phone: string;
+  studentName: string;
+  scholarshipName: string;
+  university: string;
+  submissionDate: string | null;
+  status: string;
+  statusCode: string;
+  progress: number;
+  currentStep: string;
+  documents: {
+    cv: string;
+    motivationLetter: string;
+    transcripts: string;
+    passport: string;
+    languageCert: string;
+  };
+  timeline: Array<{
+    date: string;
+    status: string;
+    description: string;
+  }>;
+  nextSteps: string[];
+  notes: string;
+  expectedResponseDate: string;
+}
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface ApplicationWithStatus extends Application {
@@ -57,15 +86,16 @@ export default function ApplicationTracker() {
     setSearchResult(null);
 
     try {
-      // التحقق من البيانات المحفوظة
-      const allApplications = JSON.parse(localStorage.getItem("zol_scholar_applications") || "[]");
-      console.log("All applications in localStorage:", allApplications);
+      // البحث باستخدام API
       console.log("Searching for:", searchQuery.trim());
 
-      const result = searchApplication(searchQuery.trim());
-      console.log("Search result:", result);
+      const response = await fetch(`/api/customers/search?q=${encodeURIComponent(searchQuery.trim())}`);
 
-      if (result) {
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Search result:", result);
+
+        if (result) {
         // إضافة معلومات الحالة
         const statusInfo = {
           ready: { label: "جاهز", icon: "✅", color: "green", description: "تم قبول الطلب أو العمل مكتمل" },
@@ -78,17 +108,19 @@ export default function ApplicationTracker() {
           ...result,
           statusInfo: statusInfo[result.statusCode as keyof typeof statusInfo] || {
             label: result.status,
-            icon: "❓",
+            icon: "��",
             color: "gray",
-            description: "حالة غير معروفة"
+            description: "حالة غير معرو��ة"
           }
         };
 
         setSearchResult(resultWithStatus);
         setSearched(true);
-      } else {
-        setError("لم يتم العثور على ط��ب بهذا البريد الإلكتروني، رقم التتبع، أو رقم الهاتف");
+      } else if (response.status === 404) {
+        setError("لم يتم العثور على طلب بهذا البريد الإلكتروني، رقم التتبع، أو رقم الهاتف");
         setSearched(true);
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
     } catch (err) {
       setError("حدث خطأ في البحث. يرجى المحاولة مرة أخرى.");
